@@ -1,0 +1,30 @@
+.category-nav {
+    display: flex;
+    justify-content: right;
+    padding: 20px 0;
+    background-color: #222;
+}
+
+.category-list {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.category-list li {
+    margin-right: 20px;
+}
+
+.category-list li a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 16px;
+    padding: 10px;
+    transition: color 0.3s ease;
+}
+
+.category-list li a:hover {
+    color: #ffcc00;
+    font-weight: bold;
+}

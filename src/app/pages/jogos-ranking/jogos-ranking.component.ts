@@ -24,7 +24,7 @@ import { DropdownComponent } from '../../shared/components/dropdown/dropdown.com
 })
 
 export class JogosRankingComponent {
-  showRankingTable = true;
+  showRankingTable = false;
   searchQuery: string = '';
   searchResults: any[] = [];
   displayedColumns: string[] = ['position', 'game', 'platform', 'rating'];

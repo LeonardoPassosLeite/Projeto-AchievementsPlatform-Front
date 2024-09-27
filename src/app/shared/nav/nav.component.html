@@ -1,0 +1,7 @@
+<nav class="category-nav">
+    <ul class="category-list">
+        <li *ngFor="let item of categories">
+            <a href="#" (click)="onCategoryClick(item.value); $event.preventDefault()">{{ item.label }}</a>
+        </li>
+    </ul>
+</nav>

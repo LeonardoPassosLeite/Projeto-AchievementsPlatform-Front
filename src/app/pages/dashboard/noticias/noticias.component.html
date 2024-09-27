@@ -1,0 +1,36 @@
+<div class="news-container">
+    <div class="featured-news" *ngIf="featuredNews">
+        <div class="featured-image">
+            <img [src]="featuredNews.urlToImage" alt="Imagem da notícia em destaque">
+        </div>
+        <div class="featured-text">
+            <h2>{{ featuredNews.title }}</h2>
+            <p>{{ featuredNews.description }}</p>
+            <a [href]="featuredNews.url" target="_blank">Leia mais</a>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-between align-items-center">
+        <h2 class="section-title">Notícias</h2>
+        <div class="platform-icons">
+            <i class="fab fa-playstation platform-icon" (click)="filterByPlatform('PlayStation')"></i>
+            <i class="fab fa-xbox platform-icon" (click)="filterByPlatform('Xbox')"></i>
+            <i class="fas fa-desktop platform-icon" (click)="filterByPlatform('PC')"></i> <!-- Para PC -->
+            <i class="fas fa-gamepad platform-icon" (click)="filterByPlatform('Nintendo')"></i> <!-- Para Nintendo -->
+        </div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="news-grid">
+        <div class="news-item" *ngFor="let news of newsList">
+            <img [src]="news.urlToImage" alt="Imagem da notícia" class="news-image" />
+            <div class="news-content">
+                <h3>{{ news.title }}</h3>
+                <p>{{ news.description }}</p>
+                <a [href]="news.url" target="_blank">Leia mais</a>
+            </div>
+        </div>
+
+    </div>
+</div>

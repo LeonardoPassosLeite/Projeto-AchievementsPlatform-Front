@@ -1,0 +1,120 @@
+.news-container {
+    .section-title {
+        color: white;
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+        text-align: left;
+    }
+
+    .divider {
+        margin: 20px 0;
+        border: 0;
+        height: 1px;
+        background: #444;
+    }
+
+    .featured-news {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        background-color: #282828;
+        padding: 30px;
+        border-radius: 8px;
+        margin-bottom: 40px;
+
+        .featured-image {
+            flex: 4;
+            margin-right: 20px;
+
+            img {
+                width: 100%;
+                height: 300px;
+                border-radius: 8px;
+                object-fit: cover;
+                /* Para manter o aspecto visual */
+            }
+        }
+
+        .featured-text {
+            flex: 4;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            h2 {
+                color: white;
+                font-size: 1.8rem;
+                margin-bottom: 10px;
+            }
+
+            p {
+                font-size: 1.1rem;
+                color: #bdbdbd;
+                margin-bottom: 15px;
+            }
+
+            a {
+                color: #ffcc00;
+                text-decoration: none;
+                font-weight: bold;
+                font-size: 1rem;
+                align-self: flex-start;
+            }
+        }
+    }
+
+    .news-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+
+        .news-item {
+            display: flex;
+            background-color: #282828;
+            padding: 15px;
+            border-radius: 8px;
+
+            .news-image {
+                width: 120px;
+                height: auto;
+                border-radius: 8px;
+                margin-right: 15px;
+            }
+
+            .news-content {
+                h3 {
+                    color: white;
+                    font-size: 1.2rem;
+                    margin-bottom: 10px;
+                }
+
+                p {
+                    color: #bdbdbd;
+                    font-size: 0.9rem;
+                }
+
+                a {
+                    color: #ffcc00;
+                    text-decoration: none;
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+
+    .platform-icons {
+        position: relative;
+        bottom: 0;
+        left: 70%;
+        padding: 10px;
+        background-color: rgba(0, 0, 0, 0.089);
+        display: flex;
+        gap: 10px;
+    }
+    
+    .platform-icon {
+        width: 50px;
+        height: auto;
+        cursor: pointer;
+    }
+}

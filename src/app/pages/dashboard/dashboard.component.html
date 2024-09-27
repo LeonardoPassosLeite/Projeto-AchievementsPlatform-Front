@@ -1,6 +1,4 @@
 <div class="dashboard-container">
-    <app-sidenav></app-sidenav>
-    <div class="content-container">
-        <router-outlet></router-outlet>
-    </div>
+    <app-nav [categories]="categories" (categorySelected)="onCategorySelected($event)"></app-nav>
+    <router-outlet></router-outlet>
 </div>

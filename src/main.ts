@@ -1,6 +1,6 @@
 import { bootstrapApplication } from '@angular/platform-browser';
 import { appConfig } from './app/core/app.config';
-import { DashboardComponent } from './app/pages/dashboard/dashboard.component';
+import { SidenavComponent } from './app/shared/sidenav/sidenav.component';
 
-bootstrapApplication(DashboardComponent, appConfig)
+bootstrapApplication(SidenavComponent, appConfig)
   .catch((err) => console.error(err));

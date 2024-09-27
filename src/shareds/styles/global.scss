@@ -1,0 +1,92 @@
+@import"../colors.scss";
+
+html,
+h1,
+h2,
+body {
+    height: 100%;
+    color: #000000;
+}
+
+span {
+    color: $dark-gray;
+    font-weight: bold;
+}
+
+button span {
+    color: inherit;
+}
+
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+.card-flex {
+    margin: 120px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.d-flex {
+    display: flex;
+    align-items: center;
+}
+
+.bottom-10 {
+    margin-bottom: 10px;
+}
+
+.bottom-18 {
+    margin-bottom: 18px;
+}
+
+.top-18 {
+    margin-top: 18px;
+}
+
+//gap
+.gap-10 {
+    gap: 10px;
+}
+
+//fonts
+.fs-11 {
+    font-size: 11px;
+}
+
+.fs-12 {
+    font-size: 12px;
+}
+
+.fs-14 {
+    font-size: 14px;
+}
+
+.fs-16 {
+    font-size: 16px;
+}
+
+.fs-18 {
+    font-size: 18px;
+}
+
+.fs-24 {
+    font-size: 24px;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+//grid
+.d-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+}
+
+.text-aling-left {
+    text-align: left;
+}

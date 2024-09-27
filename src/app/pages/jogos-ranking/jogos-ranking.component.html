@@ -1,0 +1,58 @@
+<div *ngIf="!showRankingTable">
+    <app-card-menssage [title]="'Crie Rankings dos Seus Jogos Favoritos!'"
+        [description]="'Nesta página, você pode organizar seus jogos preferidos em um ranking pessoal. Explore suas conquistas e compartilhe com amigos sua lista definitiva dos melhores jogos de todos os tempos!'"
+        [imageUrl]="'assets/aqui.png'" [buttonText]="'Criar Ranking'" (buttonClick)="showTable()"></app-card-menssage>
+</div>
+
+<div *ngIf="showRankingTable" class="ranking-table-container">
+    <table mat-table [dataSource]="paginatedData" class="mat-elevation-z8">
+        <ng-container matColumnDef="position">
+            <th mat-header-cell *matHeaderCellDef> Posição </th>
+            <td mat-cell *matCellDef="let element"> {{element.position}}º </td>
+        </ng-container>
+
+        <ng-container matColumnDef="game">
+            <th mat-header-cell *matHeaderCellDef> Jogo </th>
+            <td mat-cell *matCellDef="let element">
+                <div *ngIf="element.coverUrl">
+                    <img [src]="element.coverUrl" alt="cover" class="game-thumbnail" />
+                    <span>{{ element.game }}</span>
+                </div>
+                <div *ngIf="!element.coverUrl">
+                    <app-auto-complete [data]="element.game" [dataSuggestions]="gameSuggestions"
+                        [placeholder]="'Pesquisar Jogo...'" (searchQuery)="onSearchGame($event)"
+                        (dataSelected)="onGameSelected($event, element)">
+                    </app-auto-complete>
+                </div>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="platform">
+            <th mat-header-cell *matHeaderCellDef> Plataforma </th>
+            <td mat-cell *matCellDef="let element">
+                <app-dropdown [options]="platforms" [selectedValue]="element.platform"
+                    [placeholder]="'Selecione a plataforma'" (valueSelected)="onPlatformSelected($event, element)">
+                </app-dropdown>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="rating">
+            <th mat-header-cell *matHeaderCellDef> Nota </th>
+            <td mat-cell *matCellDef="let element">
+                <app-dropdown [options]="availableRatings" [selectedValue]="element.rating"
+                    [placeholder]="'Selecione a Nota'" (valueSelected)="onRatingSelected($event, element)">
+                </app-dropdown>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator [length]="rankingData.length" [pageSize]="pageSize" [pageSizeOptions]="[10]"
+        (page)="onPageChange($event)" showFirstLastButtons></mat-paginator>
+
+    <div class="button-container">
+        <button class="gamer-button" (click)="addMorePositions()">Adicionar Mais Posições</button>
+    </div>
+</div>

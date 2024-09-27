@@ -1,0 +1,108 @@
+@import"../../../shareds/colors.scss";
+$transition-speed: 0.3s;
+
+.menu-container {
+    display: flex;
+    height: 100vh;
+    font-family: 'Roboto', sans-serif;
+}
+.main-menu {
+    width: 80px;
+    padding: 60px 0;
+    background-color: $bg-color;
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    li {
+        margin: 15px 0;
+    }
+    .menu-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: background-color $transition-speed ease;
+        mat-icon {
+            color: $white;
+            margin-bottom: 10px;
+        }
+        span {
+            font-size: 12px;
+            color: $text-color-white;
+            text-shadow: 0px 0px 10px $transparent;
+        }
+    }
+}
+.submenu {
+    width: 200px;
+    backdrop-filter: blur(10px);
+    background: $dark-gray;
+    h3 {
+        color: $white;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        text-align: left;
+        margin-top: 100px;
+    }
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    li {
+        text-align: left;
+        margin: 15px 0;
+        transition: background-color $transition-speed ease, transform $transition-speed ease;
+    }
+    .submenu-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color $transition-speed ease;
+        mat-icon {
+            font-size: 20px;
+            color: $white;
+        }
+        span {
+            font-size: 12px;
+            color: $text-color-white;
+        }
+    }
+    li:hover {
+        background-color: lighten($dark-gray, 10%);
+    }
+}
+.content {
+    flex-grow: 1;
+    padding: 20px;
+    background: $transparent;
+    box-shadow: inset 0px 0px 50px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    margin: 10px;
+    transition: all $transition-speed ease;
+}
+li:hover {
+    background-color: $transparent;
+    color: $white;
+}
+@media (max-width: 768px) {
+    .main-menu {
+        width: 200px;
+    }
+    .submenu {
+        width: 180px;
+    }
+    .content {
+        margin-left: 0;
+    }
+    .submenu-open .content {
+        margin-left: 0;
+    }
+}

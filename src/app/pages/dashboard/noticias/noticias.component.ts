@@ -1,16 +1,19 @@
 import { Component } from '@angular/core';
 import { GamenewsService } from '../../../shared/services/gamenews.service';
 import { GenericModule } from '../../../../shareds/commons/GenericModule';
-import { IgdbService } from '../../../shared/services/igdb.service';
 import { NavComponent } from '../../../shared/nav/nav.component';
-import { Router } from '@angular/router';
+import { PlatformFilterComponent } from "../../../shared/components/platform-filter/platform-filter.component";
+import { PageTitleComponent } from "../../../shared/components/page-title/page-title.component";
 
 @Component({
   selector: 'app-noticias',
   standalone: true,
   imports: [
     GenericModule,
-    NavComponent],
+    NavComponent,
+    PlatformFilterComponent,
+    PageTitleComponent
+],
   templateUrl: './noticias.component.html',
   styleUrl: './noticias.component.scss'
 })
@@ -27,9 +30,7 @@ export class NoticiasComponent {
     { label: 'Séries', value: 'series' }
   ];
 
-  constructor(private newsService: GamenewsService,
-    private igdbService: IgdbService,
-    private router: Router) { }
+  constructor(private newsService: GamenewsService) { }
 
   ngOnInit(): void {
     this.loadNews();
@@ -47,7 +48,7 @@ export class NoticiasComponent {
     });
   }
 
-  filterByPlatform(platform: string): void {
+  onPlatformSelected(platform: string): void {
     this.currentPlatform = platform;
     this.loadNews(platform);
   }

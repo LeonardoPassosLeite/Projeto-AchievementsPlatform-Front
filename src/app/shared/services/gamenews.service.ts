@@ -36,7 +36,7 @@ export class GamenewsService {
     }
 
     const params = new HttpParams()
-      .set('q', query) // Filtro de plataforma
+      .set('q', query)
       .set('sortBy', 'publishedAt')
       .set('language', 'pt')
       .set('apiKey', secretKey.newsApiKey);

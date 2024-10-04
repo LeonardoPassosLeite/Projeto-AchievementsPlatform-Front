@@ -1,0 +1,99 @@
+@import '../../../../shareds/colors.scss';
+
+.section-header {
+    margin-top: 80px;
+}
+
+.highlighted-background {
+    background: $primary-background;
+    padding: 20px;
+    border-radius: 15px;
+    position: relative;
+    overflow: hidden;
+}
+
+.highlighted-game-card {
+    display: inline-block;
+    width: 200px;
+    flex-shrink: 0;
+    background-color: $dark-charcoal-brown;
+    padding: 10px;
+    border-radius: 15px;
+    transition: transform 0.3s ease;
+}
+
+.highlighted-game-card:hover {
+    transform: scale(1.05);
+}
+
+.game-image-release {
+    width: 100%;
+    height: 280px;
+    object-fit: contain;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.game-details h3 {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.game-details p {
+    font-size: 14px;
+}
+
+.carousel-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    margin-top: 20px;
+}
+
+.carousel-container {
+    overflow: hidden;
+    width: 100%;
+}
+
+.carousel {
+    display: flex;
+    gap: 20px;
+    overflow-x: scroll;
+    scroll-behavior: smooth;
+    width: 100%;
+}
+
+.arrow-btn {
+    background-color: rgba(0, 0, 0, 0.6);
+    border: none;
+    color: $white;
+    cursor: pointer;
+    font-size: 1.5rem;
+    padding: 10px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+}
+
+.left-arrow {
+    left: 10px;
+}
+
+.right-arrow {
+    right: 10px;
+}
+
+.arrow-btn:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.carousel::-webkit-scrollbar {
+    display: none;
+}

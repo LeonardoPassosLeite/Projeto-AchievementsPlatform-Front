@@ -5,7 +5,15 @@ h1,
 h2,
 body {
     height: 100%;
-    color: #000000;
+    color: #fcfcfc;
+}
+
+h1 {
+    font-size: 26px;
+}
+
+p {
+    font-size: 14px;
 }
 
 span {
@@ -32,6 +40,7 @@ body {
 .d-flex {
     display: flex;
     align-items: center;
+    justify-content: space-between;
 }
 
 .bottom-10 {
@@ -45,6 +54,7 @@ body {
 .top-18 {
     margin-top: 18px;
 }
+
 
 //gap
 .gap-10 {

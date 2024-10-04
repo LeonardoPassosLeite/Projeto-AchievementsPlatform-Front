@@ -1,7 +1,15 @@
+<app-auto-carousel [games]="todayReleases" [title]="'Jogos que serão lançados em breve'"
+    [subtitle]="'Descubra os lançamentos e atualizações de hoje'">
+</app-auto-carousel>
+
 <app-carousel [games]="highlightedGames" [title]="'Jogos Mais Aguardados'"
     [subtitle]="'Descubra os jogos mais esperados'">
 </app-carousel>
 
-<app-carousel [games]="currentMonthGames" [title]="'Jogos Lançamentos Desse Mês'"
-    [subtitle]="'Aproveite os lançamentos que estão por vir'">
+<app-carousel [games]="highlightedGamesMonth" [title]="'Jogos Mais Esperados Para Esse Mês'"
+    [subtitle]="'Ainda nesse mês os lançamentos que estão por vir'">
+</app-carousel>
+
+<app-carousel [games]="realeasesMonthGames" [title]="'Jogos Lançamentos Desse Mês'"
+    [subtitle]="'Aproveite os lançamentos do mês'">
 </app-carousel>

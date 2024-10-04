@@ -1,0 +1,43 @@
+<div class="launch-section">
+    <div class="section-header">
+        <app-page-title [title]="title" [subtitle]="subtitle"></app-page-title>
+    </div>
+
+    <div class="launch-carousel-wrapper" (mouseenter)="stopAutoScroll()" (mouseleave)="startAutoScroll()">
+        <button class="arrow-btn left-arrow" (click)="scrollLeft()">
+            <i class="fa fa-chevron-left"></i>
+        </button>
+        <div class="launch-carousel-container">
+            <div class="launch-carousel" #carousel>
+                <div class="launch-game-card" *ngFor="let game of games">
+                    <div class="game-image-wrapper">
+                        <img [src]="game.cover?.url" alt="{{ game.name }}" class="game-image-release"
+                            *ngIf="game.cover?.url">
+                    </div>
+
+                    <div class="game-info-overlay">
+                        <h3>{{ game.name }}</h3>
+                        <p class="platform">{{ game.platforms[0]?.name }}</p>
+
+                        <p *ngIf="!isGameReleased(game.first_release_date) && game.timeLeft" class="time-left">
+                            Lançamento em:
+                            {{ game.timeLeft.hours }}h
+                            {{ game.timeLeft.minutes }}m
+                            {{ game.timeLeft.seconds }}s
+                        </p>
+                        <p *ngIf="isGameReleased(game.first_release_date)" class="release-status">
+                            Já disponível
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="arrow-btn right-arrow" (click)="scrollRight()">
+            <i class="fa fa-chevron-right"></i>
+        </button>
+    </div>
+
+    <div class="launch-button-wrapper">
+        <button class="launch-button">Mostrar Tudo</button>
+    </div>
+</div>

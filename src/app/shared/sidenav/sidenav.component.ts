@@ -35,9 +35,9 @@ export class SidenavComponent {
       route: '/jogos' 
     },
     {
-      label: 'ranking',
-      icon: 'leaderboard',
-      route: '/jogos-ranking' 
+      label: 'Conquistas',
+      icon: 'emoji_events',
+      route: '/conquistas' 
     },
     {
       label: 'componentes',

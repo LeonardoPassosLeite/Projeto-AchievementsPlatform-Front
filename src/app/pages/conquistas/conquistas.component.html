@@ -1,0 +1,75 @@
+<div class="container-global">
+    <div class="user-profile">
+        <img [src]="userProfileUrl" alt="Foto de Perfil" class="profile-picture">
+        <div class="user-info">
+            <span class="user-name fs-18">{{ userName }}</span>
+            <div class="nivel-container">
+                <span class="user-level fs-14">Nível: <span class="nivel">{{ currentLevel }}</span></span>
+                <div class="progress-bar-container">
+                    <div class="progress-bar" [style.width]="nextLevelProgress + '%'"></div>
+                </div>
+                <div class="pontos">{{ totalPoints.toFixed(0) }}/{{ calculatePointsForNextLevel().toFixed(0) }} pontos</div>
+            </div>            
+        </div>
+
+        <span class="fs-14 all-Playtime">Tempo Total Jogados: {{ totalPlaytimeHours.toFixed(2) }} horas</span>
+    </div>
+
+    <div class="d-flex stats-container">
+        <div class="steam-points">
+            <span class="points-text gap-5 fs-16">
+                conquistas: {{ totalSteamPoints }}
+                <i class="temp fa fa-s"></i>{{ totalSteamPoints }}
+            </span>
+        </div>
+
+        <div class="platinum-summary fs-16">
+            <span class="platinum">
+                <img src="assets/steam-platinum.png" alt="Platinado"> {{ totalPlayedGames }} Jogos / {{ totalOwnedGames
+                }} Total Jogos
+            </span>
+            <div class="platinum-progress-bar-container">
+                <div class="platinum-progress-bar" [style.width]="(totalPlayedGames / totalOwnedGames) * 100 + '%'">
+                </div>
+            </div>
+        </div>
+
+        <div class="platinum-summary fs-16">
+            <span class="platinum">
+                <img src="assets/steam-platinum.png" alt="Platinado"> {{ totalPlatinum }} Platinas / {{
+                totalGamesWithAchievements }}
+                Total Jogos
+            </span>
+            <div class="platinum-progress-bar-container">
+                <div class="platinum-progress-bar"
+                    [style.width]="(totalPlatinum / totalGamesWithAchievements) * 100 + '%'"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-global">
+    <div *ngFor="let game of paginatedData" class="game-item">
+        <div class="game-cover">
+            <img [src]="game.coverUrl" alt="{{ game.name }}" />
+        </div>
+        <div class="game-info">
+            <div class="game-name fs-18 bold">{{ game.name }}</div>
+            <div class="achievements-details fs-12">
+                <span>Conquistas {{ game.achievementsUnlocked }}/{{ game.totalAchievements }}</span>
+                <div class="playtime-platinum-container">
+                    <span>Tempo Jogado: {{ game.playTime }} horas</span>
+                    <img *ngIf="game.percentage === 100" src="assets/steam-platinum.png" alt="Platinado"
+                        class="platinum-badge">
+                </div>
+                <span class="fs-18 bold">{{ game.percentage }}%</span>
+            </div>
+            <div class="progress-bar-container">
+                <div class="progress-bar" [style.width]="game.percentage + '%'"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div *ngIf="isLoading" class="loading-spinner">Carregando mais jogos...</div>

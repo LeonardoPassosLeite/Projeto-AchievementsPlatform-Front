@@ -1,6 +1,6 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { PageTitleComponent } from "../page-title/page-title.component";
 import { CommonModule } from '@angular/common';
+import { PageTitleComponent } from '../page-title/page-title.component';
 
 
 @Component({

@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { MaterialModule } from '../../../../shareds/commons/MaterialModule';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { GenericModule } from '../../../../shareds/commons/GenericModule';
+import { MaterialModule } from '../../../../../shareds/commons/MaterialModule';
+import { GenericModule } from '../../../../../shareds/commons/GenericModule';
 
 @Component({
   selector: 'app-auto-complete',

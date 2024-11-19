@@ -1,22 +1,26 @@
-@import"../../../shareds/colors.scss";
+@import '../../../../shareds/colors.scss';
 $transition-speed: 0.3s;
 
 .menu-container {
     display: flex;
     font-family: 'Roboto', sans-serif;
 }
+
 .main-menu {
     width: 200px;
     padding: 60px 0;
     background-color: $bg-color;
+
     ul {
         list-style: none;
         padding: 0;
         margin: 0;
     }
+
     li {
         margin: 15px 0;
     }
+
     .menu-item {
         display: flex;
         flex-direction: column;
@@ -25,10 +29,12 @@ $transition-speed: 0.3s;
         border-radius: 10px;
         cursor: pointer;
         transition: background-color $transition-speed ease;
+
         mat-icon {
             color: $white;
             margin-bottom: 10px;
         }
+
         span {
             font-size: 12px;
             color: $text-color-white;
@@ -46,20 +52,25 @@ $transition-speed: 0.3s;
     margin: 10px;
     transition: all $transition-speed ease;
 }
+
 li:hover {
     background-color: $transparent;
     color: $white;
 }
+
 @media (max-width: 768px) {
     .main-menu {
         width: 200px;
     }
+
     .submenu {
         width: 180px;
     }
+
     .content {
         margin-left: 0;
     }
+
     .submenu-open .content {
         margin-left: 0;
     }

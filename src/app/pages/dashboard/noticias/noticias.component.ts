@@ -1,19 +1,18 @@
 import { Component } from '@angular/core';
 import { GamenewsService } from '../../../shared/services/gamenews.service';
 import { GenericModule } from '../../../../shareds/commons/GenericModule';
-import { NavComponent } from '../../../shared/nav/nav.component';
-import { PlatformFilterComponent } from "../../../shared/components/platform-filter/platform-filter.component";
-import { PageTitleComponent } from "../../../shared/components/page-title/page-title.component";
+import { PlatformFilterComponent } from "../../../shared/components/ui/platform-filter/platform-filter.component";
+import { PageTitleComponent } from "../../../shared/components/ui/page-title/page-title.component";
+import { NavComponent } from '../../../shared/components/nav/nav.component';
 
 @Component({
   selector: 'app-noticias',
   standalone: true,
   imports: [
     GenericModule,
-    NavComponent,
     PlatformFilterComponent,
     PageTitleComponent
-],
+  ],
   templateUrl: './noticias.component.html',
   styleUrl: './noticias.component.scss'
 })
@@ -50,6 +49,9 @@ export class NoticiasComponent {
 
   onPlatformSelected(platform: string): void {
     this.currentPlatform = platform;
+
+    console.log(`Buscando notícias para a plataforma selecionada: ${platform || 'todas as plataformas'}`);
+
     this.loadNews(platform);
   }
 }

@@ -1,0 +1,13 @@
+<mat-form-field appearance="fill" class="custom-autocomplete-field">
+  <input matInput [(ngModel)]="data" [placeholder]="placeholder" (input)="onSearch($event)" (focus)="onSearch($event)"
+    [matAutocomplete]="auto">
+  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onSelectData($event.option.value)">
+    <mat-option *ngFor="let suggestion of dataSuggestions" [value]="suggestion">
+      <div class="autocomplete-item">
+        <img *ngIf="suggestion.cover?.url || suggestion.imageUrl" [src]="suggestion.cover?.url || suggestion.imageUrl"
+          alt="image" class="autocomplete-thumbnail" />
+        <span>{{ suggestion.name || suggestion.title }}</span>
+      </div>
+    </mat-option>
+  </mat-autocomplete>
+</mat-form-field>

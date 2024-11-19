@@ -6,7 +6,6 @@
     padding: 20px;
     background-color: #1e1e1e;
     color: #fff;
-
 }
 
 html,
@@ -47,8 +46,11 @@ body {
 
 .d-flex {
     display: flex;
-    align-items: center;
     justify-content: space-between;
+}
+
+.center {
+    align-items: center;
 }
 
 .bottom-10 {
@@ -62,7 +64,6 @@ body {
 .top-18 {
     margin-top: 18px;
 }
-
 
 //gap
 .gap-5 {

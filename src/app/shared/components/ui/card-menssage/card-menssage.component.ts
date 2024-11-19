@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { MaterialModule } from '../../../../shareds/commons/MaterialModule';
+import { MaterialModule } from '../../../../../shareds/commons/MaterialModule';
 
 @Component({
   selector: 'app-card-menssage',

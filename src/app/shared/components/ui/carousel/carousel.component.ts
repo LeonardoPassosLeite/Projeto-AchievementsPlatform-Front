@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
-import { PageTitleComponent } from "../page-title/page-title.component";
+import { PageTitleComponent } from '../page-title/page-title.component';
 
 @Component({
   selector: 'app-carousel',
@@ -22,11 +22,11 @@ export class CarouselComponent {
     }
   }
 
-    showDetails(event: any): void {
+  showDetails(event: any): void {
     const card = event.currentTarget;
     const details = card.querySelector('.game-details');
     const releaseDate = card.querySelector('.game-release-date');
-    
+
     if (details && releaseDate) {
       details.style.opacity = '1';
       details.style.visibility = 'visible';
@@ -35,12 +35,11 @@ export class CarouselComponent {
     }
   }
 
-  // Função para esconder os detalhes
   hideDetails(event: any): void {
     const card = event.currentTarget;
     const details = card.querySelector('.game-details');
     const releaseDate = card.querySelector('.game-release-date');
-    
+
     if (details && releaseDate) {
       details.style.opacity = '0';
       details.style.visibility = 'hidden';

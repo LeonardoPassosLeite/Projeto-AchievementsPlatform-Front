@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { GenericModule } from '../../../shareds/commons/GenericModule';
+import { GenericModule } from '../../../../shareds/commons/GenericModule';
 
 @Component({
   selector: 'app-nav',
@@ -13,7 +13,7 @@ export class NavComponent {
   @Output() categorySelected = new EventEmitter<string>();
 
   onCategoryClick(value: string): void {
-    console.log('Category Clicked:', value); // Adicione esta linha
+    console.log('Category Clicked:', value);
     this.categorySelected.emit(value);
   }
 }

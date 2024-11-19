@@ -2,10 +2,8 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GenericModule } from '../../../../shareds/commons/GenericModule';
 import { IgdbService } from '../../../shared/services/igdb.service';
-import { PageTitleComponent } from "../../../shared/components/page-title/page-title.component";
-import { PlatformFilterComponent } from "../../../shared/components/platform-filter/platform-filter.component";
-import { CarouselComponent } from "../../../shared/components/carousel/carousel.component";
-import { AutoCarouselComponent } from "../../../shared/components/auto-carousel/auto-carousel.component";
+import { CarouselComponent } from '../../../shared/components/ui/carousel/carousel.component';
+import { AutoCarouselComponent } from '../../../shared/components/ui/auto-carousel/auto-carousel.component';
 
 @Component({
   selector: 'app-jogos-lancamentos',
@@ -13,8 +11,6 @@ import { AutoCarouselComponent } from "../../../shared/components/auto-carousel/
   imports: [
     CommonModule,
     GenericModule,
-    PageTitleComponent,
-    PlatformFilterComponent,
     CarouselComponent,
     AutoCarouselComponent
   ],

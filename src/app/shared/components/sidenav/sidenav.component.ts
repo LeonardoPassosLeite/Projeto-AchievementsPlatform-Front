@@ -30,9 +30,19 @@ export class SidenavComponent {
 
   menuItems: MenuItem[] = [
     {
+      label: 'Noticias',
+      icon: 'article',
+      route: '/dashboard' 
+    },
+    {
       label: 'Jogos',
       icon: 'sports_esports',
       route: '/jogos' 
+    },
+    {
+      label: 'Insights',
+      icon: 'bar_chart',
+      route: '/insights' 
     },
     {
       label: 'Conquistas',

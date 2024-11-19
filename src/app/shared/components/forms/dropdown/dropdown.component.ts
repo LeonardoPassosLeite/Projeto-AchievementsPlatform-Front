@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { GenericModule } from '../../../../shareds/commons/GenericModule';
-import { MaterialModule } from '../../../../shareds/commons/MaterialModule';
+import { GenericModule } from '../../../../../shareds/commons/GenericModule';
+import { MaterialModule } from '../../../../../shareds/commons/MaterialModule';
 
 @Component({
   selector: 'app-dropdown',

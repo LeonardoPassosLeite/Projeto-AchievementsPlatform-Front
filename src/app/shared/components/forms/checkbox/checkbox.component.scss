@@ -1,0 +1,14 @@
+.toggle-display {
+
+    gap: 1rem; /* Espaço entre os botões de rádio */
+}
+
+.toggle-display label {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9rem;
+    cursor: pointer;
+
+    input {
+        margin-right: 0.5rem;
+    }
+}

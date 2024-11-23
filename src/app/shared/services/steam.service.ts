@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, forkJoin, of } from 'rxjs';
 import { map, catchError, switchMap } from 'rxjs/operators';
 import { secretKey } from '../../environments/secret-key';
-import { GameAchievements, SteamAchievement, SteamGame } from '../models/steam-game.model';
+import { Game, GameAchievements, SteamAchievement, SteamGame } from '../models/steam-game.model';
 
 @Injectable({
   providedIn: 'root'
@@ -144,14 +144,14 @@ export class SteamService {
 
   getGameAchievements(appId: number): Observable<GameAchievements> {
     const url = `/steam-api/ISteamUserStats/GetPlayerAchievements/v1/?key=${secretKey.steamApiKey}&steamid=${secretKey.steamId}&appid=${appId}`;
-  
+
     return this.http.get<{ playerstats: { achievements: SteamAchievement[] } }>(url).pipe(
       map(response => {
         if (response?.playerstats?.achievements) {
           const achievements = response.playerstats.achievements;
           const unlocked = achievements.filter(achievement => achievement.achieved === 1).length;
           const total = achievements.length;
-  
+
           return { unlocked, total };
         }
         return { unlocked: 0, total: 0 };
@@ -166,7 +166,7 @@ export class SteamService {
       })
     );
   }
-  
+
   getGamesWithAchievements(): Observable<SteamGame[]> {
     return this.getAllGamesWithAchievements().pipe(
       switchMap(games => games.length ? this.getAchievementsForGames(games) : of([]))
@@ -206,20 +206,6 @@ export class SteamService {
       catchError(error => {
         console.error('Erro ao buscar jogos com conquistas:', error);
         return of([]);
-      })
-    );
-  }
-
-
-  //Parte que busca quantidade de play ativos em jogos
-  getActivePlayers(appId: number): Observable<number> {
-    const url = `/steam-api/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?key=${secretKey.steamApiKey}&appid=${appId}`;
-  
-    return this.http.get<{ response: { player_count: number } }>(url).pipe(
-      map(response => response?.response?.player_count || 0), // Retorna o número de jogadores ativos ou 0 se não encontrado
-      catchError(error => {
-        console.error(`Erro ao buscar jogadores ativos para o jogo ${appId}:`, error);
-        return of(0); 
       })
     );
   }

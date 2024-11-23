@@ -4,8 +4,8 @@
     max-width: 1500px;
     margin: 0 auto;
     padding: 20px;
-    background-color: #1e1e1e;
-    color: #fff;
+    background-color: $background;
+    color: $white;
 }
 
 html,
@@ -108,6 +108,16 @@ body {
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: center;
+}
+
+.d-grid-double {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.d-grid-triple {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
 }
 
 .text-aling-left {

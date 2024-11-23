@@ -1,0 +1,7 @@
+<div class="toggle-display d-flex center">
+    <label *ngFor="let option of options">
+        <input type="radio" [name]="'toggle-options'" [value]="option.value" [checked]="option.value === selectedOption"
+            (change)="onOptionChange(option.value)" />
+        {{ option.label }}
+    </label>
+</div>

@@ -1,0 +1,35 @@
+@import "../../../shareds/colors.scss";
+
+.insights-container {
+  background-color: $background;
+  color: $white;
+  padding: 40px;
+
+  h1 {
+    font-size: 3rem;
+    color: #ff007f;
+    text-shadow: 0 0 10px #ff007f;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .d-grid-double {
+    gap: 20px;
+    width: 100%;
+    max-width: 2000px;
+
+    .left-panel,
+    .right-panel {
+      display: flex;
+      flex-direction: column;
+      background: linear-gradient(45deg, rgba(15, 0, 67, 0.3), $background );
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+  }
+}

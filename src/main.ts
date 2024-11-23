@@ -1,6 +1,14 @@
 import { bootstrapApplication } from '@angular/platform-browser';
 import { appConfig } from './app/core/app.config';
-import { SidenavComponent } from './app/shared/components/sidenav/sidenav.component';
+import { RouterOutlet } from '@angular/router';
+import { Component } from '@angular/core';
 
-bootstrapApplication(SidenavComponent, appConfig)
-  .catch((err) => console.error(err));
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  template: '<router-outlet></router-outlet>',
+  imports: [RouterOutlet],
+})
+export class RootComponent {}
+
+bootstrapApplication(RootComponent, appConfig).catch((err) => console.error(err));

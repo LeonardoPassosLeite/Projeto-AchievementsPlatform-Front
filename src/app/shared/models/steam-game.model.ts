@@ -1,3 +1,16 @@
+export interface Game {
+  name: string;
+  currentPlayers: number;
+  peakPlayers: number;
+}
+
+export interface HourlyGame {
+  id: number;
+  name: string;
+  currentPlayers: number;
+  date: string; 
+}
+
 export interface SteamGame {
   appid: number;
   name: string;
@@ -5,15 +18,15 @@ export interface SteamGame {
   img_icon_url?: string;
   img_logo_url?: string;
   has_community_visible_stats: number
-  
-  achievementsUnlocked: number;  
-  totalAchievements: number;     
-  trophies?: number;              
 
-  releaseDate?: string;            
-  genre?: string;       
-  lastPlayed?: number; 
-  playTimed?: number;          
+  achievementsUnlocked: number;
+  totalAchievements: number;
+  trophies?: number;
+
+  releaseDate?: string;
+  genre?: string;
+  lastPlayed?: number;
+  playTimed?: number;
 }
 
 export interface SteamAchievement {

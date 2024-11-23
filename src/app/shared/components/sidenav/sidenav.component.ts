@@ -29,32 +29,13 @@ export class SidenavComponent {
   constructor(private router: Router) { }
 
   menuItems: MenuItem[] = [
-    {
-      label: 'Noticias',
-      icon: 'article',
-      route: '/dashboard' 
-    },
-    {
-      label: 'Jogos',
-      icon: 'sports_esports',
-      route: '/jogos' 
-    },
-    {
-      label: 'Insights',
-      icon: 'bar_chart',
-      route: '/insights' 
-    },
-    {
-      label: 'Conquistas',
-      icon: 'emoji_events',
-      route: '/conquistas' 
-    },
-    {
-      label: 'componentes',
-      icon: 'leaderboard',
-      route: '/componentes' 
-    },
+    { label: 'Noticias', icon: 'article', route: '/dashboard' },
+    { label: 'Jogos', icon: 'sports_esports', route: '/jogos' },
+    { label: 'Insights', icon: 'bar_chart', route: '/insights' },
+    { label: 'Conquistas', icon: 'emoji_events', route: '/conquistas' },
+    { label: 'Componentes', icon: 'leaderboard', route: '/componentes' },
   ];
+
 
   navigateTo(item: MenuItem): void {
     if (item.route) {

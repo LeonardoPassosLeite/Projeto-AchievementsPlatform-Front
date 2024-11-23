@@ -5,6 +5,7 @@
 /tmp
 /out-tsc
 /bazel-out
+/src/assets
 
 # Node (dependências e logs gerados pelo Node.js)
 /node_modules

@@ -5,10 +5,7 @@ import { NavComponent } from '../../shared/components/nav/nav.component';
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [
-    RouterOutlet,
-    NavComponent
-  ],
+  imports: [NavComponent],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })

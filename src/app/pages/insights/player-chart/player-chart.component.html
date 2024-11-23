@@ -1,0 +1,12 @@
+<div class="d-grid-triple center bold ">
+    <h2 class="fs-12">{{ title }}</h2>
+    <app-checkbox *ngIf="showToggleOptions" [options]="[
+            { value: DisplayType.CurrentPlayers, label: 'Jogadores Atuais' },
+            { value: DisplayType.PeakPlayers, label: 'Pico de Jogadores' }
+        ]" [selectedOption]="displayType" (optionChange)="onToggleChange($event)">
+    </app-checkbox>
+</div>
+
+<div class="chart-container">
+    <canvas id="playerChartCanvas"></canvas>
+</div>

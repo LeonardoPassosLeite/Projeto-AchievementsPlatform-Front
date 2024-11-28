@@ -6,6 +6,7 @@
 /out-tsc
 /bazel-out
 /src/assets
+/.vscode
 
 # Node (dependências e logs gerados pelo Node.js)
 /node_modules
@@ -47,3 +48,6 @@ testem.log
 
 # Ignorar os arquivos de environment (evitar expor informações sensíveis, como API keys)
 src/app/environments
+.gitignore
+.vscode
+.vscode/

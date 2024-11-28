@@ -1,0 +1,67 @@
+// Container principal
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: radial-gradient(circle, #1b2838, #171a21);
+    color: #ffffff;
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  // Card de login
+  .login-card {
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    width: 400px;
+  }
+  
+  // Logo da Steam
+  .steam-logo {
+    width: 100px;
+    margin-bottom: 20px;
+  }
+  
+  // Título
+  h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #c7d5e0;
+  }
+  
+  // Texto descritivo
+  p {
+    font-size: 16px;
+    margin-bottom: 20px;
+    color: #8f98a0;
+  }
+  
+  // Botão de login
+  .steam-login-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(45deg, #5c7cfa, #7b61ff);
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .steam-login-button:hover {
+    background: linear-gradient(45deg, #7b61ff, #5c7cfa);
+  }
+  
+  // Ícone do botão
+  .steam-login-button i {
+    font-size: 20px;
+    margin-right: 10px;
+  }
+  

@@ -1,0 +1,17 @@
+<div *ngIf="isLoading; else contentTemplate">
+  <h2>Carregando dados da Steam...</h2>
+  <div class="spinner">
+    <div class="loader"></div>
+  </div>
+</div>
+
+<ng-template #contentTemplate>
+  <div *ngIf="message; else successTemplate">
+    <h1>Erro</h1>
+    <p>{{ message }}</p>
+  </div>
+  <ng-template #successTemplate>
+    <h1>Autenticado com sucesso!</h1>
+    <p>Bem-vindo ao seu painel.</p>
+  </ng-template>
+</ng-template>

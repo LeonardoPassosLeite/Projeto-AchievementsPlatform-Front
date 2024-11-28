@@ -1,0 +1,75 @@
+/* Estilo global */
+body {
+    background: linear-gradient(180deg, #0d1117, #161b22);
+    font-family: 'Roboto', sans-serif;
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+}
+
+/* Container principal */
+.container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* Loading e erros */
+.loading,
+.error,
+.no-games {
+    text-align: center;
+    font-size: 18px;
+    color: #e63946;
+    margin-top: 20px;
+}
+
+/* Lista de jogos */
+.games-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px 0;
+}
+
+/* Cartão do jogo */
+.game-card {
+    background: #1f2937;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.game-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px rgba(0, 255, 255, 0.5);
+}
+
+/* Imagem do jogo */
+.game-image img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+/* Detalhes do jogo */
+.game-details {
+    padding: 15px;
+}
+
+.game-details h3 {
+    margin: 0 0 10px;
+    font-size: 20px;
+    color: #00d4ff;
+}
+
+.game-details p {
+    margin: 5px 0;
+    font-size: 16px;
+    color: #d1d5db;
+}
+
+.game-details strong {
+    color: #00d4ff;
+}

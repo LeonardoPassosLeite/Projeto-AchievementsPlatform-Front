@@ -1,7 +1,10 @@
 import { bootstrapApplication } from '@angular/platform-browser';
 import { appConfig } from './app/core/app.config';
-import { RouterOutlet } from '@angular/router';
+import { provideRouter, RouterOutlet } from '@angular/router';
 import { Component } from '@angular/core';
+import { HTTP_INTERCEPTORS, provideHttpClient, withFetch } from '@angular/common/http';
+import { AuthInterceptor } from './app/shared/services/commons/AuthInterceptor';
+import { routes } from './app/core/app.routes';
 
 @Component({
   selector: 'app-root',
@@ -9,6 +12,16 @@ import { Component } from '@angular/core';
   template: '<router-outlet></router-outlet>',
   imports: [RouterOutlet],
 })
-export class RootComponent {}
+export class RootComponent { }
 
-bootstrapApplication(RootComponent, appConfig).catch((err) => console.error(err));
+bootstrapApplication(RootComponent, {
+  providers: [
+    provideHttpClient(withFetch()),
+    provideRouter(routes),
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
+  ],
+}).catch((err) => console.error(err));

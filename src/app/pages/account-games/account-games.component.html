@@ -1,0 +1,29 @@
+<div class="container">
+    <div *ngIf="loading" class="loading">
+        Carregando jogos...
+    </div>
+
+    <div *ngIf="errorMessage" class="error">
+        {{ errorMessage }}
+    </div>
+
+    <div *ngIf="!loading && games.length === 0" class="no-games">
+        Nenhum jogo encontrado.
+    </div>
+
+    <div *ngIf="!loading && games.length > 0" class="games-list">
+        <ul>
+            <li *ngFor="let game of games" class="game-card">
+                <div class="game-image">
+                    <!-- <img [src]="game.imageUrl" alt="Imagem do jogo {{ game.gameName }}" /> -->
+                </div>
+                <div class="game-details">
+                    <h3>{{ game.gameName }}</h3>
+                    <p><strong>App ID:</strong> {{ game.appId }}</p>
+                    <p><strong>Horas jogadas:</strong> {{ game.playtimeForever }} horas</p>
+                    <p><strong>Conquistas:</strong> {{ game.achievementsCount }} de {{ game.totalAchievements }}</p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

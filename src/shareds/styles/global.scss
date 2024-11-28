@@ -11,9 +11,10 @@
 html,
 h1,
 h2,
+h3
 body {
     height: 100%;
-    color: #fcfcfc;
+    color: $black;
 }
 
 h1 {
@@ -22,6 +23,7 @@ h1 {
 
 p {
     font-size: 14px;
+    color: black;
 }
 
 span {
@@ -35,6 +37,11 @@ button span {
 body {
     margin: 0;
     font-family: 'Poppins', sans-serif;
+
+    background:  
+      url('../../assets/gamer.png') no-repeat center center fixed;
+    background-size: cover;
+
 }
 
 .card-flex {

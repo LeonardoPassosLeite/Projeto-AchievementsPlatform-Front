@@ -1,9 +1,8 @@
-import { BehaviorSubject, catchError, Observable, tap, throwError } from "rxjs";
-import { TokenStorageService } from "./TokenStorageService";
-import { environment } from "../../../environments/environment";
 import { Injectable } from "@angular/core";
+import { BehaviorSubject, Observable, throwError, forkJoin } from "rxjs";
 import { AccountGameService } from "../account-game.service";
-import { ErrorHandlingService } from "../commons/error-handlig.service";
+import { TokenStorageService } from "./tokenStorage.service";
+import { SteamUserService } from "../steam-user.service";
 
 @Injectable({
   providedIn: 'root',
@@ -14,47 +13,50 @@ export class AuthService {
   isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
 
   constructor(
-    private tokenStorage: TokenStorageService,
+    private tokenStorageService: TokenStorageService,
     private accountGameService: AccountGameService,
-    private errorHandlingService : ErrorHandlingService
+    private steamUserService: SteamUserService
   ) {
     this.initializeAuthentication();
   }
 
   private initializeAuthentication(): void {
-    const token = this.tokenStorage.getToken();
-    console.log('Token encontrado no localStorage ao inicializar:', token);
-    this.isAuthenticatedSubject.next(!!token);
+    const token = this.tokenStorageService.getTokenFromCookie();
+
+    if (token) {
+      this.isAuthenticatedSubject.next(true);
+    } else {
+      this.isAuthenticatedSubject.next(false);
+    }
   }
 
-  syncAndStoreUserData(): Observable<void> {
-    const token = this.tokenStorage.getTokenFromCookie(); // Delegação ao TokenStorageService
-    if (!token) {
-      return throwError(() => new Error('Token não encontrado no cookie.'));
-    }
-    return this.accountGameService.storeAccountGameUserData(token).pipe(
-      tap(() => console.log('Jogos armazenados com sucesso.')),
-      catchError((err) => {
-        const message = this.errorHandlingService.handleHttpError(err);
-        console.error('Erro no AuthService:', message);
-        return throwError(() => new Error(message));
-      })
-    );
-  }  
+  storeProfileAndGames(): Observable<any> {
+    const token = this.tokenStorageService.getTokenFromCookie();
 
-  syncTokenFromCookie(): string | null {
-    return this.tokenStorage.getTokenFromCookie();
+    if (!token)
+      throw new Error('Token não encontrado');
+
+    const steamId = this.tokenStorageService.getSteamIdFromToken();
+
+    if (!steamId)
+      throw new Error('SteamID não encontrado no token');
+
+    return forkJoin({
+      steamProfile: this.steamUserService.storeSteamUser(token),
+      accountGames: this.accountGameService.storeAccountGames(token),
+    });
   }
 
   login(token: string): void {
-    this.tokenStorage.setToken(token);
+    this.tokenStorageService.setToken(token);
     this.isAuthenticatedSubject.next(true);
   }
 
   logout(): void {
-    this.tokenStorage.removeToken();
+    this.tokenStorageService.removeToken();
     this.isAuthenticatedSubject.next(false);
   }
+
 
   isLoggedIn(): boolean {
     return this.isAuthenticatedSubject.value;

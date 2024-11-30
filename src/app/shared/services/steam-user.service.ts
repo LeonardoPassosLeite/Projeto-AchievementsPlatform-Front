@@ -3,13 +3,12 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, Observable, throwError } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { ErrorHandlingService } from './commons/error-handlig.service';
-import { ApiResponse } from '../models/coomons/api-response.model';
-import { AccountGame } from '../models/account-game.model';
+import { SteamUser } from '../models/steam-user.model';
 
 @Injectable({
     providedIn: 'root',
 })
-export class AccountGameService {
+export class SteamUserService {
     private readonly baseUrl = environment.baseUrl;
 
     constructor(
@@ -17,8 +16,8 @@ export class AccountGameService {
         private errorHandlingService: ErrorHandlingService
     ) { }
 
-    storeAccountGames(token: string): Observable<AccountGame> {
-        return this.http.post<AccountGame>(`${this.baseUrl}/accountgame/store-games`, {}, {
+    storeSteamUser(token: string): Observable<SteamUser> {
+        return this.http.post<SteamUser>(`${this.baseUrl}/steamuser/store-profile`, {}, {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`,
@@ -31,14 +30,14 @@ export class AccountGameService {
             }),
             catchError(error => {
                 const errorMessage = this.errorHandlingService.handleHttpError(error);
-                console.error('Erro na requisição para store-games:', errorMessage);
+                console.error('Erro na requisição para store-profile:', errorMessage);
                 return throwError(() => new Error(errorMessage));
             })
         );
     }
 
-    getAccountGames(token: string): Observable<AccountGame[]> {
-        return this.http.get<AccountGame[]>(`${this.baseUrl}/accountgame/stored-games`, {
+    getStoredUser(token: string): Observable<SteamUser> {
+        return this.http.get<SteamUser>(`${this.baseUrl}/steamUser/stored-profile`, {
             headers: new HttpHeaders({
                 Authorization: `Bearer ${token}`,
                 'Content-Type': 'application/json',
@@ -47,7 +46,7 @@ export class AccountGameService {
         }).pipe(
             catchError(error => {
                 const errorMessage = this.errorHandlingService.handleHttpError(error);
-                console.error('Erro na requisição para stored-games:', errorMessage);
+                console.error('Erro na requisição para stored-profile:', errorMessage);
                 return throwError(() => new Error(errorMessage));
             })
         );

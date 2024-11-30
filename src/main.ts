@@ -3,7 +3,7 @@ import { appConfig } from './app/core/app.config';
 import { provideRouter, RouterOutlet } from '@angular/router';
 import { Component } from '@angular/core';
 import { HTTP_INTERCEPTORS, provideHttpClient, withFetch } from '@angular/common/http';
-import { AuthInterceptor } from './app/shared/services/commons/AuthInterceptor';
+import { AuthInterceptor } from './app/shared/services/commons/auth-interceptor';
 import { routes } from './app/core/app.routes';
 
 @Component({

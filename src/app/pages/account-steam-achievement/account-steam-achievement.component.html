@@ -1,0 +1,83 @@
+<div class="container-global">
+    <div *ngIf="loading" class="loading">
+        Carregando jogos...
+    </div>
+
+    <div *ngIf="errorMessage" class="error">
+        {{ errorMessage }}
+    </div>
+
+    <div *ngIf="!loading && steamUser" class="steam-profile">
+        <!-- Primeira seção: Perfil do usuário -->
+        <div class="d-grid-double bottom-18">
+            <div class="d-flex gamer-profile">
+                <img [src]="steamUser.avatarUrl || '/assets/default-avatar.jpg'" alt="Avatar" class="profile-avatar" />
+                <div class="profile-info">
+                    <p class="username">{{ steamUser.displayName || 'Nome de usuário não disponível' }}</p>
+
+                    <div class="level-ranking">
+    
+                        
+                        <p class="level">Level: {{ steamUserXpMock.level }}</p>
+                        
+                        <div class="xp-bar-container">
+                          <p class="xp-text">
+                            {{ steamUserXpMock.xpCurrent }} XP / {{ steamUserXpMock.xpToNextLevel }} XP
+                          </p>
+                          <div class="xp-bar">
+                            <div class="xp-progress" [style.width]="getXpPercentage() + '%'"></div>
+                          </div>
+                        </div>
+                      </div>
+                      
+                </div>
+            </div>
+
+            <div class="grid-item">
+                <p class="ranking">Ranking: 40</p>
+                <p><a [href]="steamUser.profileUrl" target="_blank">Ver perfil no Steam</a></p>
+            </div>
+        </div>
+
+        <div class="d-flex">
+            <a>Arte</a>
+            <a>Conquistas</a>
+            <a>Ranking Global</a>
+        </div>
+
+        <!-- Segunda seção: Imagem de perfil editável -->
+        <div class="d-grid-double py-10">
+            <div class="image-upload-container">
+                <label for="imageUpload" class="image-upload-label">
+                    <div class="image-upload-square">
+                        <img *ngIf="selectedImage" [src]="selectedImage" alt="Imagem do usuário"
+                            class="uploaded-image" />
+                        <span *ngIf="!selectedImage" class="upload-icon">+ Adicionar imagem</span>
+                    </div>
+                </label>
+                <input type="file" id="imageUpload" (change)="onImageSelected($event)" style="display: none" />
+            </div>
+
+            <div class="grid-item">
+                <div class="bottom-50">
+                    Online
+                </div>
+                <div class="bottom-100">
+                    Conquistas
+                </div>
+                <div class="d-flex">
+                    <span>Texto </span>
+                    <span>Texto </span>
+                    <span>Texto </span>
+                    <span>Texto </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div *ngIf="!loading && accountGames?.length === 0" class="no-games">
+        Nenhum jogo encontrado.
+    </div>
+
+</div>

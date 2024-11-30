@@ -3,8 +3,7 @@ import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/c
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { TokenStorageService } from '../auth/TokenStorageService';
-
+import { TokenStorageService } from '../auth/tokenStorage.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -14,31 +13,29 @@ export class AuthInterceptor implements HttpInterceptor {
     ) { }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        const token = this.tokenStorage.getToken(); 
+        const token = this.tokenStorage.getTokenFromCookie();  // Recupera o token
 
-        if (token && !this.tokenStorage.isTokenExpired(token)) {
+        if (token) {
+            // Se o token existir, adiciona o header Authorization
             request = request.clone({
                 setHeaders: {
                     Authorization: `Bearer ${token}`
                 },
                 withCredentials: true
             });
-        } else if (token && this.tokenStorage.isTokenExpired(token)) {
-            console.warn('Token expirado. Redirecionando para login.');
-            this.tokenStorage.removeToken(); 
-            this.router.navigate(['/login']);
         }
 
         return next.handle(request).pipe(
             catchError(err => {
                 if (err.status === 401) {
+                    // Caso o token seja inválido ou expirado, redireciona para o login
                     console.error('Usuário não autorizado ou token inválido.');
-                    this.tokenStorage.removeToken();
+                    this.tokenStorage.removeToken();  // Remove o token inválido
                     if (this.router.url !== '/login') {
                         this.router.navigate(['/login']);
                     }
                 }
-                return throwError(() => err);
+                return throwError(() => err);  // Lança o erro para o fluxo continuar
             })
         );
     }

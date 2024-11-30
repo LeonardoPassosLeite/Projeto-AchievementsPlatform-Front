@@ -34,6 +34,7 @@ export class SidenavComponent {
     { label: 'Jogos', icon: 'sports_esports', route: '/jogos' },
     { label: 'Insights', icon: 'bar_chart', route: '/insights' },
     { label: 'Conquistas', icon: 'emoji_events', route: '/conquistas' },
+    { label: 'Usuario', icon: 'emoji_events', route: '/usuario' },
     { label: 'Sair', icon: 'logout' }
   ];
 

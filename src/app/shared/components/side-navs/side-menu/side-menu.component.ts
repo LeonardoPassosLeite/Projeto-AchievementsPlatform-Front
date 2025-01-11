@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
-import { AuthService } from '../../services/auth/auth.service';
+import { AuthService } from '../../../services/auth/auth.service';
 
 export interface MenuItem {
   label: string;
@@ -19,10 +19,10 @@ export interface MenuItem {
     RouterModule,
     MatIconModule
   ],
-  templateUrl: './sidenav.component.html',
-  styleUrl: './sidenav.component.scss'
+  templateUrl: './side-menu.component.html',
+  styleUrl: './side-menu.component.scss'
 })
-export class SidenavComponent {
+export class SideMenuComponent {
   submenuOpen = false;
   selectedMenuTitle: string | null = null;
   activeSubmenu: MenuItem[] | null = null;
@@ -30,11 +30,7 @@ export class SidenavComponent {
   constructor(private authService: AuthService, private router: Router) { }
 
   menuItems: MenuItem[] = [
-    { label: 'Noticias', icon: 'article', route: '/dashboard' },
-    { label: 'Jogos', icon: 'sports_esports', route: '/jogos' },
-    { label: 'Insights', icon: 'bar_chart', route: '/insights' },
-    { label: 'Conquistas', icon: 'emoji_events', route: '/conquistas' },
-    { label: 'Usuario', icon: 'emoji_events', route: '/usuario' },
+    { label: 'Perfil', icon: 'article', route: '/dashboard' },
     { label: 'Sair', icon: 'logout' }
   ];
 

@@ -1,0 +1,21 @@
+<div *ngIf="gameDetails" class="container-global">
+    <div class="d-grid-double game-image">
+        <img [src]="gameDetails.iconUrl || '/assets/default-image.jpg'" alt="{{ gameDetails.gameName }}">
+        <div class="title-game fs-10">
+            <h3>{{ gameDetails.gameName }}</h3>
+        </div>
+
+        <app-modal-account-game-achievement *ngIf="isModalOpen" [gameDetails]="gameDetails" (closeModal)="closeModal()">
+        </app-modal-account-game-achievement>
+    </div>
+
+    <app-game-stats [gameDetails]="gameDetails"></app-game-stats>
+
+    <app-achievements [achievements]="achievements" [loading]="loading" [hasMore]="hasMore"
+        (loadMore)="onLoadMoreAchievements()">
+    </app-achievements>
+</div>
+
+<div *ngIf="errorMessage" class="error-message">
+    <p>{{ errorMessage }}</p>
+</div>

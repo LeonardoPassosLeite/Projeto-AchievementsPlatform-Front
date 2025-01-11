@@ -1,0 +1,32 @@
+<div class="achievement-container scroll" (scroll)="onScroll($event)">
+    <div *ngFor="let achievement of achievements" class="achievement-card"
+        [ngClass]="{ 'locked': !achievement.achieved }">
+        <div class="achievement-header">
+            <img [src]="achievement.icon || '/assets/default-image.jpg'" alt="{{ achievement.name }}"
+                class="achievement-icon" />
+            <div class="achievement-info">
+                <h3 class="achievement-title">{{ achievement.name }}</h3>
+                <p class="achievement-points">
+                    <span class="points-icon">🏆</span> {{ achievement.steamPoints }} SP
+                </p>
+            </div>
+        </div>
+        <div class="achievement-body">
+            <p class="achievement-description">"{{ achievement.description }}"</p>
+            <p class="achievement-rarity">
+                {{ achievement.rarity }}% dos jogadores desbloquearam isso
+            </p>
+            <p class="achievement-unlock-time" *ngIf="achievement.achieved" [ngClass]="'unlocked'">
+                ✅ Desbloqueado em {{ achievement.unlockTime | date: 'dd/MM/yyyy' }}
+            </p>
+            <p class="achievement-unlock-time" *ngIf="!achievement.achieved">
+                🔒 Ainda não desbloqueado
+            </p>
+        </div>
+    </div>
+
+    <!-- Indicador de carregamento enquanto novos achievements são carregados -->
+    <div *ngIf="loading" class="loading-more">
+        Carregando mais conquistas...
+    </div>
+</div>

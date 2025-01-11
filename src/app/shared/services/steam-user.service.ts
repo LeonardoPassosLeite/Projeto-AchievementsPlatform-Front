@@ -51,4 +51,20 @@ export class SteamUserService {
             })
         );
     }
+
+    updateStoredGames(token: string): Observable<void> {
+        return this.http.put<void>(`${this.baseUrl}/accountgame/update-stored-games`, {}, {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+            }),
+            withCredentials: true,
+        }).pipe(
+            catchError((error) => {
+                const errorMessage = this.errorHandlingService.handleHttpError(error);
+                console.error('Erro ao atualizar jogos armazenados:', errorMessage);
+                return throwError(() => new Error(errorMessage));
+            })
+        );
+    }
 }

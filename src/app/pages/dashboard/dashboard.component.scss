@@ -1,0 +1,267 @@
+@import "../../../shareds/colors.scss";
+
+.container-user-profile {
+    background: linear-gradient(45deg, #111, #22222244);
+    padding: 12px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px $aqua;
+    width: 680px;
+    max-height: 180px;
+    margin-bottom: 20px;
+
+    .profile-avatar {
+        width: 150px;
+        height: 160px;
+        border: 3px solid $aqua;
+        box-shadow: 0 0 10px $aqua;
+        margin-right: 40px;
+        transition: transform 0.3s ease;
+    }
+
+    .profile-info {
+        .username {
+            color: $aqua;
+            margin-top: 10px;
+            text-shadow: 0 0 10px $aqua;
+        }
+
+        .ranking,
+        .stats {
+            color: $golden;
+            text-shadow: $yellow-glow;
+            margin: 30px 40px 30px 0;
+        }
+
+        .xp-bar-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+
+            span {
+                margin-left: 0;
+                color: $gray;
+                margin-bottom: 5px;
+            }
+        }
+    }
+}
+
+.grid-item-ranking {
+    text-align: center;
+    border-radius: 8px;
+    margin-left: 20px;
+    background-color: $charcoal-gray;
+    box-shadow: 0 4px 15px rgba(0, 255, 255, 0.3);
+    color: $white;
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 8px;
+        border: 2px solid transparent;
+        background-image: linear-gradient(120deg,
+                rgba(240, 199, 17, 0.178),
+                rgb(226, 201, 57),
+                rgba(133, 222, 238, 0.219));
+        background-size: 200% 200%;
+        animation: move-border 3s linear infinite;
+        z-index: 1;
+        pointer-events: none;
+    }
+
+    .ranking-content {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        .circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(120deg,
+                    rgba(240, 199, 17, 0.178),
+                    rgb(226, 201, 57),
+                    rgba(133, 222, 238, 0.219));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5), 0 0 25px rgba(255, 255, 255, 0.3);
+            animation: glow-circle 4s infinite;
+            margin-bottom: 10px;
+
+            .placement {
+                font-size: 40px;
+                font-weight: bold;
+                color: $golden-yellow;
+                text-shadow: 0 0 10px $black, 0 0 15px $black;
+            }
+        }
+
+        h2 {
+            font-size: 28px;
+            font-weight: bold;
+            color: $golden-yellow;
+            text-shadow: 0 0 10px $black, 0 0 15px $black;
+            margin-bottom: 10px;
+        }
+
+        .statistic {
+            font-size: 18px;
+            color: $aqua;
+            text-shadow: 0 0 8px $black;
+            margin-top: 5px;
+        }
+
+        @keyframes move-border {
+            0% {
+                background-position: 0% 50%;
+                transform: rotate(0deg) scale(1);
+                filter: brightness(1);
+            }
+
+            25% {
+                background-position: 50% 60%;
+                transform: rotate(2deg) scale(1.05);
+                filter: brightness(1.2);
+            }
+
+            50% {
+                background-position: 100% 40%;
+                transform: rotate(-2deg) scale(1.1);
+                filter: brightness(1.3);
+            }
+
+            75% {
+                background-position: 50% 70%;
+                transform: rotate(1deg) scale(1.05);
+                filter: brightness(1.2);
+            }
+
+            100% {
+                background-position: 0% 50%;
+                transform: rotate(0deg) scale(1);
+                filter: brightness(1);
+            }
+        }
+
+        @keyframes glow-circle {
+            0% {
+                box-shadow: 0 0 15px rgba(255, 255, 255, 0.5), 0 0 25px rgba(255, 255, 255, 0.3);
+            }
+
+            50% {
+                box-shadow: 0 0 30px rgba(255, 255, 255, 0.7), 0 0 50px rgba(255, 255, 255, 0.5);
+            }
+
+            100% {
+                box-shadow: 0 0 15px rgba(255, 255, 255, 0.5), 0 0 25px rgba(255, 255, 255, 0.3);
+            }
+        }
+    }
+}
+
+.grid-items {
+    text-align: left;
+    padding: 20px;
+    border: 1px solid $white;
+    border-radius: 8px;
+    margin-left: 20px;
+    background-color: #1a1a1a7c;
+    height: 68vh;
+
+    .item-conquistas {
+        margin-top: 50px;
+        margin-bottom: 100px;
+    }
+
+    .right-item {
+        margin-bottom: 40px;
+        display: flex;
+        align-items: center;
+        position: relative;
+
+        span {
+            color: $aqua;
+            letter-spacing: 1px;
+            text-shadow: 0 0 5px rgba(0, 255, 255, 0.7), 0 0 10px rgba(0, 255, 255, 0.4);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        span:hover {
+            color: #00ff00;
+            text-shadow: 0 0 10px rgba(0, 255, 0, 0.8), 0 0 15px rgba(0, 255, 0, 0.5);
+            transform: scale(1.05);
+        }
+
+        span:before {
+            content: "⚡";
+            margin-right: 10px;
+            font-size: 20px;
+            color: #00d4ff;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+    }
+}
+
+//conteudo trocavel
+.content-roating {
+    width: 700px;
+    height: 950px;
+}
+
+
+@media (max-width: 768px) {
+    .games-list {
+        grid-template-columns: 1fr;
+    }
+
+    .game-details h3 {
+        font-size: 16px;
+    }
+
+    .game-details p {
+        font-size: 12px;
+    }
+
+    .profile-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .profile-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+//teste
+.profile-avatar:hover {
+    transform: scale(1.1);
+}
+
+.xp-bar {
+    width: 100%;
+    height: 10px;
+    background-color: #555;
+    border-radius: 5px;
+    overflow: hidden;
+    position: relative;
+}
+
+.xp-progress {
+    height: 100%;
+    background-color: #00ff00;
+    border-radius: 5px;
+    transition: width 0.5s ease;
+}

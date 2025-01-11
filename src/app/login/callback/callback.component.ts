@@ -20,7 +20,7 @@ export class CallbackComponent implements OnInit {
     this.authService.storeProfileAndGames().subscribe({
       next: (data) => {
         console.log('Dados sincronizados com sucesso:', data);
-        this.router.navigate(['/conquistas']);
+        this.router.navigate(['/dashboard']);
       },
       error: (err) => {
         console.error('Erro ao sincronizar dados do Steam e jogos:', err);

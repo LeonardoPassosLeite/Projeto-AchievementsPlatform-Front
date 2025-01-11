@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable, throwError, forkJoin } from "rxjs";
-import { AccountGameService } from "../account-game.service";
 import { TokenStorageService } from "./tokenStorage.service";
 import { SteamUserService } from "../steam-user.service";
+import { AccountGameService } from "../account-game.service";
 
 @Injectable({
   providedIn: 'root',
@@ -42,8 +42,8 @@ export class AuthService {
       throw new Error('SteamID não encontrado no token');
 
     return forkJoin({
+      accountGames: this.accountGameService.addAccountGames(token),
       steamProfile: this.steamUserService.storeSteamUser(token),
-      accountGames: this.accountGameService.storeAccountGames(token),
     });
   }
 

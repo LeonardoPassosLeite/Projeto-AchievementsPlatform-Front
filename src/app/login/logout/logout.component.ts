@@ -22,7 +22,6 @@ export class LogoutComponent {
         })
         .subscribe({
           next: () => {
-            console.log('Logout realizado com sucesso.');
             localStorage.removeItem('jwtToken'); // Remove o token do armazenamento
             this.router.navigate(['/login']); // Redireciona para a página de login
           },

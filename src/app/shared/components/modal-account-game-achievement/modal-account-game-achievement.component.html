@@ -1,0 +1,23 @@
+<div class="modal-overlay" (click)="onClose()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+        <div class="modal-header">
+            <img [src]="gameDetails?.iconUrl || '/assets/default-image.jpg'" alt="{{ gameDetails?.gameName || 'Jogo' }}" />
+            <h3>{{ gameDetails?.gameName || 'Nome do jogo não disponível' }}</h3>
+            <button (click)="onClose()">X</button>
+        </div>
+        <div class="modal-body" *ngIf="gameDetails?.gameStats">
+            <p>
+                <strong>Total User Steam Points:</strong> {{ gameDetails?.gameStats?.totalUserSteamPoints }}
+            </p>
+            <p>
+                <strong>Total Game Steam Points:</strong> {{ gameDetails?.gameStats?.totalGameSteamPoints }}
+            </p>
+            <p>
+                <strong>Total User Achievements:</strong> {{ gameDetails?.gameStats?.totalUserAchievements }}
+            </p>
+            <p>
+                <strong>Total Achievements:</strong> {{ gameDetails?.gameStats?.totalAchievements }}
+            </p>
+        </div>
+    </div>
+</div>

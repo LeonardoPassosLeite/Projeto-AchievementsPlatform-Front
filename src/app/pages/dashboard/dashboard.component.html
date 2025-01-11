@@ -1,3 +1,87 @@
 <div class="container-global">
-    <app-nav [categories]="categories" (categorySelected)="onCategorySelected($event)"></app-nav>
+    <div *ngIf="!loading && steamUser">
+        <div class="d-grid-double">
+            <div class="d-flex container-user-profile">
+                <img [src]="steamUser.avatarUrl || '/assets/default-avatar.jpg'" alt="Avatar" class="profile-avatar" />
+                <div class="profile-info">
+                    <div class="username fs-24 bold">
+                        <span> {{ steamUser.displayName || 'Nome de usuário não disponível' }}</span>
+                    </div>
+                    <div class="profile-level d-flex fs-16 bold">
+                        <div class="stats">Level:
+                            <span>{{ steamUserXpMock.level }}</span>
+                        </div>
+                        <div class="stats">Platinas:
+                            <span> {{ steamUser.userStats.allPlatinum }}</span>
+                        </div>
+                        <div class="stats">Conquistas:
+                            <span> {{ steamUser.userStats.allAchievements }}</span>
+                        </div>
+                        <!-- <div class="stats">Total Jogado:
+                            <span>{{ formatPlaytimeDetailed(steamUser.userStats.allPlaytimeForever) }}</span>
+                        </div> -->
+                    </div>
+                    <div class="xp-bar-container fs-14">
+                        <span> {{ steamUserXpMock.xpCurrent }} XP / {{ steamUserXpMock.xpToNextLevel }} XP </span>
+                        <div class="xp-bar">
+                            <!-- <div class="xp-progress" [style.width]="getXpPercentage() + '%'"></div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid-item-ranking">
+                <div class="ranking-content">
+                    <h2>Ranking</h2>
+                    <div class="circle">
+                        <span class="placement">#1</span>
+                    </div>
+                    <p class="statistic">{{steamUser.userStats.totalSteamPoints}} SP</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-nav d-flex fs-12">
+            <a (click)="goToArte()">Arte</a>
+            <a (click)="goToConquistas()">Minhas Conquistas</a>
+            <a (click)="goToRanking()">Ranking Global</a>
+        </div>
+
+        <!-- Segunda seção: Conteudos -->
+        <div class="d-grid-double">
+            <div class="content-roating">
+                <router-outlet></router-outlet>
+            </div>
+
+            <div class="grid-items fs-14 bold">
+                <div>
+                    {{steamUser.onlineStatus}}
+                </div>
+                <div class="item-conquistas">
+                    Conquistas Raras
+                </div>
+                <div class="right-item">
+                    <span>Jogos: {{steamUser.userStats.allGames}}</span>
+                </div>
+                <div class="right-item">
+                    <span>Comentários: {{steamUser.userStats.totalFeedbacks}}</span>
+                </div>
+                <div class="right-item">
+                    <span>Screenshots </span>
+                </div>
+                <div class="right-item">
+                    <span>Minhas Estátisticas </span>
+                </div>
+                <div class="right-item">
+                    <span>Meus Jogos Zerados </span>
+                </div>
+                <div class="right-item">
+                    <span>O que vou jogar </span>
+                </div>
+                <button (click)="updateStoredGames()" class="btn-update-games">
+                    Atualizar Jogos
+                </button>
+            </div>
+        </div>
+    </div>
 </div>

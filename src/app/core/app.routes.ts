@@ -1,31 +1,70 @@
 import { Routes } from '@angular/router';
 import { DashboardComponent } from '../pages/dashboard/dashboard.component';
-// import { InsightsComponent } from '../pages/insights/insights.component';
-import { SidenavComponent } from '../shared/components/sidenav/sidenav.component';
 import { LoginComponent } from '../login/login.component';
 import { CallbackComponent } from '../login/callback/callback.component';
 import { AuthGuard } from '../shared/services/auth/auth.guard';
-import { AccountSteamAchievementComponent } from '../pages/account-steam-achievement/account-steam-achievement.component';
-
-// import { AccountProfileComponent } from '../pages/steam-user/account-profile/account-profile.component';
+import { RankingGlobalComponent } from '../pages/dashboard/ranking-global/ranking-global.component';
+import { AccountArtComponent } from '../pages/dashboard/account-art/account-art.component';
+import { AccountGameDetailsComponent } from '../pages/dashboard/account-game/account-game-details/account-game-details.component';
+import { AccountGameAchievementComponent } from '../pages/dashboard/account-game/account-game-achievement/account-game-achievement.component';
+import { SideMenuComponent } from '../shared/components/side-navs/side-menu/side-menu.component';
+import { NavBarComponent } from '../shared/components/side-navs/nav-bar/nav-bar.component';
+import { AccountGamePlatinumComponent } from '../pages/dashboard/account-game/account-game-platinum/account-game-platinum.component';
+import { AccountGameInProgressComponent } from '../pages/dashboard/account-game/account-game-in-progress/account-game-in-progress.component';
+import { AccountGameFinishedComponent } from '../pages/dashboard/account-game/account-game-finished/account-game-finished.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: '/login', pathMatch: 'full' },
     { path: 'login', component: LoginComponent },
-    { path: 'auth/callback', component: CallbackComponent },
+    { canActivate: [AuthGuard], path: 'auth/callback', component: CallbackComponent },
 
     {
         path: '',
-        component: SidenavComponent,
+        component: SideMenuComponent,
         canActivate: [AuthGuard],
         children: [
-            { path: 'dashboard', component: DashboardComponent },
-            { path: 'conquistas', component: AccountSteamAchievementComponent },
-            // { path: 'insights', component: InsightsComponent },
-            // { path: 'usuario', component: AccountProfileComponent },
-            { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+            {
+                path: 'dashboard',
+                component: DashboardComponent,
+                children: [
+                    { path: 'arte', component: AccountArtComponent },
+                    {
+                        path: 'navbar',
+                        component: NavBarComponent,
+                        children: [
+                            {
+                                path: 'games-conquistas',
+                                component: AccountGameAchievementComponent,
+                            },
+                            {
+                                path: 'games-platinados',
+                                component: AccountGamePlatinumComponent,
+                            },
+                            {
+                                path: 'games-em-amdamento',
+                                component: AccountGameInProgressComponent,
+                            },
+                            {
+                                path: 'games-finalizados',
+                                component: AccountGameFinishedComponent,
+                            },
+                            {
+                                path: '',
+                                redirectTo: 'games-conquistas',
+                                pathMatch: 'full',
+                            },
+                        ],
+                    },
+                    { path: 'ranking-global', component: RankingGlobalComponent },
+                    { path: 'account-game-details/:id', component: AccountGameDetailsComponent },
+                    { path: '', redirectTo: 'arte', pathMatch: 'full' },
+                ]
+            },
+            { path: 'insights', component: AccountGameAchievementComponent },
+            { path: 'usuario', component: AccountGameAchievementComponent },
         ]
     },
 
-    { path: '**', redirectTo: '/login' }
+    // Redirecionamento padrão para login em caso de rota inválida
+    // { path: '**', redirectTo: '/login' }
 ];

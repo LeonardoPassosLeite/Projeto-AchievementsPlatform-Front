@@ -1,0 +1,111 @@
+.d-grid-double {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    padding: 20px;
+}
+
+.achievement-card {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+    background: linear-gradient(145deg, #2b2b2b, #232323);
+    border: 1px solid #444;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.achievement-card.locked {
+    opacity: 0.5;
+    pointer-events: none;
+    filter: grayscale(100%);
+}
+
+.achievement-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.7);
+}
+
+.achievement-card.locked:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+.achievement-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Cria 2 colunas de tamanhos iguais */
+    gap: 20px; /* Espaçamento entre os itens */
+    max-height: 620px; /* Altura máxima com rolagem */
+    overflow-y: auto; /* Rolagem vertical */
+    padding: 20px; /* Espaçamento interno */
+    box-sizing: border-box; /* Inclui padding no tamanho do contêiner */
+}
+
+.achievement-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.achievement-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 8px;
+    margin-right: 16px;
+    object-fit: cover;
+    border: 2px solid #555;
+}
+
+.achievement-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.achievement-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    margin: 0;
+}
+
+.achievement-points {
+    font-size: 14px;
+    font-weight: bold;
+    color: #ffa500;
+    margin-top: 4px;
+}
+
+.points-icon {
+    margin-right: 4px;
+    font-size: 16px;
+}
+
+.achievement-body {
+    border-top: 1px solid #444;
+    padding-top: 12px;
+    color: #bbb;
+}
+
+.achievement-description {
+    font-size: 14px;
+    font-style: italic;
+    margin: 8px 0;
+}
+
+.achievement-rarity {
+    font-size: 12px;
+    color: #eeeeee;
+    margin-bottom: 8px;
+}
+
+.achievement-unlock-time {
+    font-size: 12px;
+    font-weight: bold;
+    color: #ff8f8f;
+}
+
+.achievement-unlock-time.unlocked {
+    color: #4caf50;
+}

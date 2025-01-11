@@ -1,0 +1,41 @@
+<div class="container-games-achievements scroll" (scroll)="onScroll($event)">
+    <div *ngIf="loading && accountGames.length === 0" class="loading">
+        Carregando jogos...
+    </div>
+
+    <div *ngIf="errorMessage" class="error">
+        {{ errorMessage }}
+    </div>
+
+    <div *ngIf="!loading && accountGames.length === 0 && !errorMessage" class="no-games">
+        Nenhum jogo encontrado.
+    </div>
+
+    <div *ngIf="accountGames.length > 0" class="games-list">
+        <!-- <span class="fs-14">S: {{ steamUser.userStats.totalSteamPoints }}</span> -->
+        <div *ngFor="let game of accountGames" class="game-card" (click)="onGameClick(game.id)">
+            <div class="game-image">
+                <img [src]="game.iconUrl || '/assets/default-image.jpg'" alt="Imagem do jogo {{ game.gameName }}" />
+            </div>
+            <div class="game-details">
+                <h3>{{ game.gameName || 'Nome do jogo não disponível' }}</h3>
+                <div class="game-meta">
+                    <p><strong>Horas jogadas:</strong> {{ formatPlaytime(game.playtimeForever) }}</p>
+                    <p><strong>Conquistas:</strong> {{ game.gameStats.totalUserAchievements }} / {{
+                        game.gameStats.totalAchievements }}</p>
+                    <p *ngIf="game.gameStats.platinum"><strong>Platinado</strong></p>
+                    <strong *ngIf="!game.gameStats.platinum" style="visibility: hidden;">Placeholder</strong>
+                </div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar"
+                        [style.width]="(game.gameStats.totalUserAchievements / game.gameStats.totalAchievements) * 100 + '%'">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="loading && accountGames.length > 0" class="loading-more">
+        Carregando mais jogos...
+    </div>
+</div>

@@ -1,9 +1,19 @@
+import { PagedResult } from "./coomons/pagination.model";
+import { GameAchievement } from "./game-achievement";
+import { GameStats } from "./game-stats.model";
+
 export interface AccountGame {
-    appId: number;
+    id: number;
     gameName: string;
     iconUrl: string;
     playtimeForever: number;
-    achievementsCount: number;
-    totalAchievements: number;
-    formattedPlaytime?: string;
+    gameStats: GameStats;
 }
+
+export interface AccountGameWithAchievements extends AccountGame {
+    achievements: PagedResult<GameAchievement>;
+}
+
+// export interface AccountGameWithFeedbacks extends AccountGame {
+//     feedbacks: GameFeedbackWithSteamUser[];
+// }

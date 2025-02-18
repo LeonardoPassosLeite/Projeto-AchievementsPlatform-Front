@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { environment } from '../../environments/environment';
 import { AccountGameWithAchievements } from '../models/account-game.model';
 import { ErrorHandlingService } from './commons/error-handlig.service';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -19,8 +19,13 @@ export class AccountGameDetailsService {
   ) { }
 
   setGameDetails(details: AccountGameWithAchievements): void {
+    if (!details) {
+      console.warn('Tentativa de definir detalhes do jogo com um valor inválido:', details);
+      return;
+    }
     this.gameDetails = details;
   }
+  
 
   getStoredGameDetails(): AccountGameWithAchievements | null {
     return this.gameDetails;

@@ -1,10 +1,12 @@
 import { bootstrapApplication } from '@angular/platform-browser';
-import { appConfig } from './app/core/app.config';
 import { provideRouter, RouterOutlet } from '@angular/router';
-import { Component } from '@angular/core';
-import { HTTP_INTERCEPTORS, provideHttpClient, withFetch } from '@angular/common/http';
+import { provideHttpClient, HTTP_INTERCEPTORS, withFetch } from '@angular/common/http';
 import { AuthInterceptor } from './app/shared/services/commons/auth-interceptor';
 import { routes } from './app/core/app.routes';
+import { Component, importProvidersFrom } from '@angular/core';
+import { AccountGameQuery } from './app/state/account-game/AccountGame.query';
+import { AccountGameStore } from './app/state/account-game/AccountGame.store';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
 
 @Component({
   selector: 'app-root',
@@ -12,12 +14,15 @@ import { routes } from './app/core/app.routes';
   template: '<router-outlet></router-outlet>',
   imports: [RouterOutlet],
 })
-export class RootComponent { }
+export class RootComponent {}
 
 bootstrapApplication(RootComponent, {
   providers: [
     provideHttpClient(withFetch()),
     provideRouter(routes),
+    AccountGameStore, 
+    AccountGameQuery,  
+    importProvidersFrom(BrowserAnimationsModule),  
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

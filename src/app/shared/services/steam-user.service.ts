@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, Observable, throwError } from 'rxjs';
-import { environment } from '../../environments/environment';
 import { ErrorHandlingService } from './commons/error-handlig.service';
 import { SteamUser } from '../models/steam-user.model';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
     providedIn: 'root',

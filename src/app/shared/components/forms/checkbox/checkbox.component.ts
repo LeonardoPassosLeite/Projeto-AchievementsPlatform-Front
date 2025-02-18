@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { GenericModule } from '../../../../../shareds/commons/GenericModule';
-import { DisplayType } from '../../../enums/displayType';
+import { DisplayType } from '../../../enums/GameStatus';
 
 @Component({
   selector: 'app-checkbox',

@@ -1,0 +1,109 @@
+.carousel-board {
+    width: 100%;
+}
+
+.carousel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.carousel-title {
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: rgb(0, 0, 0);
+    padding: 3px 5px;
+    border-radius: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    background: linear-gradient(45deg, #00ccff, #ffffff, #0000007e);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+    display: inline-block;
+    margin-bottom: 0;
+    margin-top: 20px;
+}
+
+.carousel-controls {
+    display: flex;
+    gap: 10px;
+}
+
+.scroll-btn {
+    background: transparent; 
+    color: white;
+    font-size: 10px; 
+    width: 30px;
+    height: 20px;
+    border-radius: 10%;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255, 255, 255, 0.3); 
+    backdrop-filter: blur(5px);
+    box-shadow: 0px 0px 5px rgba(255, 255, 255, 0.3);
+}
+
+.scroll-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5);
+}
+
+.carousel-column {
+    width: 97%;
+    height: 140px;
+    border-radius: 10px;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.322);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: visible;
+}
+
+.carousel-content {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.carousel-dropzone {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto !important;
+    white-space: nowrap;
+    width: 100%;
+    padding: 10px;
+    gap: 15px;
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(175, 223, 208, 0.212) transparent;
+}
+
+
+.carousel-save {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.save-btn {
+    background: linear-gradient(90deg, #00ccff, #007bff);
+    color: white;
+    font-size: 16px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+}
+
+.save-btn:disabled {
+    background: gray;
+    cursor: not-allowed;
+}
+
+.save-btn:hover:not(:disabled) {
+    background: linear-gradient(90deg, #007bff, #0056b3);
+}

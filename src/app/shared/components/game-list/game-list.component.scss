@@ -1,0 +1,117 @@
+@import "../../../../shareds/colors.scss";
+
+.container-games-achievements {
+    max-width: 1000px;
+    height: 65vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    font-family: 'Orbitron', sans-serif;
+    color: white;
+    margin: 0 auto;
+    padding: 10px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 255, 255, 0.3);
+}
+
+.game-card {
+    background: #1f2937;
+    border-radius: 15px;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s ease-in-out;
+    display: flex;
+    margin-bottom: 10px;
+    padding: 10px;
+    cursor: pointer;
+
+    &:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 25px rgba(0, 255, 255, 0.5);
+    }
+}
+
+.game-image {
+    width: 200px;
+    height: 100px;
+    margin-right: 15px;
+    flex-shrink: 0;
+    overflow: hidden;
+    border-radius: 10px;
+    border: 3px solid #00d4ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.progress-bar-container {
+    margin-top: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    height: 5px;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.progress-bar {
+    height: 100%;
+    background-color: $golden-yellow;
+    transition: width 0.3s ease-in-out;
+    border-radius: 10px;
+}
+
+.game-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-grow: 1;
+    color: #d1d5db;
+
+    h3 {
+        margin: 0 0 10px;
+        font-size: 18px;
+        color: #00d4ff;
+        font-weight: 600;
+    }
+
+    .game-meta {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+        min-height: 25px;
+
+        p {
+            font-size: 12px;
+            white-space: nowrap;
+
+            strong {
+                color: #00d4ff;
+            }
+
+            span {
+                margin-left: 5px; 
+            }
+        }
+
+        .game-playtime {
+            flex-grow: 1;
+            text-align: left;
+        }
+
+        .game-achievements {
+            width: 120px;
+            text-align: center;
+        }
+
+        .game-platinum {
+            text-align: right;
+            min-width: 80px;
+        }
+
+        .empty-placeholder {
+            visibility: hidden;
+            min-width: 80px;
+        }
+    }      
+}

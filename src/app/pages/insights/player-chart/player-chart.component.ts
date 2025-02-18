@@ -3,7 +3,7 @@ import { Game } from '../../../shared/models/steam-game.model';
 import { Chart } from 'chart.js';
 import { GenericModule } from '../../../../shareds/commons/GenericModule';
 import { CheckboxComponent } from '../../../shared/components/forms/checkbox/checkbox.component';
-import { DisplayType } from '../../../shared/enums/displayType';
+import { DisplayType } from '../../../shared/enums/GameStatus';
 
 @Component({
   selector: 'app-player-chart',

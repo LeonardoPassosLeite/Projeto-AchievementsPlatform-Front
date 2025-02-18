@@ -17,20 +17,28 @@ export class CallbackComponent implements OnInit {
   constructor(private router: Router, private authService: AuthService) { }
 
   ngOnInit(): void {
+    this.isLoading = true;  
+    this.message = null;
+
     this.authService.storeProfileAndGames().subscribe({
       next: (data) => {
-        console.log('Dados sincronizados com sucesso:', data);
+        if (!data.accountGames || !data.steamProfile) {
+          console.error('Dados incompletos recebidos:', data);
+          this.message = 'A sincronização foi concluída, mas alguns dados estão faltando.';
+          this.isLoading = false;
+          return;
+        }
+
         this.router.navigate(['/dashboard']);
       },
       error: (err) => {
-        console.error('Erro ao sincronizar dados do Steam e jogos:', err);
-        console.error('Detalhes do erro:', err.error); // Adicionando mais informações do erro
+        console.error('Erro ao sincronizar dados:', err.error || 'Detalhes não disponíveis');
         this.message = err.message || 'Ocorreu um erro inesperado. Tente novamente mais tarde.';
         this.isLoading = false;
       },
       complete: () => {
         this.isLoading = false;
-      }
+      },
     });
   }
 }

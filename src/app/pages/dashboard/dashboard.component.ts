@@ -77,8 +77,12 @@ export class DashboardComponent {
     });
   }
 
-  goToArte() {
-    this.router.navigate(['/dashboard/arte']);
+  goToHome() {
+    this.router.navigate(['/dashboard/home']);
+  }
+
+  goToStatus() {
+    this.router.navigate(['/dashboard/status']);
   }
 
   goToConquistas() {
@@ -87,5 +91,13 @@ export class DashboardComponent {
 
   goToRanking() {
     this.router.navigate(['/dashboard/ranking-global']);
+  }
+
+  goToGameStatus() {
+    this.router.navigate(['/dashboard/game-status']);
+  }
+
+  goToTest() {
+    this.router.navigate(['/dashboard/test']);
   }
 }

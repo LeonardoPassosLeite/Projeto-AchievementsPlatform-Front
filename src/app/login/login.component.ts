@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { GenericModule } from '../../shareds/commons/GenericModule';
 import { AuthService } from '../shared/services/auth/auth.service';
-import { environment } from '../environments/environment';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-login',

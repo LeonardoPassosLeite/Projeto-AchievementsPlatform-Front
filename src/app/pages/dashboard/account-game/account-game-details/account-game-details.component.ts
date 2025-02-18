@@ -45,7 +45,6 @@ export class AccountGameDetailsComponent implements OnInit {
 
     if (!storedGameDetails) {
       this.handleError('Os detalhes do jogo não estão disponíveis.');
-      this.router.navigate(['/dashboard/account-games']);
       return;
     }
 

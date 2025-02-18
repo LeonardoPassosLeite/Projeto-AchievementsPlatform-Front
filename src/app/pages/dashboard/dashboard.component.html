@@ -42,7 +42,8 @@
         </div>
 
         <div class="content-nav d-flex fs-12">
-            <a (click)="goToArte()">Arte</a>
+            <a (click)="goToHome()">Inicio</a>
+            <a (click)="goToStatus()">Games Status</a>
             <a (click)="goToConquistas()">Minhas Conquistas</a>
             <a (click)="goToRanking()">Ranking Global</a>
         </div>
@@ -70,13 +71,15 @@
                     <span>Screenshots </span>
                 </div>
                 <div class="right-item">
-                    <span>Minhas Estátisticas </span>
+                    <span role="button" tabindex="1" (click)="goToTest()"
+                        (keydown.enter)="goToGameStatus()">Minhas
+                        Estátisticas
+                    </span>
                 </div>
                 <div class="right-item">
-                    <span>Meus Jogos Zerados </span>
-                </div>
-                <div class="right-item">
-                    <span>O que vou jogar </span>
+                    <span role="button" tabindex="0" (click)="goToGameStatus()" (keydown.enter)="goToGameStatus()">
+                        O que vou jogar
+                    </span>
                 </div>
                 <button (click)="updateStoredGames()" class="btn-update-games">
                     Atualizar Jogos

@@ -43,8 +43,8 @@
 
         <div class="content-nav d-flex fs-12">
             <a (click)="goToHome()">Inicio</a>
-            <a (click)="goToStatus()">Games Status</a>
-            <a (click)="goToConquistas()">Minhas Conquistas</a>
+            <a (click)="goToGameStatus()">Painel</a>
+            <a (click)="goToConquistas()">Conquistas</a>
             <a (click)="goToRanking()">Ranking Global</a>
         </div>
 
@@ -54,37 +54,7 @@
                 <router-outlet></router-outlet>
             </div>
 
-            <div class="grid-items fs-14 bold">
-                <div>
-                    {{steamUser.onlineStatus}}
-                </div>
-                <div class="item-conquistas">
-                    Conquistas Raras
-                </div>
-                <div class="right-item">
-                    <span>Jogos: {{steamUser.userStats.allGames}}</span>
-                </div>
-                <div class="right-item">
-                    <span>Comentários: {{steamUser.userStats.totalFeedbacks}}</span>
-                </div>
-                <div class="right-item">
-                    <span>Screenshots </span>
-                </div>
-                <div class="right-item">
-                    <span role="button" tabindex="1" (click)="goToTest()"
-                        (keydown.enter)="goToGameStatus()">Minhas
-                        Estátisticas
-                    </span>
-                </div>
-                <div class="right-item">
-                    <span role="button" tabindex="0" (click)="goToGameStatus()" (keydown.enter)="goToGameStatus()">
-                        O que vou jogar
-                    </span>
-                </div>
-                <button (click)="updateStoredGames()" class="btn-update-games">
-                    Atualizar Jogos
-                </button>
-            </div>
+            <app-sidebar></app-sidebar>
         </div>
     </div>
 </div>

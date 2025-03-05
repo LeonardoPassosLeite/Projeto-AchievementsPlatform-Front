@@ -1,7 +1,11 @@
 export interface PagedResult<T> {
-    data: T[];
+    items: T[];
     totalItems: number;
     pageNumber: number;
     pageSize: number;
     totalPages: number;
+}
+
+export interface PagedResultWithMeta<T, TMeta> extends PagedResult<T> {
+    meta?: TMeta;
 }

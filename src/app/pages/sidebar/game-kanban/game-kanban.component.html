@@ -1,0 +1,49 @@
+<div class="games-container scroll">
+    <div class="kanban-shelf">
+        <h3>Não Iniciado</h3>
+
+        <div class="kanban-controls">
+            <button class="scroll-btn left" (click)="scroll('left')">&#8249;</button>
+            <button class="scroll-btn right" (click)="scroll('right')">&#8250;</button>
+        </div>
+
+        <div class="kanban-shelf-list" #shelf>
+            <div *ngFor="let jogo of getGamesByStatus(GameStatus.NotStarted) | async" class="kanban-item"
+                draggable="true" (dragstart)="dragStart($event, jogo)">
+                <img [src]="jogo.iconUrl" alt="{{ jogo.gameName }}">
+            </div>
+        </div>
+    </div>
+
+    <div class="kanban-columns">
+        <div class="kanban-column" (drop)="drop($event, GameStatus.InProgress)" (dragover)="allowDrop($event)">
+            <h3>Em Progresso</h3>
+            <div class="kanban-list">
+                <div *ngFor="let jogo of getGamesByStatus(GameStatus.InProgress) | async" class="kanban-item"
+                    draggable="true" (dragstart)="dragStart($event, jogo)">
+                    <img [src]="jogo.iconUrl" alt="{{ jogo.gameName }}">
+                </div>
+            </div>
+        </div>
+
+        <div class="kanban-column" (drop)="drop($event, GameStatus.Completed)" (dragover)="allowDrop($event)">
+            <h3>Zerado</h3>
+            <div class="kanban-list">
+                <div *ngFor="let jogo of getGamesByStatus(GameStatus.Completed) | async" class="kanban-item"
+                    draggable="true" (dragstart)="dragStart($event, jogo)">
+                    <img [src]="jogo.iconUrl" alt="{{ jogo.gameName }}">
+                </div>
+            </div>
+        </div>
+
+        <div class="kanban-column" (drop)="drop($event, GameStatus.Abandoned)" (dragover)="allowDrop($event)">
+            <h3>Dropado</h3>
+            <div class="kanban-list">
+                <div *ngFor="let jogo of getGamesByStatus(GameStatus.Abandoned) | async" class="kanban-item"
+                    draggable="true" (dragstart)="dragStart($event, jogo)">
+                    <img [src]="jogo.iconUrl" alt="{{ jogo.gameName }}">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

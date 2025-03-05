@@ -14,18 +14,18 @@ export class NavBarComponent {
   constructor(private router: Router) { }
 
   goToGameAchievements() {
-    this.router.navigate(['dashboard/navbar/games-conquistas']);
+    this.router.navigate(['dashboard/conquistas/games-conquistas']);
   }
 
   goToGamePlatinum() {
-    this.router.navigate(['dashboard/navbar/games-platinados']);
+    this.router.navigate(['dashboard/conquistas/games-platinados']);
   }
 
   goToGameInProgress() {
-    this.router.navigate(['dashboard/navbar/games-em-amdamento']);
+    this.router.navigate(['dashboard/conquistas/games-em-amdamento']);
   }
 
   goToGameFinished() {
-    this.router.navigate(['dashboard/navbar/games-finalizados']);
+    this.router.navigate(['dashboard/conquistas/games-finalizados']);
   }
 }

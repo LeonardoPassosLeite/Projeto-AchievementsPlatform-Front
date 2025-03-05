@@ -6,11 +6,17 @@ import { ErrorHandlingService } from '../../shared/services/commons/error-handli
 import { TokenStorageService } from '../../shared/services/auth/tokenStorage.service';
 import { GenericModule } from '../../../shareds/commons/GenericModule';
 import { Router, RouterModule } from '@angular/router';
+import { SidebarComponent } from '../sidebar/sidebar.component';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [GenericModule, RouterModule],
+  imports:
+    [
+      GenericModule,
+      RouterModule,
+      SidebarComponent
+    ],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
@@ -37,7 +43,6 @@ export class DashboardComponent {
 
   ngOnInit(): void {
     const token = this.tokenCoockieService.getTokenFromCookie();
-    console.log('Valor do token recuperado: ', token);
     if (token) {
       this.loadSteamUser(token);
     } else {
@@ -50,7 +55,6 @@ export class DashboardComponent {
     this.steamUserService.getStoredUser(token).subscribe({
       next: (response) => {
         this.steamUser = response;
-        console.log("Perfil: ", response);
       },
       error: (error) => {
         this.errorMessage = this.errorHandlingService.handleHttpError(error);
@@ -68,7 +72,6 @@ export class DashboardComponent {
 
     this.steamUserService.updateStoredGames(token).subscribe({
       next: () => {
-        console.log('Jogos armazenados atualizados com sucesso.');
         this.loadSteamUser(token);
       },
       error: (error) => {
@@ -78,26 +81,19 @@ export class DashboardComponent {
   }
 
   goToHome() {
-    this.router.navigate(['/dashboard/home']);
-  }
-
-  goToStatus() {
-    this.router.navigate(['/dashboard/status']);
-  }
-
-  goToConquistas() {
-    this.router.navigate(['/dashboard/navbar/games-conquistas']);
-  }
-
-  goToRanking() {
-    this.router.navigate(['/dashboard/ranking-global']);
+    this.router.navigate(['/dashboard//home']);
   }
 
   goToGameStatus() {
     this.router.navigate(['/dashboard/game-status']);
   }
 
-  goToTest() {
-    this.router.navigate(['/dashboard/test']);
+  goToConquistas() {
+    this.router.navigate(['/dashboard/conquistas/games-conquistas']);
   }
+
+  goToRanking() {
+    this.router.navigate(['/dashboard/ranking-global']);
+  }
+
 }

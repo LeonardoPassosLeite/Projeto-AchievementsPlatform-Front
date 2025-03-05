@@ -1,0 +1,28 @@
+<div class="grid-items fs-14 bold" *ngIf="!loading && steamUser">
+    <div>
+        {{steamUser.onlineStatus}}
+    </div>
+    <div class="item-conquistas">
+        Conquistas Raras
+    </div>
+    <div class="right-item" (click)="goToAllGames()">
+        <span>Jogos: {{steamUser.userStats.allGames}}</span>
+    </div>
+    <div class="right-item" (click)="goToUserFeedbacks()">
+        <span>Comentários: {{steamUser.userStats.totalFeedbacks}}</span>
+    </div>
+    <div class="right-item">
+        <span>Minhas Estátisticas</span>
+    </div>
+    <div class="right-item">
+        <span>Guias de Conquistas</span>
+    </div>
+    <!-- <div class="right-item">
+        <span role="button" tabindex="1" (click)="goToTest()" (keydown.enter)="goToGameStatus()">Minhas
+            Estátisticas</span>
+    </div> -->
+    <div class="right-item">
+        <span role="button" tabindex="0" (click)="goToKanban()" (keydown.enter)="goToKanban()">Gerenciar
+            Jogos</span>
+    </div>
+</div>

@@ -84,13 +84,10 @@ export class HomeComponent {
   }
 
   updateGameStatus(update: { id: number; newStatus: GameStatus }): void {
-    console.log(`🚀 Atualizando status do jogo ID ${update.id} para ${update.newStatus}`);
 
     this.gameStatusManagerService.updateGameStatus(update.id, update.newStatus).subscribe({
       next: () => {
-        console.log(`✅ Status atualizado no backend: ${update.id} -> ${update.newStatus}`);
 
-        // Atualiza localmente a lista de jogos para refletir a mudança
         const gameIndex = this.accountGames.findIndex(game => game.id === update.id);
         if (gameIndex !== -1) {
           this.accountGames[gameIndex] = {
@@ -102,7 +99,6 @@ export class HomeComponent {
           };
         }
 
-        // 🔄 FORÇA ATUALIZAÇÃO DA INTERFACE
         this.accountGames = [...this.accountGames];
       },
       error: (error) => this.handleError(error, 'Erro ao atualizar status do jogo.')

@@ -1,9 +1,8 @@
-<div class="home-container scroll">
+<div>
     <app-carousel [items]="carouselItems" [statuses]="statuses" [getStatusName]="getStatusName"
-    [itemTemplate]="carouselItemsItemTemplate" (statusUpdated)="updateGameStatus($event)">
-</app-carousel>
+        [itemTemplate]="carouselItemsItemTemplate">
+    </app-carousel>
 </div>
-
 
 <ng-template #carouselItemsItemTemplate let-item>
     <div class="carousel-item-content">

@@ -1,0 +1,202 @@
+@import "../../../../shareds/colors.scss";
+
+.games-container {
+    padding: 20px;
+    background: rgba($background, 0.8);
+}
+
+.games-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+// .game-card-header
+// {
+//     background-color: rgb(255, 255, 255);
+// }
+
+.game-card {
+    width: 240px;
+    background: rgba(32, 32, 32, 0.8);
+    border-radius: 15px;
+    padding: 15px;
+    transition: transform 0.3s ease-in-out;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.7);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-image: rgba($background, 0.8);
+    background-size: cover;
+    position: relative;
+    overflow: hidden;
+}
+
+.game-card img {
+    width: 100%;
+    height: auto;
+    margin-top: 10px;
+    border-radius: 12px;
+    filter: brightness(0.8);
+}
+
+.game-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+
+    .status,
+    .rating-title {
+        font-size: 10px;
+        margin: 5px 0;
+        color: #ffcc00;
+        margin-bottom: 10px;
+    }
+
+    .time-played {
+        flex-direction: start;
+    }
+
+    .status-badge {
+        background: #007bff;
+        color: white;
+        padding: 3px 8px;
+        border-radius: 6px;
+        font-size: 12px;
+        font-weight: bold;
+    }
+
+    .game-rating {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin-top: 10px;
+    }
+
+    .rating-stars {
+        font-size: 20px;
+        display: flex;
+        justify-content: center;
+        gap: 4px;
+
+        span {
+            margin: 0 2px;
+            color: #555; 
+            position: relative;
+        }
+
+        .filled {
+            color: #ffcc00; 
+        }
+
+        .half-filled {
+            background: linear-gradient(90deg, #ffcc00 50%, #555 50%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    }
+
+    .game-rating {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 10px;
+    }
+
+    .rating-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 60px;
+    }
+
+    .rating-stars {
+        font-size: 20px;
+        color: #ffcc00;
+        display: flex;
+        justify-content: center;
+        gap: 4px;
+
+        span {
+            margin: 0 2px;
+        }
+
+        .filled {
+            color: #ffcc00;
+        }
+    }
+
+    .rating-score {
+        font-size: 18px;
+        font-weight: bold;
+        margin-top: 5px;
+        color: #fff;
+        padding: 10px;
+        border-radius: 8px;
+        width: 80px;
+        text-align: center;
+        transition: background-color 0.3s ease;
+
+        &.high-rating {
+            background-color: #28a745;
+        }
+
+        &.medium-rating {
+            background-color: #ffc107;
+        }
+
+        &.low-rating {
+            background-color: #dc3545;
+        }
+
+        &.no-rating {
+            background-color: #343a40;
+        }
+    }
+}
+
+.game-card-footer {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.comment-btn {
+    padding: 10px 15px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(45deg, #ff7b00, #ff9a3b);
+    color: #fff;
+    cursor: pointer;
+    transition: 0.3s ease;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+
+    &:hover {
+        transform: scale(1.05);
+        background: linear-gradient(45deg, #ff9a3b, #ff7b00);
+    }
+}
+
+.steam-link {
+    display: inline-block;
+    padding: 6px 10px;
+    font-size: 14px;
+    border-radius: 6px;
+    background: #171a21;
+    color: #66c0f4;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+
+    &:hover {
+        background: #66c0f4;
+        color: #171a21;
+    }
+}

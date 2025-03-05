@@ -1,0 +1,78 @@
+<div class="comments-container">
+    <!-- Informações do Jogo (Fixo) -->
+    <div class="game-info-card">
+        <img [src]="gameInfo.iconUrl" alt="Game Icon" class="game-icon">
+        <div class="game-details">
+            <h2 class="game-name">{{ gameInfo.gameName }}</h2>
+        </div>
+    </div>
+
+    <!-- Título da Seção de Comentários -->
+    <h2 class="title">💬 COMENTÁRIOS</h2>
+
+    <!-- Comentários dos Usuários -->
+    <div *ngIf="feedbacks$ | async as feedbacks; else noComments">
+        <div *ngIf="feedbacks.items.length > 0; else noComments">
+            <div class="feedback-card" *ngFor="let feedback of feedbacks.items">
+                
+                <!-- Cabeçalho do Comentário -->
+                <div class="feedback-header">
+                    <div class="user-info">
+                        <img [src]="feedback.steamUserFeedback?.avatarUrl ?? 'assets/default-avatar.png'" 
+                             alt="Avatar" class="user-avatar">
+                        <div class="user-details">
+                            <span class="user-name">{{ feedback.steamUserFeedback?.displayName }}</span>
+                        </div>
+                    </div>
+                    <span class="comment-date">🕒 {{ feedback.createdAt | date:'dd/MM/yyyy HH:mm' }}</span>
+                </div>
+    
+                <!-- Conteúdo do Comentário -->
+                <div class="feedback-content">
+                    <p class="comment-text">📝 "{{ feedback.comment }}"</p>
+                </div>
+    
+                <!-- Detalhes Adicionais -->
+                <div class="feedback-details">
+                    <p class="playtime">⏳ Tempo jogado: {{ formatPlaytime(gameInfo.playtimeForever) }}</p>
+                    <p class="rating">⭐ <span>{{ feedback.rating }}/5</span></p>
+                    <p class="recommend">
+                        {{ feedback.recommend ? '✅ Recomendado' : '❌ Não Recomendado' }}
+                    </p>
+                </div>
+    
+                <!-- Atualização do Comentário -->
+                <p class="comment-update" *ngIf="feedback.updatedAt !== feedback.createdAt">
+                    ✏️ Atualizado em: {{ feedback.updatedAt | date:'dd/MM/yyyy HH:mm' }}
+                </p>
+            </div>            
+        </div>
+    </div>
+    
+
+    <!-- Template caso não tenha comentários -->
+    <ng-template #noComments>
+        <p class="no-comments">🚫 Nenhum comentário encontrado para este jogo.</p>
+    </ng-template>
+
+    <!-- Paginação -->
+    <div class="pagination-controls">
+        <button (click)="previousPage()" [disabled]="pageNumber <= 1">⬅️ Anterior</button>
+        <span>Página {{ pageNumber }}</span>
+        <button (click)="nextPage()" [disabled]="pageNumber * pageSize >= totalItems">Próxima ➡️</button>
+    </div>
+
+    <!-- Seção de adicionar comentário -->
+    <div class="add-comment">
+        <textarea [(ngModel)]="newComment" placeholder="Escreva seu comentário..." rows="3"></textarea>
+        <div class="rating-container">
+            <label>⭐ Avaliação:</label>
+            <input type="number" [(ngModel)]="newRating" min="1" max="5">
+        </div>
+        <label>
+            <input type="checkbox" [(ngModel)]="recommend"> ✅ Recomendado
+        </label>
+        <button (click)="submitComment()">Enviar Comentário</button>
+    </div>
+
+</div>

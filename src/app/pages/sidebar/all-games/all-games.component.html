@@ -1,0 +1,46 @@
+<div class="games-container scroll">
+    <div *ngIf="allGames$ | async as games">
+        <div class="games-grid">
+            <div *ngFor="let game of games" class="game-card">
+                <div class="game-card-header d-grid-triple d-flex fs-10">
+                    <span> ⏳ {{ formatPlaytime(game.playtimeForever || 0) }}</span>
+                    <span> 🏆 {{game.gameStats.totalUserAchievements}}/{{game.gameStats.totalAchievements}}</span>
+                    <span>
+                        {{ getStatusLabel(game.gameStatusManager.gameStatus) }}
+                    </span>
+                </div>
+
+                <img [src]="game.iconUrl ? game.iconUrl : 'assets/default-game.png'"
+                    alt="{{ game.gameName || 'Jogo Desconhecido' }}">
+
+                <div class="game-info text-align-center fs-12">
+                    <h3>{{ game.gameName || 'Nome Indisponível' }}</h3>
+
+                    <div class="rating-container">
+                        <div class="rating-stars">
+                            <span *ngFor="let i of [].constructor(5); let idx = index"
+                                [class.filled]="game.averageRating >= (idx + 1)"
+                                [class.half-filled]="game.averageRating >= (idx + 0.5) && game.averageRating < (idx + 1)">
+                                ★
+                            </span>
+                        </div>
+                        <p class="rating-score" [ngClass]="{
+                            'high-rating': game.averageRating >= 4,
+                            'medium-rating': game.averageRating >= 2.5 && game.averageRating < 4,
+                            'low-rating': game.averageRating > 0 && game.averageRating < 2.5,
+                            'no-rating': game.averageRating === 0
+                        }">
+                            {{ game.averageRating ? game.averageRating : 'N/A' }}
+                        </p>
+                    </div>
+
+                    <div class="game-card-footer">
+                        <button class="comment-btn" (click)="goToComments(game.id)">
+                            💬 Ver Comentários ({{ game.totalFeedbacks || 0 }})
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

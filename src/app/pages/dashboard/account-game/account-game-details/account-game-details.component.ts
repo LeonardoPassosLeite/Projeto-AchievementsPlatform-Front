@@ -49,8 +49,8 @@ export class AccountGameDetailsComponent implements OnInit {
     }
 
     this.gameDetails = storedGameDetails;
-    this.achievements = storedGameDetails.achievements?.data || [];
-    this.hasMore = storedGameDetails.achievements?.totalPages > 1;
+    this.achievements = storedGameDetails.pagination?.items || []; 
+    this.hasMore = storedGameDetails.pagination?.totalPages > 1; 
   }
 
   private loadAchievements(token: string, gameId: number): void {
@@ -60,17 +60,15 @@ export class AccountGameDetailsComponent implements OnInit {
       .getGameDetailsWithPagedAchievements(token, gameId, this.currentPage, this.pageSize)
       .subscribe({
         next: (response) => {
-          const achievements = response.achievements;
-
-          if (achievements && Array.isArray(achievements.data)) {
+          if (response && Array.isArray(response.items)) { 
             this.achievements = [
               ...this.achievements,
-              ...achievements.data,
+              ...response.items,
             ];
-            this.hasMore = this.currentPage < achievements.totalPages;
+            this.hasMore = this.currentPage < response.totalPages; 
             this.currentPage++;
           } else {
-            console.error('Formato inesperado nos dados de conquistas:', achievements);
+            console.error('Formato inesperado nos dados de conquistas:', response);
             this.hasMore = false;
           }
         },

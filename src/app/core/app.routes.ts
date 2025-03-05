@@ -13,6 +13,10 @@ import { AccountGameInProgressComponent } from '../pages/dashboard/account-game/
 import { AccountGameFinishedComponent } from '../pages/dashboard/account-game/account-game-finished/account-game-finished.component';
 import { HomeComponent } from '../pages/dashboard/home/home.component';
 import { GameStatusComponent } from '../pages/dashboard/game-status/game-status.component';
+import { GameKanbanComponent } from '../pages/sidebar/game-kanban/game-kanban.component';
+import { AllGamesComponent } from '../pages/sidebar/all-games/all-games.component';
+import { CommentsComponent } from '../pages/sidebar/all-games/comments/comments.component';
+import { UserFeedbacksComponent } from '../pages/sidebar/user-feedbacks/user-feedbacks.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -28,9 +32,11 @@ export const routes: Routes = [
                 path: 'dashboard',
                 component: DashboardComponent,
                 children: [
-                    { path: 'status', component: GameStatusComponent },
+                    { path: 'home', component: HomeComponent },
+                    { path: 'game-status', component: GameStatusComponent },
+                    { path: 'ranking-global', component: RankingGlobalComponent },
                     {
-                        path: 'navbar',
+                        path: 'conquistas',
                         component: NavBarComponent,
                         children: [
                             {
@@ -56,10 +62,11 @@ export const routes: Routes = [
                             },
                         ],
                     },
-                    { path: 'ranking-global', component: RankingGlobalComponent },
                     { path: 'account-game-details/:id', component: AccountGameDetailsComponent },
-                    { path: 'game-status', component: GameStatusComponent },
-                    { path: 'home', component: HomeComponent },
+                    { path: 'game-kanban', component: GameKanbanComponent },
+                    { path: 'all-games', component: AllGamesComponent },
+                    { path: 'user-feedbacks', component: UserFeedbacksComponent },
+                    { path: 'comments/:id', component: CommentsComponent },
                     { path: '', redirectTo: 'home', pathMatch: 'full' },
                 ]
             },

@@ -1,12 +1,22 @@
 import { UserStats } from "./user-stats.model";
 
-export interface SteamUser {
-    steamUserId: string;
+export interface SteamUserFeedback {
+    id: number;
     displayName: string;
     avatarUrl: string;
+}
+
+export interface SteamUserBase extends SteamUserFeedback {
     profileUrl: string;
+}
+
+export interface SteamUser extends SteamUserBase {
     onlineStatus: string;
     lastLogoff: number;
     userStats: UserStats;
-    steamLevel: number;
+}
+
+export interface SteamUserRanking extends SteamUserBase {
+    rankingPosition: number;
+    totalSteamPoints?: number;
 }

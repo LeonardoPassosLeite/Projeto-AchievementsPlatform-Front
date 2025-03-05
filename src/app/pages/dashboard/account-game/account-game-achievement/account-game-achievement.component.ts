@@ -52,11 +52,11 @@ export class AccountGameAchievementComponent implements OnInit {
       .subscribe({
         next: (response) => {
           console.log('Dados recebidos:', response);
-          if (response.data.length < this.pageSize) {
+          if (response.items.length < this.pageSize) {
             this.hasMore = false;
           }
 
-          this.accountGames = [...this.accountGames, ...response.data];
+          this.accountGames = [...this.accountGames, ...response.items]; 
           this.currentPage++;
         },
         error: (error) => {

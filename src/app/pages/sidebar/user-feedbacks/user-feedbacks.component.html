@@ -1,0 +1,36 @@
+<div *ngIf="feedbacks.length > 0" class="feedback-list">
+    <div *ngFor="let feedback of feedbacks" class="feedback-item">
+        <div class="feedback-header">
+            <div class="game-info">
+                <img *ngIf="feedback.accountGame?.iconUrl" [src]="feedback.accountGame.iconUrl"
+                    alt="{{ feedback.accountGame?.gameName }}" class="game-icon">
+                <h3>{{ feedback.accountGame?.gameName }}</h3>
+            </div>
+        </div>
+        
+        <div class="feedback-body">
+            <p>{{ feedback.comment }}</p>
+        </div>
+
+        <div class="feedback-footer d-grid-triple">
+
+            <div class="rating">
+                <ng-container *ngFor="let star of [1, 2, 3, 4, 5]; let i = index">
+                    <i class="star" [ngClass]="{
+                        'full-star': feedback.rating >= star,
+                        'half-star': feedback.rating >= star - 0.5 && feedback.rating < star,
+                        'empty-star': feedback.rating < star
+                    }">
+                    </i>
+                </ng-container>
+            </div>
+
+            <p [ngClass]="{'recommended': feedback.recommend, 'not-recommended': !feedback.recommend}">
+                <strong>{{ feedback.recommend ? 'Recomendado' : 'Não Recomendado' }}</strong>
+            </p>
+
+            <p><strong>Data:</strong> {{ feedback.createdAt | date:'short' }}</p>
+
+        </div>
+    </div>
+</div>

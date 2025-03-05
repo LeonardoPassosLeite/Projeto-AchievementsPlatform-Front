@@ -5,6 +5,8 @@ import { catchError, map } from 'rxjs/operators';
 import { AccountGameWithAchievements } from '../models/account-game.model';
 import { ErrorHandlingService } from './commons/error-handlig.service';
 import { environment } from '../../../environments/environment';
+import { PagedResult } from '../models/coomons/pagination.model';
+import { GameAchievement } from '../models/game-achievement';
 
 @Injectable({
   providedIn: 'root',
@@ -25,7 +27,7 @@ export class AccountGameDetailsService {
     }
     this.gameDetails = details;
   }
-  
+
 
   getStoredGameDetails(): AccountGameWithAchievements | null {
     return this.gameDetails;
@@ -40,7 +42,7 @@ export class AccountGameDetailsService {
     gameId: number,
     pageNumber: number,
     pageSize: number
-  ): Observable<AccountGameWithAchievements> {
+  ): Observable<PagedResult<GameAchievement>> {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',
@@ -50,7 +52,7 @@ export class AccountGameDetailsService {
       .get<{
         message: string;
         status: number;
-        data: AccountGameWithAchievements;
+        pagination: PagedResult<GameAchievement>;
       }>(`${this.baseUrl}/AccountGame/game-achievements/${gameId}`, {
         headers,
         params: {
@@ -61,8 +63,10 @@ export class AccountGameDetailsService {
       })
       .pipe(
         map((response) => {
-          console.log('Resposta do backend:', response);
-          return response.data; // Retorna apenas os dados do jogo
+          if (!response.pagination)
+            throw new Error('Dados de paginação ausentes na resposta da API.');
+
+          return response.pagination;
         }),
         catchError((error) => {
           const errorMessage = this.errorHandlingService.handleHttpError(error);

@@ -18,7 +18,7 @@ export class GameListComponent {
 
   @Input()
   set accountGames(value: AccountGame[] | null) {
-    this._accountGames = value ?? []; 
+    this._accountGames = value ?? [];
   }
   get accountGames(): AccountGame[] {
     return this._accountGames;
@@ -38,40 +38,39 @@ export class GameListComponent {
 
   onGameClick(gameId: number): void {
     this.gameClicked.emit(gameId);
-
+  
     if (!this.enableGameDetails) return;
-
+  
     const token = this.tokenStorageService.getTokenFromCookie();
-
+  
     if (!token) {
       console.error('Token de autenticação não encontrado.');
       return;
     }
-
+  
     const game = this.accountGames.find((g) => g.id === gameId);
-
+  
     if (!game) {
       console.error('Jogo não encontrado na lista:', gameId);
       return;
     }
-
+  
     this.accountGameDetailsService
       .getGameDetailsWithPagedAchievements(token, gameId, 1, 6)
       .subscribe({
-        next: (response) => {
-          console.log('Dados retornados do backend:', response);
+        next: (pagination) => {
+          console.log('Dados recebidos:', pagination);
 
+          if (!pagination) {
+            console.error('Erro: O backend não retornou `pagination` como esperado.');
+            return;
+          }
+  
           const gameWithAchievements: AccountGameWithAchievements = {
-            ...game,
-            gameName: response.gameName,
-            iconUrl: response.iconUrl,
-            playtimeForever: response.playtimeForever,
-            gameStats: response.gameStats,
-            achievements: response.achievements,
+            ...game, 
+            pagination: pagination 
           };
-
-          console.log('Detalhes do jogo com conquistas atualizados:', gameWithAchievements);
-
+    
           this.accountGameDetailsService.setGameDetails(gameWithAchievements);
           this.router.navigate(['/dashboard/account-game-details', gameId]);
         },

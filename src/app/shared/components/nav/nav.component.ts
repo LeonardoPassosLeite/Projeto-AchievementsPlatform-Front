@@ -13,7 +13,6 @@ export class NavComponent {
   @Output() categorySelected = new EventEmitter<string>();
 
   onCategoryClick(value: string): void {
-    console.log('Category Clicked:', value);
     this.categorySelected.emit(value);
   }
 }

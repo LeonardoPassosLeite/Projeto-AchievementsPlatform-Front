@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { catchError, Observable, tap, throwError } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
+import { tap, catchError } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { GameStatus } from '../enums/GameStatus';
 import { TokenStorageService } from './auth/tokenStorage.service';
+import { AccountGameStore } from '../../state/account-game/AccountGame.store';
 
 @Injectable({
   providedIn: 'root'
@@ -11,19 +13,22 @@ import { TokenStorageService } from './auth/tokenStorage.service';
 export class GameStatusManagerService {
   private baseUrl = `${environment.baseUrl}/gamestatusmanager`;
 
-  constructor(private http: HttpClient, 
-              private tokenStorageService: TokenStorageService) { }
+  constructor(
+    private http: HttpClient,
+    private tokenStorageService: TokenStorageService,
+    private accountGameStore: AccountGameStore 
+  ) {}
 
-  updateGameStatus(gameId: number, newStatus: GameStatus): Observable<void> {
+  updateGameStatus(gameId: number, newStatus: GameStatus): Observable<{ gameId: number; gameStatus: GameStatus }> {
     const token = this.tokenStorageService.getTokenFromCookie();
 
     if (!token) {
-      console.error(" Token ausente ao tentar atualizar status do jogo");
+      console.error("❌ Token ausente ao tentar atualizar status do jogo");
       return throwError(() => new Error("Usuário não autenticado"));
     }
 
-    return this.http.put<void>(`${this.baseUrl}/update-status/${gameId}`,
-      { newStatus },
+    return this.http.put<{ gameId: number; gameStatus: GameStatus }>(`${this.baseUrl}/update-status/${gameId}`,
+      { gameStatus: newStatus },  
       {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
@@ -32,17 +37,18 @@ export class GameStatusManagerService {
         withCredentials: true,  
       }
     ).pipe(
-      tap(() => {
-        console.log(`✅ Status do jogo ID ${gameId} atualizado para ${newStatus}`);
+      tap((response) => {
+        this.accountGameStore.update(state => {
+          const updatedGames = state.accountGames.map(game =>
+            game.id === response.gameId ? { ...game, gameStatusManager: { gameStatus: response.gameStatus } } : game
+          );
+          return { ...state, accountGames: updatedGames };
+        });
       }),
       catchError((error) => {
         console.error(`❌ Erro ao atualizar status do jogo ID ${gameId}:`, error);
         return throwError(() => new Error("Erro ao atualizar status do jogo. Verifique o backend."));
       })
     );
-  }
-
-  getAllGameStatuses(): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/status`);
   }
 }

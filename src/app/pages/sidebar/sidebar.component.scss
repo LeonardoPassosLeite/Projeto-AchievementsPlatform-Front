@@ -1,0 +1,51 @@
+@import "../../../shareds/colors.scss";
+
+.content-roating {
+    width: 700px;
+    height: 950px;
+}
+
+.grid-items {
+    text-align: left;
+    padding: 20px;
+    border: 1px solid $white;
+    border-radius: 8px;
+    margin-left: 20px;
+    background-color: #1a1a1a7c;
+    height: 68vh;
+
+    .item-conquistas {
+        margin-top: 50px;
+        margin-bottom: 100px;
+    }
+
+    .right-item {
+        margin-bottom: 40px;
+        display: flex;
+        align-items: center;
+        position: relative;
+
+        span {
+            color: $aqua;
+            letter-spacing: 1px;
+            text-shadow: 0 0 5px rgba(0, 255, 255, 0.7), 0 0 10px rgba(0, 255, 255, 0.4);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        span:hover {
+            color: #00ff00;
+            text-shadow: 0 0 10px rgba(0, 255, 0, 0.8), 0 0 15px rgba(0, 255, 0, 0.5);
+            transform: scale(1.05);
+        }
+
+        span:before {
+            content: "⚡";
+            margin-right: 10px;
+            font-size: 20px;
+            color: #00d4ff;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+    }
+}

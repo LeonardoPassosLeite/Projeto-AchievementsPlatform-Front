@@ -25,7 +25,6 @@ export class SteamUserService {
             withCredentials: true,
         }).pipe(
             map(response => {
-                console.log('Resposta do servidor:', response);
                 return response;
             }),
             catchError(error => {
@@ -67,4 +66,22 @@ export class SteamUserService {
             })
         );
     }
+
+    getUserFeedbacks(token: string): Observable<any[]> {
+        return this.http.get<any[]>(`${this.baseUrl}/steamuser/feedbacks`, {
+            headers: new HttpHeaders({
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            }),
+            withCredentials: true,
+        }).pipe(
+            catchError(error => {
+                console.error('Erro completo:', error);  
+                const errorMessage = this.errorHandlingService.handleHttpError(error);
+                console.error('Erro na requisição para feedbacks:', errorMessage);
+                return throwError(() => new Error(errorMessage));
+            })
+        );
+    }
+    
 }

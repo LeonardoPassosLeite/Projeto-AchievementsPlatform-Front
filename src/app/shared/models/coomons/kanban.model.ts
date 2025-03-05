@@ -1,4 +1,8 @@
-export interface Kanban<T, S> {
-    status: S;
-    items: T[];
+import { GameStatus } from "../../enums/GameStatus";
+
+export interface Kanban {
+    id: number;
+    name: string;
+    status: GameStatus;
+    image: string;
 }

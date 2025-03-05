@@ -2,7 +2,6 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { GameStatus } from '../../../shared/enums/GameStatus';
 import { isScrolledToBottom } from '../../../utils/scroll.utils';
 import { AccountGameQuery } from '../../../state/account-game/AccountGame.query';
-import { GameStatusManagerService } from '../../../shared/services/game-status-manager.service';
 import { ErrorHandlingService } from '../../../shared/services/commons/error-handlig.service';
 import { TokenStorageService } from '../../../shared/services/auth/tokenStorage.service';
 import { AccountGame } from '../../../shared/models/account-game.model';
@@ -42,7 +41,6 @@ export class GameStatusComponent {
 
   constructor(
     private accountGameQuery: AccountGameQuery,
-    private gameStatusManagerService: GameStatusManagerService,
     private errorHandlingService: ErrorHandlingService,
     private tokenStorageService: TokenStorageService,
   ) { }
@@ -53,7 +51,6 @@ export class GameStatusComponent {
     if (!this.token) {
       this.errorMessage = 'Token de autenticação não encontrado.';
 
-      this.loadPagedAllAccountGames();
       return;
     }
 
@@ -82,30 +79,7 @@ export class GameStatusComponent {
     });
   }
 
-  updateGameStatus(update: { id: number; newStatus: GameStatus }): void {
-    console.log(`🚀 Atualizando status do jogo ID ${update.id} para ${update.newStatus}`);
-
-    this.gameStatusManagerService.updateGameStatus(update.id, update.newStatus).subscribe({
-      next: () => {
-        console.log(`✅ Status atualizado no backend: ${update.id} -> ${update.newStatus}`);
-
-        const gameIndex = this.accountGames.findIndex(game => game.id === update.id);
-        if (gameIndex !== -1) {
-          this.accountGames[gameIndex] = {
-            ...this.accountGames[gameIndex],
-            gameStatusManager: {
-              ...this.accountGames[gameIndex].gameStatusManager,
-              gameStatus: update.newStatus
-            }
-          };
-        }
-
-        this.accountGames = [...this.accountGames];
-      },
-      error: (error) => this.handleError(error, 'Erro ao atualizar status do jogo.')
-    });
-  }
-
+  //arrumar isso, preciso fazer com que fique generico
   getStatusName(status: GameStatus): string {
     const statusNames: { [key in GameStatus]: string } = {
       [GameStatus.NotStarted]: "Não Iniciado",

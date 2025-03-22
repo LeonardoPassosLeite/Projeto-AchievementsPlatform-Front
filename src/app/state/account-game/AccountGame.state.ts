@@ -4,6 +4,7 @@ export interface AccountGameState {
     accountGames: AccountGame[];
     platinumPage: number;
     isLoading: boolean;
+    hasMore: boolean;
 }
 
 export function createInitialState(): AccountGameState {
@@ -11,5 +12,6 @@ export function createInitialState(): AccountGameState {
         accountGames: [],
         platinumPage: 1,
         isLoading: false,
+        hasMore: true,
     };
 }

@@ -17,8 +17,9 @@
                 {{ achievement.rarity }}% dos jogadores desbloquearam isso
             </p>
             <p class="achievement-unlock-time" *ngIf="achievement.achieved" [ngClass]="'unlocked'">
-                ✅ Desbloqueado em {{ achievement.unlockTime | date: 'dd/MM/yyyy' }}
+                ✅ Desbloqueado em {{ convertTimestampToDate(achievement.unlockTime) }}
             </p>
+
             <p class="achievement-unlock-time" *ngIf="!achievement.achieved">
                 🔒 Ainda não desbloqueado
             </p>

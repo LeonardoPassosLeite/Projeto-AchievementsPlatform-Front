@@ -1,1 +1,91 @@
-<p>user-insights works!</p>
+<div class="container-overvlow scroll user-insights">
+
+  <div class="see-all-games fs-12">
+    <a (click)="goToAllGames()">Ver todos os jogos</a>
+  </div>
+
+  <div class="podium-container">
+    <div class="podium">
+      <div class="podium-item" *ngFor="let game of topPlayedGames; let i = index">
+        <div class="podium-rank">{{ i + 1 }}º</div>
+        <div class="podium-game">
+          <img [src]="game.iconUrl" alt="{{ game.gameName }}" class="game-icon" />
+          <span class="game-name">{{ game.gameName }}</span>
+          <span class="playtime">{{ formatPlaytime(game.playtimeForever) }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="select-container d-flex">
+    <app-select id="dataTypeSelect" label="Selecione o tipo de dado" [options]="dataTypes"
+      [(ngModel)]="selectedDataType" (selectionChange)="onSelectionChange($event)">
+    </app-select>
+
+    <app-select id="yearSelect" label="Selecione o ano" [options]="availableYears" [selectedValue]="selectedYear"
+      (selectionChange)="onYearChange($event)">
+    </app-select>
+  </div>
+
+  <div class="see-all-games fs-12">
+    <a (click)="goToAllGamesPlaytimeForever()">Ver todos os jogos </a>
+  </div>
+
+  <!-- Steam Points -->
+  <div *ngIf="selectedDataType === 'steam points' && !loading">
+    <!-- Estatísticas Resumidas -->
+    <div class="summary-container">
+      <div class="summary-item">
+        <span class="summary-label">Total de Steam Points:</span>
+        <span class="summary-value">{{ totalSteamPoints }} SP</span>
+      </div>
+    </div>
+
+    <!-- Gráfico -->
+    <app-steam-points-insights
+      [steamPointsLabels]="updateChartData(selectedYear === 'Todos os Anos' ? steamPointsByYear : steamPointsByMonth, selectedYear === 'Todos os Anos').labels"
+      [steamPointsData]="updateChartData(selectedYear === 'Todos os Anos' ? steamPointsByYear : steamPointsByMonth, selectedYear === 'Todos os Anos').data">
+    </app-steam-points-insights>
+  </div>
+
+  <!-- Conquistas -->
+  <div *ngIf="selectedDataType === 'conquistas' && !loading">
+    <div class="summary-container">
+      <div class="summary-item">
+        <span class="summary-label">Total de Conquistas:</span>
+        <span class="summary-value">{{ totalAchievements }}</span>
+      </div>
+    </div>
+
+    <!-- Gráfico -->
+    <app-achievements-insights
+      [achievementLabels]="updateChartData(selectedYear === 'Todos os Anos' ? achievementsByYear : achievementsByMonth, selectedYear === 'Todos os Anos').labels"
+      [achievementData]="updateChartData(selectedYear === 'Todos os Anos' ? achievementsByYear : achievementsByMonth, selectedYear === 'Todos os Anos').data">
+    </app-achievements-insights>
+  </div>
+
+  <!-- Platinas -->
+  <div *ngIf="selectedDataType === 'platinas' && !loading">
+    <div class="summary-container">
+      <div class="summary-item">
+        <span class="summary-label">Total de Platinas:</span>
+        <span class="summary-value">{{ totalPlatinas }}</span>
+      </div>
+    </div>
+
+    <!-- Gráfico -->
+    <app-platinum-insights
+      [platinumLabels]="updateChartData(selectedYear === 'Todos os Anos' ? platinasByYear : platinasByMonth, selectedYear === 'Todos os Anos').labels"
+      [platinumData]="updateChartData(selectedYear === 'Todos os Anos' ? platinasByYear : platinasByMonth, selectedYear === 'Todos os Anos').data">
+    </app-platinum-insights>
+  </div>
+
+  <!-- Mensagens de Erro e Carregamento -->
+  <div *ngIf="errorMessage" class="error-message">
+    <p>{{ errorMessage }}</p>
+  </div>
+
+  <div *ngIf="loading" class="loading-message">
+    <p>Carregando...</p>
+  </div>
+</div>

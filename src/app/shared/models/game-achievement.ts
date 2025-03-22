@@ -7,4 +7,5 @@ export interface GameAchievement {
     description: string;
     rarity: number;
     steamPoints: number;
+    accountGameId: number;
 }

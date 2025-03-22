@@ -1,0 +1,5 @@
+<div *ngIf="platinumLabels.length > 0" style="display: block; width: 80%; margin: auto;">
+    <app-chart [datasets]="[{ data: platinumData, label: 'Platinas' }]" [labels]="platinumLabels"
+        [options]="barChartOptions" [chartType]="selectedChartType">
+    </app-chart>
+</div>

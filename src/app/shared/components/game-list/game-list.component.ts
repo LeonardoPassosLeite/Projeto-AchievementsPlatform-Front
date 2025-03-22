@@ -23,6 +23,7 @@ export class GameListComponent {
   get accountGames(): AccountGame[] {
     return this._accountGames;
   }
+  
   @Input() loading: boolean = false;
   @Input() errorMessage: string | null = null;
   @Input() enableGameDetails: boolean = false;

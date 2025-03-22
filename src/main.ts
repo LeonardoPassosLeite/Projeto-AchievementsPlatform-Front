@@ -6,7 +6,9 @@ import { routes } from './app/core/app.routes';
 import { Component, importProvidersFrom } from '@angular/core';
 import { AccountGameQuery } from './app/state/account-game/AccountGame.query';
 import { AccountGameStore } from './app/state/account-game/AccountGame.store';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgChartsModule } from 'ng2-charts';
+
 
 @Component({
   selector: 'app-root',
@@ -14,15 +16,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   template: '<router-outlet></router-outlet>',
   imports: [RouterOutlet],
 })
-export class RootComponent {}
+export class RootComponent { }
 
 bootstrapApplication(RootComponent, {
   providers: [
     provideHttpClient(withFetch()),
     provideRouter(routes),
-    AccountGameStore, 
-    AccountGameQuery,  
-    importProvidersFrom(BrowserAnimationsModule),  
+    AccountGameStore,
+    AccountGameQuery,
+    importProvidersFrom(BrowserAnimationsModule, NgChartsModule),
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

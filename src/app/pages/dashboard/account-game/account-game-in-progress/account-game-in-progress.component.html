@@ -1,1 +1,6 @@
-<p>account-game-in-progress works!</p>
+<app-game-list 
+  [accountGames]="(playtimeGames$ | async) ?? []"
+  [loading]="false"
+  [errorMessage]="null"
+  [enableGameDetails]="true">
+</app-game-list>

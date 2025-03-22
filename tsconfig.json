@@ -1,6 +1,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "types": ["youtube"],
     "outDir": "./dist/out-tsc",
     "strict": true,
     "noImplicitOverride": true,

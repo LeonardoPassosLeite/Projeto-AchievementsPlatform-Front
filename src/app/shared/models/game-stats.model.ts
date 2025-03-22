@@ -1,3 +1,5 @@
+import { GameAchievement } from "./game-achievement";
+
 export interface GameStats {
     id: number;
     totalUserAchievements: number;
@@ -5,4 +7,5 @@ export interface GameStats {
     totalGameSteamPoints: number;
     totalUserSteamPoints: number;
     platinum: boolean;
+    achievements: GameAchievement[]; 
 }

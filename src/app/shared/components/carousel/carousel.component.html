@@ -1,36 +1,37 @@
 <ng-container *ngFor="let column of organizedItems">
-    <div>
-      <div class="carousel-header">
-        <h3 class="carousel-title">{{ getStatusName(column.status) }}</h3>
-        <div class="carousel-controls">
-          <button class="scroll-btn left" *ngIf="canScrollLeftMap[getStatusName(column.status)]"
-            (click)="prevSlide(column.status)">
-            &#9665;
-          </button>
-  
-          <button class="scroll-btn right" *ngIf="canScrollRightMap[getStatusName(column.status)]"
-            (click)="nextSlide(column.status)">
-            &#9655;
-          </button>
-        </div>
+  <div>
+    <div class="carousel-header">
+
+      <h3 class="carousel-title">{{ getStatusName(column.status) }}</h3>
+      <div class="carousel-controls">
+        <button class="scroll-btn left" *ngIf="canScrollLeftMap[getStatusName(column.status)]"
+          (click)="prevSlide(column.status)">
+          &#9665;
+        </button>
+        <button class="scroll-btn right" *ngIf="canScrollRightMap[getStatusName(column.status)]"
+          (click)="nextSlide(column.status)">
+          &#9655;
+        </button>
       </div>
-  
-      <div class="carousel-column">
-        <div class="carousel-content">
-          <div cdkDropList #scrollContainer [attr.id]="'scroll-' + getStatusName(column.status)"
-            [attr.data-status]="getStatusName(column.status)" class="carousel-dropzone">
-  
-            <div class="d-flex">
-              <div *ngIf="column.items.length === 0" class="carousel-empty">
-                <p class="empty-text">Nenhum jogo aqui...</p>
-              </div>
-  
-              <div *ngFor="let item of column.items" class="carousel-item">
-                <ng-container *ngTemplateOutlet="itemTemplate; context: { $implicit: item }"></ng-container>
-              </div>
+    </div>
+
+    <div class="carousel-column">
+      <div class="carousel-content">
+        <div cdkDropList #scrollContainer [attr.id]="'scroll-' + getStatusName(column.status)"
+          [attr.data-status]="getStatusName(column.status)" class="carousel-dropzone">
+
+          <div class="d-flex">
+            <div *ngIf="column.items.length === 0" class="carousel-empty">
+              <p class="empty-text">Nenhum jogo aqui...</p>
+            </div>
+
+            <div *ngFor="let item of column.items" class="carousel-item">
+              <ng-container *ngTemplateOutlet="itemTemplate; context: { $implicit: item }"></ng-container>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </ng-container>
+  </div>
+  <!-- <a (click)="" class="see-all-games fs-10">Ver todos os jogos</a> -->
+</ng-container>

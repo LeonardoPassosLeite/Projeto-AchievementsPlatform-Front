@@ -25,4 +25,9 @@ export class AchievementsComponent implements OnInit {
       this.loadMore.emit();
     }
   }
+
+  convertTimestampToDate(timestamp: number): string {
+    const date = new Date(timestamp * 1000);
+    return date.toLocaleDateString('pt-BR'); 
+  }
 }

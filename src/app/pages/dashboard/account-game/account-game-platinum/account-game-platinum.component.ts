@@ -18,8 +18,4 @@ export class AccountGamePlatinumComponent {
   constructor(private accountGameQuery: AccountGameQuery) {
     this.platinumGames$ = this.accountGameQuery.platinumGames$;
   }
-
-  loadMorePlatinumGames(): void {
-    this.accountGameQuery.loadMorePlatinumGames();
-  }
 }

@@ -17,6 +17,10 @@ import { GameKanbanComponent } from '../pages/sidebar/game-kanban/game-kanban.co
 import { AllGamesComponent } from '../pages/sidebar/all-games/all-games.component';
 import { CommentsComponent } from '../pages/sidebar/all-games/comments/comments.component';
 import { UserFeedbacksComponent } from '../pages/sidebar/user-feedbacks/user-feedbacks.component';
+import { UserInsightsComponent } from '../pages/sidebar/user-insights/user-insights.component';
+import { AllGamesPlaytimeComponent } from '../pages/sidebar/user-insights/all-games-playtime/all-games-playtime.component';
+import { AccountGameDroppedComponent } from '../pages/dashboard/account-game/account-game-dropped/account-game-dropped.component';
+import { AccountGameFavoriteComponent } from '../pages/dashboard/account-game/account-game-favorite/account-game-favorite.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -56,6 +60,14 @@ export const routes: Routes = [
                                 component: AccountGameFinishedComponent,
                             },
                             {
+                                path: 'games-dropados',
+                                component: AccountGameDroppedComponent,
+                            },
+                            {
+                                path: 'games-favoritos',
+                                component: AccountGameFavoriteComponent,
+                            },
+                            {
                                 path: '',
                                 redirectTo: 'games-conquistas',
                                 pathMatch: 'full',
@@ -66,7 +78,9 @@ export const routes: Routes = [
                     { path: 'game-kanban', component: GameKanbanComponent },
                     { path: 'all-games', component: AllGamesComponent },
                     { path: 'user-feedbacks', component: UserFeedbacksComponent },
+                    { path: 'user-insights', component: UserInsightsComponent, },
                     { path: 'comments/:id', component: CommentsComponent },
+                    { path: 'all-games-playtimeForever', component: AllGamesPlaytimeComponent },
                     { path: '', redirectTo: 'home', pathMatch: 'full' },
                 ]
             },

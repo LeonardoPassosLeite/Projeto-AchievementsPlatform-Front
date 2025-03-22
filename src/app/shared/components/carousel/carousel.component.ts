@@ -92,4 +92,6 @@ export class CarouselComponent<T extends { id: number; gameName: string, status:
   private getContainerByStatus(status: S): HTMLElement | null {
     return this.scrollContainers.find(ref => ref.nativeElement.getAttribute('data-status') === this.getStatusName(status))?.nativeElement ?? null;
   }
+
+
 } 

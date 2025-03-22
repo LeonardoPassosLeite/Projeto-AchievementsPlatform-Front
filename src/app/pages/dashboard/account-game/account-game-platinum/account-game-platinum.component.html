@@ -1,7 +1,6 @@
 <app-game-list 
-  [accountGames]="(platinumGames$ | async) ? (platinumGames$ | async) : []"
+  [accountGames]="(platinumGames$ | async) ?? []"
   [loading]="false"
   [errorMessage]="null"
-  [enableGameDetails]="true"
-  (scrolledToBottom)="loadMorePlatinumGames()">
+  [enableGameDetails]="true">
 </app-game-list>

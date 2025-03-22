@@ -1,0 +1,5 @@
+<div *ngIf="steamPointsLabels.length > 0" style="display: block; width: 80%; margin: auto;">
+    <app-chart [datasets]="[{ data: steamPointsData, label: 'Steam Points' }]" [labels]="steamPointsLabels"
+        [options]="barChartOptions" [chartType]="selectedChartType">
+    </app-chart>
+</div>

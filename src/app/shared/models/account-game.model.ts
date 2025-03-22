@@ -25,10 +25,15 @@ export interface AccountGame extends AccountGameSumary {
 }
 
 export interface AccountGamePreview extends AccountGameSumary {
+
     gameStats: {
         totalUserAchievements: number;
         totalAchievements: number;
     };
+}
+
+export interface AccountGamePlaytimePreview extends AccountGameBase {
+    playTimeForever: number;
 }
 
 export interface AccountGameWithAchievements extends AccountGame {

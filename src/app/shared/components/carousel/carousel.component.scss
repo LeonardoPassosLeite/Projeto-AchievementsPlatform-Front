@@ -107,3 +107,18 @@
 .save-btn:hover:not(:disabled) {
     background: linear-gradient(90deg, #007bff, #0056b3);
 }
+
+.see-all-games {
+    margin-bottom: 5px;
+    text-align: end;
+  
+    a {
+      color: #007bff; // Cor do link
+      cursor: pointer;
+      text-decoration: underline;
+  
+      &:hover {
+        color: #0056b3; // Cor do link ao passar o mouse
+      }
+    }
+  }

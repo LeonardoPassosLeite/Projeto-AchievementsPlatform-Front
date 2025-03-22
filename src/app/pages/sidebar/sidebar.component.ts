@@ -55,6 +55,10 @@ export class SidebarComponent {
     this.router.navigate(['/dashboard/user-feedbacks']);
   }
 
+  goToUserInsights() {
+    this.router.navigate(['/dashboard/user-insights']);
+  }
+  
   goToKanban() {
     this.router.navigate(['/dashboard/game-kanban']);
   }

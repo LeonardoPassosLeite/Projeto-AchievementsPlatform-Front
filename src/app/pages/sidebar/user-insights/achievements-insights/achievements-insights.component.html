@@ -1,0 +1,5 @@
+<div *ngIf="achievementLabels.length > 0" style="display: block; width: 80%; margin: auto;">
+  <app-chart [datasets]="[{ data: achievementData, label: 'Conquistas' }]" [labels]="achievementLabels"
+    [options]="barChartOptions" [chartType]="selectedChartType">
+  </app-chart>
+</div>

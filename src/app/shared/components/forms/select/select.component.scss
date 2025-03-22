@@ -1,0 +1,97 @@
+.achievements-insights {
+    background: linear-gradient(45deg, #0d1b2a, #1b2a47, #24355c);
+    color: #fff;
+    border-radius: 20px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: auto;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+    font-family: 'roboto', sans-serif;
+}
+
+h2 {
+    font-size: 2rem;
+    color: #00ffcc;
+    text-align: center;
+    text-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc, 0 0 30px #00ffcc;
+}
+
+p {
+    font-size: 1.2rem;
+    margin: 10px 0;
+    text-align: center;
+}
+
+label {
+    font-size: 1rem;
+    margin: 5px 0;
+    display: block;
+    color: #00ffcc;
+}
+
+select {
+    padding: 10px;
+    background: #1f2d3d;
+    color: #fff;
+    border: 2px solid #00ffcc;
+    border-radius: 10px;
+    font-size: 1rem;
+    outline: none;
+    cursor: pointer;
+    width: 200px;
+    margin-bottom: 20px;
+}
+
+select:focus {
+    border-color: #00b5b7;
+}
+
+#yearSelect,
+#monthSelect {
+    border: 2px solid #00ffcc;
+    color: #fff;
+    background-color: #1f2d3d;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 1.1rem;
+}
+
+#yearSelect:focus,
+#monthSelect:focus {
+    border-color: #00b5b7;
+}
+
+/* Canvas */
+canvas {
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 255, 204, 0.3);
+}
+
+p.ngIf {
+    color: #ffffff;
+    font-size: 1.2rem;
+    text-align: center;
+    margin: 20px 0;
+}
+
+button {
+    background-color: #00ffcc;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    color: #0d1b2a;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+}
+
+button:hover {
+    background-color: #00b5b7;
+}
+
+select:hover,
+button:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+}

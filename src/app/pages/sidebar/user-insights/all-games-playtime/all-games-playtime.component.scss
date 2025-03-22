@@ -1,0 +1,70 @@
+.game-card {
+    display: flex;
+    align-items: center;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .rank {
+        font-size: 1.5em;
+        font-weight: bold;
+        color: #555;
+        margin-right: 20px;
+        min-width: 40px;
+        text-align: center;
+    }
+
+    .game-icon {
+        width: 160px;
+        height: 80px;
+        border-radius: 10px;
+        margin-right: 20px;
+    }
+
+    .game-info {
+        flex-grow: 1;
+
+        h3 {
+            margin: 0;
+            font-size: 1.2em;
+            color: #333;
+        }
+
+        p {
+            margin: 5px 0 0;
+            color: #777;
+        }
+    }
+
+    &:nth-child(1) {
+        background: linear-gradient(135deg, #ffd700, #ffcc00);
+
+        .rank {
+            color: #fff;
+        }
+    }
+
+    &:nth-child(2) {
+        background: linear-gradient(135deg, #c0c0c0, #a9a9a9);
+
+        .rank {
+            color: #fff;
+        }
+    }
+
+    &:nth-child(3) {
+        background: linear-gradient(135deg, #cd7f32, #b87333);
+
+        .rank {
+            color: #fff;
+        }
+    }
+}

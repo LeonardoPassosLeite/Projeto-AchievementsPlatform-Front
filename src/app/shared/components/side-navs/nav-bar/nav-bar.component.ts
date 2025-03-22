@@ -28,4 +28,12 @@ export class NavBarComponent {
   goToGameFinished() {
     this.router.navigate(['dashboard/conquistas/games-finalizados']);
   }
+
+  goToGameDropped() {
+    this.router.navigate(['dashboard/conquistas/games-dropados']);
+  }
+
+  goToGameFavorite() {
+    this.router.navigate(['dashboard/conquistas/games-favoritos']);
+  }
 }

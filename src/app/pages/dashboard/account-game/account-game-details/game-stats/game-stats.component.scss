@@ -1,5 +1,22 @@
 .details-game {
     padding: 15px;
-    margin-top: -100px;
     font-family: 'Roboto', sans-serif;
+
+    span {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 15px;
+        line-height: 1.2;
+    }
+
+    mat-icon {
+        font-size: 20px;
+        height: 20px;
+        width: 20px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: -1px;
+    }
 }

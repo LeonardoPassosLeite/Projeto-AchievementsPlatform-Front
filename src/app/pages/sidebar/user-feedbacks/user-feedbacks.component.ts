@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SteamUserService } from '../../../shared/services/steam-user.service';
 import { GenericModule } from '../../../../shareds/commons/GenericModule';
-import { TokenStorageService } from '../../../shared/services/auth/tokenStorage.service';
+import { TokenStorageService } from '../../../core/auth/tokenStorage.service';
 
 @Component({
   selector: 'app-user-feedbacks',

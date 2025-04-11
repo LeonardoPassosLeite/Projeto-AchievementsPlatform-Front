@@ -3,7 +3,7 @@ import { SteamUser } from '../../shared/models/steam-user.model';
 import { AccountGame } from '../../shared/models/account-game.model';
 import { SteamUserService } from '../../shared/services/steam-user.service';
 import { ErrorHandlingService } from '../../shared/services/commons/error-handlig.service';
-import { TokenStorageService } from '../../shared/services/auth/tokenStorage.service';
+import { TokenStorageService } from '../../core/auth/tokenStorage.service';
 import { GenericModule } from '../../../shareds/commons/GenericModule';
 import { Router, RouterModule } from '@angular/router';
 import { SidebarComponent } from '../sidebar/sidebar.component';

@@ -9,3 +9,8 @@ export interface PagedResult<T> {
 export interface PagedResultWithMeta<T, TMeta> extends PagedResult<T> {
     meta?: TMeta;
 }
+
+export interface PaginationParams {
+    page: number;
+    pageSize: number;
+}

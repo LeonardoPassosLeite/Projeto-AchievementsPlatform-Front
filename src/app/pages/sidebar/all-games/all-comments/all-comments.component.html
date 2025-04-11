@@ -1,0 +1,60 @@
+<div class="comment-container">
+    <div *ngIf="pagedFeedbacks$ | async as paged">
+        <div class="game-info-fixed">
+            <div class="game-info">
+                <img [src]="paged.meta?.iconUrl" alt="Capa do jogo" class="game-cover" />
+                <h2>{{ paged.meta?.gameName }}</h2>
+            </div>
+        </div>
+
+        <!-- Lista de comentários -->
+        <div class="feedback-scrollable scroll">
+            <app-comment-list [items]="paged.items" [totalItems]="paged.totalItems"
+                itemType="user"></app-comment-list>
+        </div>
+
+        <!-- Formulário de feedback -->
+        <form [formGroup]="feedbackForm" (ngSubmit)="submitComment()" class="form-fixed">
+            <app-pagination [totalItems]="paged.totalItems" [pageSize]="paged.pageSize"
+                [pageIndex]="paged.pageNumber - 1" (pageChange)="onPageChange($event)">
+            </app-pagination>
+            <textarea formControlName="comment" placeholder="Escreva seu comentário..." rows="3"></textarea>
+
+            <div class="form-options">
+                <div class="rating-recommend-group">
+                    <div class="rating-container">
+                        <label>Avaliação:</label>
+                        <select formControlName="rating">
+                            <option *ngFor="let value of ratingOptions" [ngValue]="+value">{{ value }}</option>
+                        </select>
+                    </div>
+
+                    <div class="recommend-buttons">
+                        <button type="button" [class.active]="feedbackForm.value.recommend === true"
+                            (click)="feedbackForm.patchValue({ recommend: true })" class="thumb-button"
+                            aria-label="Recomendar">
+                            <fa-icon [icon]="faThumbsUp"></fa-icon>
+                        </button>
+
+                        <button type="button" [class.active]="feedbackForm.value.recommend === false"
+                            (click)="feedbackForm.patchValue({ recommend: false })" class="thumb-button danger"
+                            aria-label="Não recomendar">
+                            <fa-icon [icon]="faThumbsDown"></fa-icon>
+                        </button>
+                    </div>
+
+                    <div class="button-submit">
+                        <button type="submit" [disabled]="feedbackForm.invalid || isSubmitting">
+                            Enviar Comentário
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <app-modal-feedback-warning [visible]="showWarningModal" [message]="warningMessage"
+        [onClose]="closeWarningModal.bind(this)">
+    </app-modal-feedback-warning>
+
+</div>

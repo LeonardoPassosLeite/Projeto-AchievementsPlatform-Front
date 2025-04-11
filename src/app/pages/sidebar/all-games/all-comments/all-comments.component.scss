@@ -1,0 +1,166 @@
+.comment-container {
+    background: rgba(29, 38, 56, 0.521);
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.26);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    display: flex;
+    flex-direction: column;
+    max-height: 70vh;
+    overflow: hidden;
+    padding: 0.6rem;
+
+    .game-info-fixed {
+        margin-bottom: 1rem;
+
+        .game-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+
+            .game-cover {
+                width: 250px;
+                height: auto;
+                border-radius: 10px;
+                box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
+            }
+
+            h2 {
+                font-size: 1.2rem;
+                font-weight: bold;
+                margin: 0;
+            }
+        }
+    }
+
+    .feedback-scrollable {
+        flex: 1;
+        max-height: 500px; 
+        overflow-y: auto;
+        margin-bottom: 1.5rem;
+        padding-right: 5px;
+    }
+
+    .form-fixed {
+        background: rgba(255, 255, 255, 0.05);
+        padding: 1.5rem;
+        border-radius: 10px;
+        margin-bottom: 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+
+        textarea {
+            width: 96%;
+            padding: 0.8rem;
+            border-radius: 8px;
+            border: none;
+            resize: vertical;
+            background: #292828;
+            color: #fff;
+            font-size: 1rem;
+        }
+
+        .form-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .rating-recommend-group {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            width: 100%;
+
+            .rating-container {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+
+                label {
+                    font-weight: bold;
+                    color: #fff;
+                }
+
+                select {
+                    width: 70px;
+                    padding: 0.3rem;
+                    border-radius: 4px;
+                    border: none;
+                    background: #fff;
+                    color: #000;
+                    font-weight: bold;
+                    text-align: center;
+                    text-align-last: center;
+                    appearance: none;
+                    font-size: 1rem;
+
+                    &:focus {
+                        outline: 2px solid #00b894;
+                    }
+                }
+            }
+
+            .recommend-buttons {
+                display: flex;
+                gap: 1rem;
+
+                button {
+                    background: none;
+                    border: none;
+                    color: #ccc;
+                    font-size: 2rem;
+                    cursor: pointer;
+                    transition: transform 0.2s ease;
+
+                    &.active {
+                        color: #58f773;
+                        transform: scale(1.2);
+                    }
+
+                    &.danger.active {
+                        color: #f75858;
+                    }
+
+                    &:hover {
+                        transform: scale(1.1);
+                    }
+                }
+            }
+
+            .button-submit {
+                padding-top: 20px;
+                justify-content: flex-end;
+
+                button[type='submit'] {
+                    background: #00b894;
+                    color: #fff;
+                    padding: 0.6rem 1.4rem;
+                    border: none;
+                    border-radius: 6px;
+                    font-weight: bold;
+                    cursor: pointer;
+                    transition: background 0.3s;
+
+                    &:disabled {
+                        background: #555;
+                        cursor: not-allowed;
+                    }
+
+                    &:hover:not(:disabled) {
+                        background: #00a383;
+                    }
+                }
+            }
+        }
+    }
+
+    .no-comments-msg {
+        font-style: italic;
+        color: #ccc;
+        font-family: 'Roboto', sans-serif;
+        margin-top: 1rem;
+    }
+}

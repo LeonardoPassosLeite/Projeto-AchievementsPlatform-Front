@@ -1,33 +1,28 @@
-import { AccountGameBase, } from "./account-game.model";
+import { AccountGameFeedback } from "./account-game.model";
 import { SteamUserFeedback } from "./steam-user.model";
 
-export interface GameFeedback {
-    id: number;
+export interface GameFeedbackRequest {
     accountGameId: number;
-    accountGame: AccountGameBase
+    comment: string;
+    rating: number;
+    recommend: boolean;
+}
+
+export interface GameFeedbackResponseBase {
+    id: number;
     comment: string;
     rating: number;
     recommend: boolean;
     createdAt: string;
     updatedAt: string;
-}
-
-export interface GameFeedbackWithSteamUser extends GameFeedback {
     steamUserId: number;
     steamUserFeedback: SteamUserFeedback;
 }
 
-export interface AccountGameMeta {
-    gameName: string;
-    iconUrl: string;
-    playtimeForever: number;
+export interface GameFeedbackResponse extends GameFeedbackResponseBase {
+    accountGameId: number;
 }
 
-export interface GameFeedbackWithMeta {
-    items: GameFeedbackWithSteamUser[];
-    totalItems: number;
-    pageNumber: number;
-    pageSize: number;
-    totalPages: number;
-    meta?: AccountGameMeta;
+export interface UserGameFeedbackResponse extends GameFeedbackResponse { 
+    accountGameFeedback: AccountGameFeedback;
 }

@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { tap, catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
+import { ErrorHandlingService } from './commons/error-handlig.service';
 import { environment } from '../../../environments/environment';
-import { GameStatus } from '../enums/GameStatus';
-import { TokenStorageService } from './auth/tokenStorage.service';
-import { AccountGameStore } from '../../state/account-game/AccountGame.store';
+import { GameStatus } from '../enums/game-status';
+import { ApiResponse } from '../models/coomons/api-response.model';
 
 @Injectable({
   providedIn: 'root'
@@ -15,40 +15,23 @@ export class GameStatusManagerService {
 
   constructor(
     private http: HttpClient,
-    private tokenStorageService: TokenStorageService,
-    private accountGameStore: AccountGameStore 
-  ) {}
+    private errorHandlingService: ErrorHandlingService
+  ) { }
 
-  updateGameStatus(gameId: number, newStatus: GameStatus): Observable<{ gameId: number; gameStatus: GameStatus }> {
-    const token = this.tokenStorageService.getTokenFromCookie();
-
-    if (!token) {
-      console.error("❌ Token ausente ao tentar atualizar status do jogo");
-      return throwError(() => new Error("Usuário não autenticado"));
-    }
-
-    return this.http.put<{ gameId: number; gameStatus: GameStatus }>(`${this.baseUrl}/update-status/${gameId}`,
-      { gameStatus: newStatus },  
-      {
-        headers: new HttpHeaders({
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
+  updateGameStatus(data: { accountGameId: number, newStatus: GameStatus }): Observable<ApiResponse<null>> {
+    return this.http.put<ApiResponse<null>>(`${this.baseUrl}/update-game-status`, data)
+      .pipe(
+        map((response) => {
+          if (!response?.message) {
+            throw new Error('Erro inesperado ao atualizar o status.');
+          }
+          return response;
         }),
-        withCredentials: true,  
-      }
-    ).pipe(
-      tap((response) => {
-        this.accountGameStore.update(state => {
-          const updatedGames = state.accountGames.map(game =>
-            game.id === response.gameId ? { ...game, gameStatusManager: { gameStatus: response.gameStatus } } : game
-          );
-          return { ...state, accountGames: updatedGames };
-        });
-      }),
-      catchError((error) => {
-        console.error(`❌ Erro ao atualizar status do jogo ID ${gameId}:`, error);
-        return throwError(() => new Error("Erro ao atualizar status do jogo. Verifique o backend."));
-      })
-    );
+        catchError((error) => {
+          const errorMessage = this.errorHandlingService.handleHttpError(error);
+          console.error('Erro ao atualizar status:', errorMessage);
+          return throwError(() => new Error(errorMessage));
+        })
+      );
   }
 }

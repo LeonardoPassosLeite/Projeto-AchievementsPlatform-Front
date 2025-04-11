@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { AccountGame } from '../../../../shared/models/account-game.model';
 import { GenericModule } from '../../../../../shareds/commons/GenericModule';
 import { AccountGameQuery } from '../../../../state/account-game/AccountGame.query';
-import { GameListComponent } from '../../../../shared/components/game-list/game-list.component';
+import { GameListComponent } from '../../../../shared/components/games/game-list/game-list.component';
 
 @Component({
   selector: 'app-account-game-platinum',

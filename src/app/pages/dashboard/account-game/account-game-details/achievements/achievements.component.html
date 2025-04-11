@@ -26,7 +26,10 @@
         </div>
     </div>
 
-    <!-- Indicador de carregamento enquanto novos achievements são carregados -->
+    <div *ngIf="!loading && achievements.length === 0" class="empty-achievements">
+        Nenhuma conquista encontrada
+    </div>
+
     <div *ngIf="loading" class="loading-more">
         Carregando mais conquistas...
     </div>

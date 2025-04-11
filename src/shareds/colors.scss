@@ -1,40 +1,118 @@
-//cores normais
-$black: black;
-$red : red;
-$white: white;
-//cores personalizadas
+// =============================================
+// Cores Base
+// =============================================
+$pure-black: #000000;
+$pure-white: #ffffff;
+$pure-red: #ff0000;
+$rare-deep-blue: #0070f3;
 
-$blue-gray: #7C8894;
-$very-light-gray: #fafafa;
-$light-gray: #f1f1f1;
-$dark-gray: #3a3a3a;
-$charcoal-gray: #1f1f1f;
-$cyan: #66fcf1;
-$dusty-rose: #d199008c;
-$burnt-orange: #ff6f00;
-$translucent-white: rgba(255, 255, 255, 0.8);
-$golden-yellow: #ffc107;
-$bg-color: #1b1b1b;
-$dark-charcoal-brown: #38343446;
-//variaveis
-$background: #0d1117;
+// =============================================
+// Escala de Cinza
+// =============================================
+$snow-white: #fafafa;
+$cotton-gray: #f1f1f1;
+$silver-gray: #c5c6c7;
+$slate-gray: #616161;
+$steel-blue-gray: #7c8894;
+$charcoal: #3a3a3a;
+$midnight: #1f1f1f;
+$void-black: #1b1b1b;
+$obsidian: #272727;
+$shadow-gray: #333;
+$dark-mocha: #38343446;
 
-$button-save: #3cb8b8;
-$primary-background: linear-gradient(135deg, #000000, #1c1c1c);
-$border: #cacaca;
-$menu-header-background: #272727;
-$border-color: #444;
-$text-color-light: #616161;
-$text-color-white: #fff;
-$hover-background: #333;
-$box-shadow: rgba(0, 0, 0, 0.3);
-$transparent: rgba(255, 255, 255, 0.2);
-$upload: rgba(138, 125, 52, 0.151);
-$border-card-hover: #66fcf2a8;
-$card-off: rgba(75, 30, 30, 0.5);
+// =============================================
+// Cores Neon/Gamer
+// =============================================
+// Roxos
+$neon-purple: #6a00f4;
+$electric-lavender: #8a3aff;
+$deep-violet: #4d00b0;
+$translucent-purple: rgba(106, 0, 244, 0.2);
 
-//Steam-Profilie
-$gray: #c5c6c7;
-$aqua: aqua;
-$golden: rgb(223, 215, 170);
-$yellow-glow: 0 0 5px rgba(235, 235, 0, 0.7);
+// Azuis/Cianos
+$neon-cyan: #00f0ff;
+$sky-cyan: #4df9ff;
+$ocean-teal: #00b8c4;
+
+// Fundos escuros
+$cosmic-blue: #12162c;
+$abyss-blue: #070112;
+$translucent-space: rgba(13, 2, 33, 0.9);
+
+// Rosas/Vermelhos
+$neon-pink: #ff3864;
+$bubblegum-pink: #ff6b8b;
+$raspberry: #d62a54;
+
+// Cores de status
+$neon-green: #00ff88;
+$sun-yellow: #ffcc00;
+$hot-pink: #ff2d75;
+$azure-blue: #00b4ff;
+
+// =============================================
+// Cores de Destaque
+// =============================================
+$mint-cyan: #66fcf1;
+$bright-cyan: #00d4ff;
+$aqua-blue: #00ffff;
+
+$goldenrod: #ffc107;
+$vintage-gold: #dfd7aa;
+$pumpkin-orange: #ff6f00;
+$antique-rose: #d199008c;
+
+// =============================================
+// Cores de Efeitos
+// =============================================
+$hover-shadow: rgba($neon-cyan, 0.5);  
+$background: $cosmic-blue;  
+$milky-glass: rgba(255, 255, 255, 0.8);
+$ghost-white: rgba(255, 255, 255, 0.2);
+$old-parchment: rgba(138, 125, 52, 0.151);
+$cyan-haze: #66fcf2a8;
+$rusty-red: rgba(75, 30, 30, 0.5);
+$gold-border: rgba(255, 215, 0, 0.7);
+$cyan-glow: rgba(0, 255, 255, 0.5);
+$yellow-spark: 0 0 5px rgba(235, 235, 0, 0.7);
+
+// Efeitos neon
+$purple-radiance: 0 0 10px rgba(106, 0, 244, 0.7);
+$cyan-aura: 0 0 10px rgba(0, 240, 255, 0.7);
+$pink-pulse: 0 0 10px rgba(255, 56, 100, 0.7);
+
+// =============================================
+// Gradientes
+// =============================================
+$space-gradient: linear-gradient(135deg, #000000, #1c1c1c);
+$deep-space: #0d1117;
+$twilight-blue: #1f2937;
+
+// Gradientes neon
+$cosmic-purple-gradient: linear-gradient(135deg, $cosmic-blue 0%, $neon-purple 100%);
+$purple-cyan-gradient: linear-gradient(135deg, $neon-purple 0%, $neon-cyan 100%);
+$purple-pink-gradient: linear-gradient(135deg, $neon-purple 0%, $neon-pink 100%);
+
+// =============================================
+// Cores de Componentes
+// =============================================
+$save-teal: #3cb8b8;
+$light-border: #cacaca;
+$dark-border: #444;
+$pure-white-text: #fff;
+$shadow: rgba(0, 0, 0, 0.3);
+$cloud-gray: #d1d5db;
+
+// Bordas neon
+$purple-border: 1px solid $neon-purple;
+$cyan-border: 1px solid $neon-cyan;
+$pink-border: 1px solid $neon-pink;
+$background-color: rgba($cosmic-blue, 0.8);
+
+$achievement-gradient: linear-gradient(145deg, $charcoal, $obsidian);
+$achievement-orange: #ffa500;
+$card-hover-bg: rgba(255, 255, 255, 0.04);
+$card-hover-border: rgba(255, 255, 255, 0.08);
+$error-bg: #300;
+$error-text: $pure-red;

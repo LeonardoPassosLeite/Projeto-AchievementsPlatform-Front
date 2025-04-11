@@ -31,9 +31,7 @@
     <a (click)="goToAllGamesPlaytimeForever()">Ver todos os jogos </a>
   </div>
 
-  <!-- Steam Points -->
   <div *ngIf="selectedDataType === 'steam points' && !loading">
-    <!-- Estatísticas Resumidas -->
     <div class="summary-container">
       <div class="summary-item">
         <span class="summary-label">Total de Steam Points:</span>
@@ -41,14 +39,12 @@
       </div>
     </div>
 
-    <!-- Gráfico -->
     <app-steam-points-insights
       [steamPointsLabels]="updateChartData(selectedYear === 'Todos os Anos' ? steamPointsByYear : steamPointsByMonth, selectedYear === 'Todos os Anos').labels"
       [steamPointsData]="updateChartData(selectedYear === 'Todos os Anos' ? steamPointsByYear : steamPointsByMonth, selectedYear === 'Todos os Anos').data">
     </app-steam-points-insights>
   </div>
 
-  <!-- Conquistas -->
   <div *ngIf="selectedDataType === 'conquistas' && !loading">
     <div class="summary-container">
       <div class="summary-item">
@@ -57,14 +53,12 @@
       </div>
     </div>
 
-    <!-- Gráfico -->
     <app-achievements-insights
       [achievementLabels]="updateChartData(selectedYear === 'Todos os Anos' ? achievementsByYear : achievementsByMonth, selectedYear === 'Todos os Anos').labels"
       [achievementData]="updateChartData(selectedYear === 'Todos os Anos' ? achievementsByYear : achievementsByMonth, selectedYear === 'Todos os Anos').data">
     </app-achievements-insights>
   </div>
 
-  <!-- Platinas -->
   <div *ngIf="selectedDataType === 'platinas' && !loading">
     <div class="summary-container">
       <div class="summary-item">
@@ -73,14 +67,12 @@
       </div>
     </div>
 
-    <!-- Gráfico -->
     <app-platinum-insights
       [platinumLabels]="updateChartData(selectedYear === 'Todos os Anos' ? platinasByYear : platinasByMonth, selectedYear === 'Todos os Anos').labels"
       [platinumData]="updateChartData(selectedYear === 'Todos os Anos' ? platinasByYear : platinasByMonth, selectedYear === 'Todos os Anos').data">
     </app-platinum-insights>
   </div>
 
-  <!-- Mensagens de Erro e Carregamento -->
   <div *ngIf="errorMessage" class="error-message">
     <p>{{ errorMessage }}</p>
   </div>

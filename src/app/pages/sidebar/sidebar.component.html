@@ -5,24 +5,28 @@
     <div class="item-conquistas">
         Conquistas Raras
     </div>
-    <div class="right-item" (click)="goToAllGames()">
+    <div class="right-item" (click)="navigation.goToAllGames()">
         <span>Jogos: {{steamUser.userStats.allGames}}</span>
     </div>
-    <div class="right-item" (click)="goToUserFeedbacks()">
+    <div class="right-item" (click)="navigation.goToUserFeedbacks()">
         <span>Comentários: {{steamUser.userStats.totalFeedbacks}}</span>
     </div>
-    <div class="right-item" (click)="goToUserInsights()">
+    <div class="right-item" (click)="navigation.goToUserInsights()">
         <span>Minhas Estátisticas</span>
     </div>
     <div class="right-item">
         <span>Guias de Conquistas</span>
+    </div>
+    <div class="right-item" (click)="navigation.goToRankingTier()">
+        <span>Meu ranking tier</span>
     </div>
     <!-- <div class="right-item">
         <span role="button" tabindex="1" (click)="goToTest()" (keydown.enter)="goToGameStatus()">Minhas
             Estátisticas</span>
     </div> -->
     <div class="right-item">
-        <span role="button" tabindex="0" (click)="goToKanban()" (keydown.enter)="goToKanban()">Gerenciar
+        <span role="button" tabindex="0" (click)="navigation.goToGameStatusManager()"
+            (keydown.enter)="navigation.goToGameStatusManager">Gerenciar
             Jogos</span>
     </div>
 </div>

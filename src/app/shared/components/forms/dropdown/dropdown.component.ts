@@ -1,16 +1,12 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { GenericModule } from '../../../../../shareds/commons/GenericModule';
-import { MaterialModule } from '../../../../../shareds/commons/MaterialModule';
 
 @Component({
   selector: 'app-dropdown',
   standalone: true,
-  imports: [
-    GenericModule,
-    MaterialModule
-  ],
+  imports: [GenericModule],
   templateUrl: './dropdown.component.html',
-  styleUrl: './dropdown.component.scss'
+  styleUrl: './dropdown.component.scss',
 })
 export class DropdownComponent {
   @Input() options: any[] = [];
@@ -19,7 +15,15 @@ export class DropdownComponent {
 
   @Output() valueSelected = new EventEmitter<any>();
 
-  onValueChange(value: any): void {
+  isOpen = false;
+
+  toggleDropdown(): void {
+    this.isOpen = !this.isOpen;
+  }
+
+  selectOption(value: any): void {
+    this.selectedValue = value;
     this.valueSelected.emit(value);
+    this.isOpen = false;
   }
 }

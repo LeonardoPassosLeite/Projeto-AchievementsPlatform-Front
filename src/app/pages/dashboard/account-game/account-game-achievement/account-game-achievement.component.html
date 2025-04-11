@@ -1,7 +1,2 @@
-<app-game-list 
-  [accountGames]="accountGames"
-  [loading]="loading"
-  [errorMessage]="errorMessage"
-  [enableGameDetails]="true"
-  (scrolledToBottom)="loadPagedAccountGames()">
-</app-game-list>
+<app-game-list [accountGames]="accountGames" [loading]="paginator.loading" [enableGameDetails]="true"
+  (scrolledToBottom)="onScroll()"></app-game-list>

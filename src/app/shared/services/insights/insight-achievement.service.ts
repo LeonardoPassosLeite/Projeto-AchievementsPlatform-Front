@@ -1,9 +1,11 @@
-
 import { Injectable } from '@angular/core';
-import { GameAchievement } from '../../models/game-achievement';
-import { Observable, of, switchMap } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Observable, of, switchMap, throwError } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 import { environment } from '../../../../environments/environment';
-import { GameAchievementService } from '../game-achievement.service';
+import { ErrorHandlingService } from '../commons/error-handlig.service';
+import { GameAchievement } from '../../models/game-achievement';
+import { PagedResult } from '../../models/coomons/pagination.model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,15 +13,18 @@ import { GameAchievementService } from '../game-achievement.service';
 export class InsightAchievementService {
   private readonly baseUrl = `${environment.baseUrl}/GameAchievement`;
 
-  constructor(private gameAchievementService: GameAchievementService) { }
+  constructor(
+    private http: HttpClient,
+    private errorHandlingService: ErrorHandlingService
+  ) { }
 
-  getAllAchievements(token: string): Observable<GameAchievement[]> {
+  getAllAchievements(): Observable<GameAchievement[]> {
     const pageSize = 100;
     let pageNumber = 1;
     let allAchievements: GameAchievement[] = [];
 
     const loadPage = (): Observable<GameAchievement[]> => {
-      return this.gameAchievementService.getPagedAchievements(token, pageNumber, pageSize).pipe(
+      return this.getPagedAchievements(pageNumber, pageSize).pipe(
         switchMap((pagedResult) => {
           allAchievements = [...allAchievements, ...pagedResult.items];
 
@@ -36,6 +41,18 @@ export class InsightAchievementService {
     return loadPage();
   }
 
+  private getPagedAchievements(pageNumber: number, pageSize: number): Observable<PagedResult<GameAchievement>> {
+    return this.http.get<PagedResult<GameAchievement>>(
+      `${this.baseUrl}/paged-achievements?pageNumber=${pageNumber}&pageSize=${pageSize}`
+    ).pipe(
+      catchError(error => {
+        const errorMessage = this.errorHandlingService.handleHttpError(error);
+        console.error('Erro ao buscar achievements paginados:', errorMessage);
+        return throwError(() => new Error(errorMessage));
+      })
+    );
+  }
+
   countAchievementsByMonth(achievements: GameAchievement[]): Record<string, number> {
     const achievementsByMonth: Record<string, number> = {};
 
@@ -45,11 +62,7 @@ export class InsightAchievementService {
         const month = date.toLocaleString('pt-BR', { month: 'long' });
         const monthCapitalized = month.charAt(0).toUpperCase() + month.slice(1);
 
-        if (achievementsByMonth[monthCapitalized]) {
-          achievementsByMonth[monthCapitalized]++;
-        } else {
-          achievementsByMonth[monthCapitalized] = 1;
-        }
+        achievementsByMonth[monthCapitalized] = (achievementsByMonth[monthCapitalized] || 0) + 1;
       }
     });
 
@@ -64,11 +77,7 @@ export class InsightAchievementService {
         const date = new Date(achievement.unlockTime * 1000);
         const year = date.getFullYear().toString();
 
-        if (achievementsByYear[year]) {
-          achievementsByYear[year]++;
-        } else {
-          achievementsByYear[year] = 1;
-        }
+        achievementsByYear[year] = (achievementsByYear[year] || 0) + 1;
       }
     });
 

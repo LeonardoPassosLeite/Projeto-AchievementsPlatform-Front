@@ -1,10 +1,10 @@
 @import "../../../shareds/colors.scss";
 
 .container-user-profile {
-    background: linear-gradient(45deg, #111, #22222244);
+    background: linear-gradient(45deg, $void-black, rgba($charcoal, 0.27));
     padding: 12px;
     border-radius: 10px;
-    box-shadow: 0 4px 20px $aqua;
+    box-shadow: 0 4px 20px $aqua-blue;
     width: 680px;
     max-height: 180px;
     margin-bottom: 20px;
@@ -12,23 +12,23 @@
     .profile-avatar {
         width: 150px;
         height: 160px;
-        border: 3px solid $aqua;
-        box-shadow: 0 0 10px $aqua;
+        border: 3px solid $aqua-blue;
+        box-shadow: 0 0 10px $aqua-blue;
         margin-right: 40px;
         transition: transform 0.3s ease;
     }
 
     .profile-info {
         .username {
-            color: $aqua;
+            color: $aqua-blue;
             margin-top: 10px;
-            text-shadow: 0 0 10px $aqua;
+            text-shadow: 0 0 10px $aqua-blue;
         }
 
         .ranking,
         .stats {
-            color: $golden;
-            text-shadow: $yellow-glow;
+            color: $vintage-gold;
+            text-shadow: $yellow-spark;
             margin: 30px 40px 30px 0;
         }
 
@@ -39,7 +39,7 @@
 
             span {
                 margin-left: 0;
-                color: $gray;
+                color: $silver-gray;
                 margin-bottom: 5px;
             }
         }
@@ -50,9 +50,9 @@
     text-align: center;
     border-radius: 8px;
     margin-left: 20px;
-    background-color: $charcoal-gray;
-    box-shadow: 0 4px 15px rgba(0, 255, 255, 0.3);
-    color: $white;
+    background-color: $midnight;
+    box-shadow: 0 4px 15px rgba($neon-cyan, 0.3);
+    color: $pure-white;
     position: relative;
     overflow: hidden;
 
@@ -66,9 +66,9 @@
         border-radius: 8px;
         border: 2px solid transparent;
         background-image: linear-gradient(120deg,
-                rgba(240, 199, 17, 0.178),
-                rgb(226, 201, 57),
-                rgba(133, 222, 238, 0.219));
+                rgba($vintage-gold, 0.178),
+                $vintage-gold,
+                rgba($sky-cyan, 0.219));
         background-size: 200% 200%;
         animation: move-border 3s linear infinite;
         z-index: 1;
@@ -88,35 +88,35 @@
             height: 120px;
             border-radius: 50%;
             background: linear-gradient(120deg,
-                    rgba(240, 199, 17, 0.178),
-                    rgb(226, 201, 57),
-                    rgba(133, 222, 238, 0.219));
+                    rgba($vintage-gold, 0.178),
+                    $vintage-gold,
+                    rgba($sky-cyan, 0.219));
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5), 0 0 25px rgba(255, 255, 255, 0.3);
+            box-shadow: 0 0 15px rgba($pure-white, 0.5), 0 0 25px rgba($pure-white, 0.3);
             animation: glow-circle 4s infinite;
             margin-bottom: 10px;
 
             .placement {
                 font-size: 40px;
                 font-weight: bold;
-                color: $golden-yellow;
-                text-shadow: 0 0 10px $black, 0 0 15px $black;
+                color: $goldenrod;
+                text-shadow: 0 0 10px $pure-black, 0 0 15px $pure-black;
             }
         }
 
         h2 {
             font-size: 28px;
             font-weight: bold;
-            color: $golden-yellow;
-            text-shadow: 0 0 10px $black, 0 0 15px $black;
+            color: $goldenrod;
+            text-shadow: 0 0 10px $pure-black, 0 0 15px $pure-black;
             margin-bottom: 10px;
         }
 
         .statistic {
-            color: $white;
-            text-shadow: 0 0 8px $black;
+            color: $pure-white;
+            text-shadow: 0 0 8px $pure-black;
             margin-top: 5px;
         }
 
@@ -154,15 +154,15 @@
 
         @keyframes glow-circle {
             0% {
-                box-shadow: 0 0 15px rgba(255, 255, 255, 0.5), 0 0 25px rgba(255, 255, 255, 0.3);
+                box-shadow: 0 0 15px rgba($pure-white, 0.5), 0 0 25px rgba($pure-white, 0.3);
             }
 
             50% {
-                box-shadow: 0 0 30px rgba(255, 255, 255, 0.7), 0 0 50px rgba(255, 255, 255, 0.5);
+                box-shadow: 0 0 30px rgba($pure-white, 0.7), 0 0 50px rgba($pure-white, 0.5);
             }
 
             100% {
-                box-shadow: 0 0 15px rgba(255, 255, 255, 0.5), 0 0 25px rgba(255, 255, 255, 0.3);
+                box-shadow: 0 0 15px rgba($pure-white, 0.5), 0 0 25px rgba($pure-white, 0.3);
             }
         }
     }
@@ -197,7 +197,6 @@
     }
 }
 
-
 .xp-bar {
     width: 100%;
     height: 10px;
@@ -209,29 +208,28 @@
 
 .xp-progress {
     height: 100%;
-    background-color: #00ff00;
+    background-color: $neon-green;
     border-radius: 5px;
     transition: width 0.5s ease;
 }
 
-//music
-
+// Music Player
 .music-search-container {
     position: fixed;
     bottom: 80px;
     right: 20px;
     width: 350px;
-    background-color: #1a1a1a;
-    border: 2px solid #00ff00;
+    background-color: $midnight;
+    border: 2px solid $neon-green;
     border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
-    color: #00ff00;
+    box-shadow: 0 0 15px rgba($neon-green, 0.5);
+    color: $neon-green;
     font-family: 'Courier New', Courier, monospace;
     z-index: 1000;
 
     .music-search-header {
         padding: 10px;
-        background-color: #000;
+        background-color: $pure-black;
         border-top-left-radius: 10px;
         border-top-right-radius: 10px;
         display: flex;
@@ -241,12 +239,12 @@
         h3 {
             margin: 0;
             font-size: 18px;
-            text-shadow: 0 0 5px #00ff00;
+            text-shadow: 0 0 5px $neon-green;
         }
 
         button {
-            background-color: #00ff00;
-            color: #000;
+            background-color: $neon-green;
+            color: $pure-black;
             border: none;
             border-radius: 5px;
             padding: 5px 10px;
@@ -264,16 +262,16 @@
         input {
             flex: 1;
             padding: 5px;
-            background-color: #000;
-            border: 1px solid #00ff00;
+            background-color: $pure-black;
+            border: 1px solid $neon-green;
             border-radius: 5px;
-            color: #00ff00;
+            color: $neon-green;
             font-family: 'Courier New', Courier, monospace;
         }
 
         button {
-            background-color: #00ff00;
-            color: #000;
+            background-color: $neon-green;
+            color: $pure-black;
             border: none;
             border-radius: 5px;
             padding: 5px 10px;
@@ -293,8 +291,8 @@
             align-items: center;
             margin-bottom: 10px;
             padding: 10px;
-            background-color: #000;
-            border: 1px solid #00ff00;
+            background-color: $pure-black;
+            border: 1px solid $neon-green;
             border-radius: 5px;
 
             img {
@@ -310,19 +308,19 @@
                 .music-title {
                     margin: 0;
                     font-size: 14px;
-                    color: #00ff00;
+                    color: $neon-green;
                 }
 
                 .music-channel {
                     margin: 0;
                     font-size: 12px;
-                    color: #00ff00;
+                    color: $neon-green;
                 }
             }
 
             button {
-                background-color: #00ff00;
-                color: #000;
+                background-color: $neon-green;
+                color: $pure-black;
                 border: none;
                 border-radius: 5px;
                 padding: 5px 10px;
@@ -347,7 +345,7 @@
 
     .bar {
         width: 8px;
-        background-color: #00ff00;
+        background-color: $neon-green;
         animation: pulse 1s infinite ease-in-out;
         animation-play-state: running;
 
@@ -381,6 +379,6 @@
     img {
         width: 50px;
         height: 50px;
-        filter: drop-shadow(0 0 5px #00ff00);
+        filter: drop-shadow(0 0 5px $neon-green);
     }
 }

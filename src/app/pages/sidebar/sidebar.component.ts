@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { SteamUserService } from '../../shared/services/steam-user.service';
-import { TokenStorageService } from '../../shared/services/auth/tokenStorage.service';
+import { TokenStorageService } from '../../core/auth/tokenStorage.service';
 import { ErrorHandlingService } from '../../shared/services/commons/error-handlig.service';
 import { SteamUser } from '../../shared/models/steam-user.model';
 import { GenericModule } from '../../../shareds/commons/GenericModule';
 import { Router } from '@angular/router';
+import { NavigationService } from '../../shared/services/commons/navigation.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -20,6 +21,7 @@ export class SidebarComponent {
 
   constructor(
     private steamUserService: SteamUserService,
+    public navigation: NavigationService,
     private errorHandlingService: ErrorHandlingService,
     private tokenCoockieService: TokenStorageService,
     private router: Router,
@@ -45,21 +47,5 @@ export class SidebarComponent {
       },
       complete: () => this.loading = false,
     });
-  }
-
-  goToAllGames() {
-    this.router.navigate(['/dashboard/all-games']);
-  }
-
-  goToUserFeedbacks() {
-    this.router.navigate(['/dashboard/user-feedbacks']);
-  }
-
-  goToUserInsights() {
-    this.router.navigate(['/dashboard/user-insights']);
-  }
-  
-  goToKanban() {
-    this.router.navigate(['/dashboard/game-kanban']);
   }
 }

@@ -1,23 +1,38 @@
-import { Component, OnInit } from '@angular/core';
-import { AccountGame } from '../../../../shared/models/account-game.model';
-import { Observable } from 'rxjs';
-import { AccountGameQuery } from '../../../../state/account-game/AccountGame.query';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { GenericModule } from '../../../../../shareds/commons/GenericModule';
+import { RankingPositionTableComponent } from './ranking-position-table/ranking-position-table.component';
 
 @Component({
   selector: 'app-account-game-favorite',
   standalone: true,
-  imports: [],
+  imports: [
+    GenericModule,
+    RouterModule,
+  ],
   templateUrl: './account-game-favorite.component.html',
-  styleUrl: './account-game-favorite.component.scss'
+  styleUrls: ['./account-game-favorite.component.scss']
 })
 export class AccountGameFavoriteComponent implements OnInit {
-  accountGames$: Observable<AccountGame[]>;
+  @ViewChild(RankingPositionTableComponent) rankingPositionTable?: RankingPositionTableComponent;
+
+  activeTab: 'ranking-position' | 'playtime' = 'ranking-position';
+
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+  ) { }
 
   ngOnInit(): void {
-    console.log("Jogos: ", this.accountGames$)
+    this.activeTab = this.router.url.includes('playtime') ? 'playtime' : 'ranking-position';
   }
 
-  constructor(private accountGameQuery: AccountGameQuery) {
-    this.accountGames$ = this.accountGameQuery.accountGames$;
+  navigateToTab(tab: 'ranking-position' | 'playtime'): void {
+    this.activeTab = tab;
+    this.router.navigate([tab], { relativeTo: this.route });
+  }
+
+  isActiveTab(tabName: string): boolean {
+    return this.router.url.includes(tabName);
   }
 }

@@ -1,0 +1,63 @@
+@import '../../../../../shareds/colors.scss';
+
+.dropdown-wrapper {
+    padding: 20px 0 0 20px;
+    width: 220px;
+    user-select: none;
+    font: 12px 'Roboto', sans-serif;
+    margin-top: 10px;
+    position: relative;
+
+    .dropdown-selected,
+    .dropdown-options {
+        border: 1px solid $dark-border;
+        border-radius: 6px;
+    }
+
+    .dropdown-selected {
+        background: transparent;
+        padding: 6px 10px;
+        color: $pure-white-text;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: border-color 0.2s;
+
+        &:hover {
+            border-color: $neon-cyan;
+        }
+    }
+
+    .arrow-down {
+        border: solid $silver-gray;
+        border-width: 0 1px 1px 0;
+        display: inline-block;
+        padding: 3px;
+        transform: rotate(45deg);
+        margin-left: 6px;
+    }
+
+    .dropdown-options {
+        position: absolute;
+        width: 100%;
+        background: $void-black;
+        margin-top: 4px;
+        z-index: 10;
+        max-height: 200px;
+        overflow-y: auto;
+        box-shadow: 0 4px 8px $shadow;
+
+        .dropdown-option {
+            padding: 8px 10px;
+            cursor: pointer;
+            color: $pure-white-text;
+            transition: background-color 0.2s, padding-left 0.2s;
+
+            &:hover {
+                background: $obsidian;
+                padding-left: 14px;
+            }
+        }
+    }
+}

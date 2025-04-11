@@ -1,0 +1,97 @@
+@import '../../../../../shareds/colors.scss';
+
+.kanban-shelf {
+    background: $background-color;
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid $ghost-white;
+    box-shadow: 0 8px 24px $shadow;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.kanban-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+
+    .kanban-title {
+        color: $mint-cyan;
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin: 0;
+        white-space: nowrap;
+    }
+
+    .kanban-search {
+        flex-grow: 1;
+        max-width: 400px;
+        margin: 0 10px;
+    }
+
+    .buttons {
+        display: flex;
+        gap: 5px;
+
+        button {
+            background: rgba($aqua-blue, 0.15);
+            border: 1px solid rgba($aqua-blue, 0.5);
+            color: $aqua-blue;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px $shadow;
+
+            &:hover {
+                background: rgba($aqua-blue, 0.3);
+                transform: scale(1.1);
+                box-shadow: 0 0 15px $cyan-glow;
+            }
+
+            mat-icon {
+                font-size: 20px;
+                width: 20px;
+                height: 20px;
+            }
+        }
+    }
+}
+
+.kanban-shelf-list {
+    display: flex;
+    gap: 45px;
+    overflow-x: auto;
+    padding: 10px 0px 10px 10px;
+    scroll-behavior: smooth;
+
+    &::-webkit-scrollbar {
+        height: 8px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: linear-gradient(90deg, rgba($neon-cyan, 0.5), rgba($ocean-teal, 0.7));
+        border-radius: 4px;
+        box-shadow: inset 0 0 3px $shadow;
+    }
+}
+
+.kanban-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 140px;
+    cursor: grab;
+    transition: all 0.25s ease;
+    margin: 0 10px;
+
+    &:hover {
+        transform: translateY(-5px);
+    }
+}

@@ -1,4 +1,4 @@
-import { GameStatus } from "../../enums/GameStatus";
+import { GameStatus } from "../../enums/game-status";
 
 export interface Kanban {
     id: number;

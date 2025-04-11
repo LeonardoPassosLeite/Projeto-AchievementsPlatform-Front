@@ -1,0 +1,36 @@
+<div class="game-status-manager">
+  <app-all-game-list [title]="'Jogos não iniciados'" [games$]="notStartedGames$"></app-all-game-list>
+
+  <div class="status-board">
+    <div class="status-column" *ngFor="let column of statusColumns" cdkDropList [id]="'status-' + column.value"
+      [cdkDropListData]="{ status: column.value }" [cdkDropListConnectedTo]="connectedDropLists"
+      (cdkDropListDropped)="onGameDropped($event, column.value)">
+      <h3>{{ column.label }}</h3>
+
+      <ng-container *ngIf="(assignedStatus$ | async) as games">
+        <ng-container *ngIf="getGamesByColumn(games, column.value).length > 0; else noGames">
+          <div *ngFor="let game of getGamesByColumn(games, column.value)" class="game-card" cdkDrag
+            [cdkDragData]="game">
+            <img [src]="game.iconUrl" class="game-thumbnail">
+
+            <!-- Drag Preview -->
+            <ng-template cdkDragPreview>
+              <img [src]="game.iconUrl" class="game-thumbnail">
+            </ng-template>
+
+            <!-- Placeholder -->
+            <ng-template cdkDragPlaceholder>
+              <div class="game-card placeholder-custom">
+                <img [src]="game.iconUrl" class="game-thumbnail-placeholder" />
+              </div>
+            </ng-template>
+          </div>
+        </ng-container>
+
+        <ng-template #noGames>
+          <div class="no-games">Nenhum jogo encontrado.</div>
+        </ng-template>
+      </ng-container>
+    </div>
+  </div>
+</div>

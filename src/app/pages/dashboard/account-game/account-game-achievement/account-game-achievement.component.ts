@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { AccountGame } from '../../../../shared/models/account-game.model';
 import { ErrorHandlingService } from '../../../../shared/services/commons/error-handlig.service';
 import { GenericModule } from '../../../../../shareds/commons/GenericModule';
-import { TokenStorageService } from '../../../../shared/services/auth/tokenStorage.service';
 import { RouterModule } from '@angular/router';
 import { AccountGameService } from '../../../../shared/services/account-game.service';
-import { GameListComponent } from '../../../../shared/components/game-list/game-list.component';
+import { GameListComponent } from '../../../../shared/components/games/game-list/game-list.component';
+import { InfinitePaginator } from '../../../../utils/infinite-paginator';
 
 @Component({
   selector: 'app-account-game-achievement',
@@ -20,52 +20,43 @@ import { GameListComponent } from '../../../../shared/components/game-list/game-
 })
 export class AccountGameAchievementComponent implements OnInit {
   accountGames: AccountGame[] = [];
-  errorMessage: string | null = null;
-  loading = false;
-  currentPage = 1;
-  pageSize = 10;
-  hasMore = true;
-  private token: string | null = null; 
+  paginator = new InfinitePaginator();
 
   constructor(
     private accountGameService: AccountGameService,
-    private errorHandlingService: ErrorHandlingService,
-    private tokenStorageService: TokenStorageService
+    private errorHandlingService: ErrorHandlingService
   ) { }
 
   ngOnInit(): void {
-    this.token = this.tokenStorageService.getTokenFromCookie(); 
-    if (this.token) {
-      this.loadPagedAccountGames();
-    } else {
-      this.errorMessage = 'Token de autenticação não encontrado.';
-    }
+    this.loadData();
   }
 
-  loadPagedAccountGames(): void {
-    if (this.loading || !this.hasMore || !this.token) return;  
+  loadData(): void {
+    this.paginator.loading = true;
 
-    this.loading = true;
-
-    this.accountGameService
-      .getPagedAccountGamesWithAchievements(this.token, this.currentPage, this.pageSize)
+    this.accountGameService.getPagedAccountGamesWithAchievements({
+        page: this.paginator.page,
+        pageSize: this.paginator.pageSize
+      })
       .subscribe({
         next: (response) => {
-          console.log('Dados recebidos:', response);
-          if (response.items.length < this.pageSize) {
-            this.hasMore = false;
-          }
-
-          this.accountGames = [...this.accountGames, ...response.items]; 
-          this.currentPage++;
+          this.accountGames = [...this.accountGames, ...response.items];
+          this.paginator.hasMore = response.items.length === this.paginator.pageSize;
+          this.paginator.advance();
         },
         error: (error) => {
-          this.errorMessage = this.errorHandlingService.handleHttpError(error);
-          console.error('Erro ao carregar jogos:', error);
+          const message = this.errorHandlingService.handleWithLog(error, 'Erro ao carregar jogos:');
+          console.error(message);
         },
         complete: () => {
-          this.loading = false;
+          this.paginator.loading = false;
         },
       });
+  }
+
+  onScroll(): void {
+    if (this.paginator.hasMore && !this.paginator.loading) {
+      this.loadData();
+    }
   }
 }

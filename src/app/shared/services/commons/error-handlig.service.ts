@@ -8,19 +8,32 @@ export class ErrorHandlingService {
     constructor(private router: Router) { }
 
     handleHttpError(err: any): string {
+        const raw = err.error;
+
         if (err.status === 401) {
-            console.error('Token inválido ou expirado. Redirecionando para login...');
             this.router.navigate(['/login']);
             return 'Sua sessão expirou. Faça login novamente.';
-        } else if (err.status === 400) {
-            console.error('Erro na requisição: ', err.error);
-            return 'Houve um problema ao processar sua solicitação. Verifique os dados e tente novamente.';
-        } else if (err.status >= 500) {
-            console.error('Erro interno no servidor:', err.error);
-            return 'Ocorreu um erro no servidor. Por favor, tente novamente mais tarde.';
-        } else {
-            console.error('Erro desconhecido:', err);
-            return 'Algo deu errado. Por favor, tente novamente.';
         }
+
+        if (err.status === 400 || err.status === 500) {
+            if (typeof raw === 'string') {
+                return raw;
+            }
+
+            return (
+                raw?.detail ||
+                raw?.message ||
+                err?.message ||
+                'Houve um problema ao processar sua solicitação.'
+            );
+        }
+
+        return 'Algo deu errado. Por favor, tente novamente.';
+    }
+
+    handleWithLog(err: any, contextMessage: string): string {
+        const parsed = this.handleHttpError(err);
+        console.error(`${contextMessage}`, parsed);
+        return parsed;
     }
 }

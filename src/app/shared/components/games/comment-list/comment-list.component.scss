@@ -1,0 +1,159 @@
+.container-overflow {
+    max-height: 65vh;
+}
+
+.feedback-list {
+    .star-rating {
+        display: flex;
+        gap: 0.2rem;
+        align-items: center;
+
+        .star-icon {
+            color: #f1c40f;
+            font-size: 0.7rem;
+        }
+    }
+
+
+    h3 {
+        position: sticky;
+        margin-bottom: 1rem;
+        font-size: 1.4rem;
+        border-bottom: 1px solid #444;
+        padding-bottom: 0.5rem;
+        color: #00e5ff;
+    }
+
+    .feedback-card {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        background: #1c1f2b;
+        border: 1px solid #2b2f3e;
+        border-radius: 12px;
+        padding: 16px;
+        margin-bottom: 24px;
+
+        .game-card {
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+
+            .game-header {
+                display: flex;
+                align-items: center;
+                gap: 16px;
+
+                .game-icon {
+                    width: 180px;
+                    border-radius: 6px;
+                    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+                }
+
+                .game-details {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+
+                    .game-title {
+                        font-size: 1.2rem;
+                        font-weight: bold;
+                        margin-bottom: 6px;
+                        color: #fff;
+                    }
+
+                    .playtime {
+                        font-size: 0.8rem;
+                        color: #ccc;
+                        display: flex;
+                        align-items: center;
+                        gap: 6px;
+
+                        .clock-icon {
+                            color: #ccc;
+                        }
+                    }
+                }
+            }
+        }
+
+        .top-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+
+            .user-info {
+                display: flex;
+                align-items: flex-start;
+                gap: 0.8rem;
+
+                img {
+                    width: 48px;
+                    height: 48px;
+                    border-radius: 50%;
+                    border: 2px solid #00e5ff;
+                    object-fit: cover;
+                }
+
+                .user-details {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: flex-start;
+
+                    .username {
+                        font-weight: bold;
+                        color: #fff;
+                        font-size: 0.95rem;
+                        text-shadow: 0 0 2px #00e5ff;
+                        margin-bottom: 0.3rem;
+                    }
+
+                    .comment-text {
+                        font-style: italic;
+                        font-size: 1.05rem;
+                        color: #ddd;
+                        margin-bottom: 0.6rem;
+                    }
+
+                    .rating-recommend {
+                        display: flex;
+                        align-items: center;
+                        gap: 0.5rem;
+                        font-size: 0.9rem;
+
+                        .rating {
+                            color: #f1c40f;
+                            font-weight: bold;
+                        }
+
+                        .divider {
+                            opacity: 0.5;
+                        }
+
+                        .recommend {
+                            color: #2ecc71;
+                            font-weight: bold;
+                        }
+
+                        .not-recommend {
+                            color: #e74c3c;
+                            font-weight: bold;
+                        }
+                    }
+                }
+            }
+
+            .date {
+                font-size: 0.75rem;
+                color: #aaa;
+                white-space: nowrap;
+            }
+        }
+    }
+}
+
+.no-comments-msg {
+    color: #ccc;
+    font-style: italic;
+    margin-top: 1rem;
+}

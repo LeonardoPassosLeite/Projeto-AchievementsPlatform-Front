@@ -3,7 +3,7 @@ import { AccountGame } from '../../../../shared/models/account-game.model';
 import { Observable } from 'rxjs';
 import { AccountGameQuery } from '../../../../state/account-game/AccountGame.query';
 import { GenericModule } from '../../../../../shareds/commons/GenericModule';
-import { GameListComponent } from '../../../../shared/components/game-list/game-list.component';
+import { GameListComponent } from '../../../../shared/components/games/game-list/game-list.component';
 
 @Component({
   selector: 'app-account-game-in-progress',

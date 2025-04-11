@@ -1,0 +1,37 @@
+.tab-nav {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+    justify-content: start;
+  }
+  
+  .tab-button {
+    background-color: #1a1a2e;
+    border: 1px solid #292945;
+    color: #aaa;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+  
+    .material-icons-outlined {
+      font-size: 18px;
+    }
+  
+    &:hover {
+      background-color: #23233b;
+      color: #fff;
+      border-color: #393967;
+    }
+  
+    &.active {
+      background-color: #393967;
+      color: #fff;
+      border-color: #4c4ca0;
+    }
+  }
+  

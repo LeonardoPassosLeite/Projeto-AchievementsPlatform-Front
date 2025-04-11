@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { isScrolledToBottom } from '../../../utils/scroll.utils';
-import { GameStatus } from '../../../shared/enums/GameStatus';
+import { GameStatus } from '../../../shared/enums/game-status';
 import { AccountGame } from '../../../shared/models/account-game.model';
 import { AccountGameQuery } from '../../../state/account-game/AccountGame.query';
 import { GameStatusManagerService } from '../../../shared/services/game-status-manager.service';
 import { ErrorHandlingService } from '../../../shared/services/commons/error-handlig.service';
-import { TokenStorageService } from '../../../shared/services/auth/tokenStorage.service';
+import { TokenStorageService } from '../../../core/auth/tokenStorage.service';
 import { GenericModule } from '../../../../shareds/commons/GenericModule';
 import { CarouselComponent } from '../../../shared/components/carousel/carousel.component';
 
@@ -83,38 +83,38 @@ export class HomeComponent {
     });
   }
 
-  updateGameStatus(update: { id: number; newStatus: GameStatus }): void {
+  // updateGameStatus(update: { id: number; newStatus: GameStatus }): void {
 
-    this.gameStatusManagerService.updateGameStatus(update.id, update.newStatus).subscribe({
-      next: () => {
+  //   this.gameStatusManagerService.updateGameStatus(update.id, update.newStatus).subscribe({
+  //     next: () => {
 
-        const gameIndex = this.accountGames.findIndex(game => game.id === update.id);
-        if (gameIndex !== -1) {
-          this.accountGames[gameIndex] = {
-            ...this.accountGames[gameIndex],
-            gameStatusManager: {
-              ...this.accountGames[gameIndex].gameStatusManager,
-              gameStatus: update.newStatus
-            }
-          };
-        }
+  //       const gameIndex = this.accountGames.findIndex(game => game.id === update.id);
+  //       if (gameIndex !== -1) {
+  //         this.accountGames[gameIndex] = {
+  //           ...this.accountGames[gameIndex],
+  //           gameStatusManager: {
+  //             ...this.accountGames[gameIndex].gameStatusManager,
+  //             gameStatus: update.newStatus
+  //           }
+  //         };
+  //       }
 
-        this.accountGames = [...this.accountGames];
-      },
-      error: (error) => this.handleError(error, 'Erro ao atualizar status do jogo.')
-    });
-  }
+  //       this.accountGames = [...this.accountGames];
+  //     },
+  //     error: (error) => this.handleError(error, 'Erro ao atualizar status do jogo.')
+  //   });
+  // }
 
-  getStatusName(status: GameStatus): string {
-    const statusNames: { [key in GameStatus]: string } = {
-      [GameStatus.NotStarted]: "Não Iniciado",
-      [GameStatus.InProgress]: "Em Progresso",
-      [GameStatus.Completed]: "Zerados",
-      [GameStatus.Platinum]: "Platinados",
-      [GameStatus.Abandoned]: "Dropados"
-    };
-    return statusNames[status];
-  }
+  // getStatusName(status: GameStatus): string {
+  //   const statusNames: { [key in GameStatus]: string } = {
+  //     [GameStatus.NotStarted]: "Não Iniciado",
+  //     [GameStatus.InProgress]: "Em Progresso",
+  //     [GameStatus.Completed]: "Zerados",
+  //     [GameStatus.Platinum]: "Platinados",
+  //     [GameStatus.Abandoned]: "Dropados"
+  //   };
+  //   return statusNames[status];
+  // }
 
   onScroll(event: Event): void {
     if (isScrolledToBottom(event, 100)) {

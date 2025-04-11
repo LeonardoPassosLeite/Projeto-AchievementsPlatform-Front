@@ -1,0 +1,22 @@
+<div class="game-dropdown-panel" *ngIf="show">
+    <h3>Escolha um jogo</h3>
+    <div class="search-wrapper">
+        <mat-icon>search</mat-icon>
+        <input type="text" [(ngModel)]="searchTerm" placeholder="Buscar jogos" />
+    </div>
+
+    <div class="dropdown-scroll scroll" (scroll)="onScroll($event)">
+        <div class="game-option-item" *ngFor="let game of games | filterByName:searchTerm" (click)="onSelectGame(game)">
+            <img [src]="game.iconUrl" class="game-thumb" alt="{{ game.gameName }}" />
+            <div class="game-info">
+                <div class="name">{{ game.gameName }}</div>
+                <div class="stats">
+                    <span class="g-icon">S</span>
+                    {{ game.gameStats.totalUserSteamPoints }}/{{ game.gameStats.totalGameSteamPoints }}
+                    <mat-icon>emoji_events</mat-icon>
+                    {{ game.gameStats.totalUserAchievements }} / {{game.gameStats.totalAchievements}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -10,15 +10,12 @@ import { isScrolledToBottom } from '../../../../../utils/scroll.utils';
   templateUrl: './achievements.component.html',
   styleUrl: './achievements.component.scss'
 })
-export class AchievementsComponent implements OnInit {
+export class AchievementsComponent {
   @Input() achievements: GameAchievement[] = [];
   @Input() loading: boolean = false;
   @Input() hasMore: boolean = false;
+  
   @Output() loadMore = new EventEmitter<void>();
-
-  ngOnInit(): void {
-
-  }
 
   onScroll(event: Event): void {
     if (isScrolledToBottom(event, 100) && this.hasMore && !this.loading) {
@@ -28,6 +25,6 @@ export class AchievementsComponent implements OnInit {
 
   convertTimestampToDate(timestamp: number): string {
     const date = new Date(timestamp * 1000);
-    return date.toLocaleDateString('pt-BR'); 
+    return date.toLocaleDateString('pt-BR');
   }
 }

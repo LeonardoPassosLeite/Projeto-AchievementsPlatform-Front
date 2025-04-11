@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 import { DashboardComponent } from '../pages/dashboard/dashboard.component';
 import { LoginComponent } from '../login/login.component';
 import { CallbackComponent } from '../login/callback/callback.component';
-import { AuthGuard } from '../shared/services/auth/auth.guard';
+import { AuthGuard } from './auth/auth.guard';
 import { RankingGlobalComponent } from '../pages/dashboard/ranking-global/ranking-global.component';
 import { AccountGameDetailsComponent } from '../pages/dashboard/account-game/account-game-details/account-game-details.component';
 import { AccountGameAchievementComponent } from '../pages/dashboard/account-game/account-game-achievement/account-game-achievement.component';
@@ -13,14 +13,22 @@ import { AccountGameInProgressComponent } from '../pages/dashboard/account-game/
 import { AccountGameFinishedComponent } from '../pages/dashboard/account-game/account-game-finished/account-game-finished.component';
 import { HomeComponent } from '../pages/dashboard/home/home.component';
 import { GameStatusComponent } from '../pages/dashboard/game-status/game-status.component';
-import { GameKanbanComponent } from '../pages/sidebar/game-kanban/game-kanban.component';
-import { AllGamesComponent } from '../pages/sidebar/all-games/all-games.component';
-import { CommentsComponent } from '../pages/sidebar/all-games/comments/comments.component';
+// import { AllGamesComponent } from '../pages/sidebar/all-games/all-games.component';
 import { UserFeedbacksComponent } from '../pages/sidebar/user-feedbacks/user-feedbacks.component';
-import { UserInsightsComponent } from '../pages/sidebar/user-insights/user-insights.component';
-import { AllGamesPlaytimeComponent } from '../pages/sidebar/user-insights/all-games-playtime/all-games-playtime.component';
+// import { UserInsightsComponent } from '../pages/sidebar/user-insights/user-insights.component';
+// import { AllGamesPlaytimeComponent } from '../pages/sidebar/user-insights/all-games-playtime/all-games-playtime.component';
 import { AccountGameDroppedComponent } from '../pages/dashboard/account-game/account-game-dropped/account-game-dropped.component';
 import { AccountGameFavoriteComponent } from '../pages/dashboard/account-game/account-game-favorite/account-game-favorite.component';
+import { RankingPositionResolver } from '../shared/resolvers/ranking-position/ranking-position-resolver';
+import { RankingPositionTableComponent } from '../pages/dashboard/account-game/account-game-favorite/ranking-position-table/ranking-position-table.component';
+import { GameStatusManagerComponent } from '../pages/sidebar/manager/game-status-manager/game-status-manager.component';
+import { RankingTierComponent } from '../pages/sidebar/manager/ranking-tier/ranking-tier.component';
+import { GameStatusNavComponent } from '../shared/components/side-navs/game-status-nav/game-status-nav.component';
+import { AllGamesComponent } from '../pages/sidebar/all-games/all-games.component';
+import { AllCommentsComponent } from '../pages/sidebar/all-games/all-comments/all-comments.component';
+import { CommentsComponent } from '../pages/sidebar/comments/comments.component';
+import { RankingPlaytimeTableComponent } from '../pages/dashboard/account-game/account-game-favorite/ranking-playtime-table/ranking-playtime-table.component';
+import { UserInsightsComponent } from '../pages/sidebar/user-insights/user-insights.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -41,7 +49,7 @@ export const routes: Routes = [
                     { path: 'ranking-global', component: RankingGlobalComponent },
                     {
                         path: 'conquistas',
-                        component: NavBarComponent,
+                        component: GameStatusNavComponent,
                         children: [
                             {
                                 path: 'games-conquistas',
@@ -66,6 +74,17 @@ export const routes: Routes = [
                             {
                                 path: 'games-favoritos',
                                 component: AccountGameFavoriteComponent,
+                                children: [
+                                    {
+                                        path: 'ranking-position',
+                                        component: RankingPositionTableComponent
+                                    },
+                                    {
+                                        path: 'playtime',
+                                        component: RankingPlaytimeTableComponent
+                                    },
+                                    { path: '', redirectTo: 'ranking-position', pathMatch: 'full' }
+                                ]
                             },
                             {
                                 path: '',
@@ -74,15 +93,44 @@ export const routes: Routes = [
                             },
                         ],
                     },
+                    {
+                        path: 'all-comments/:id',
+                        component: AllCommentsComponent
+                    },
+                    {
+                        path: 'comments',
+                        component: CommentsComponent,
+                    },
                     { path: 'account-game-details/:id', component: AccountGameDetailsComponent },
-                    { path: 'game-kanban', component: GameKanbanComponent },
-                    { path: 'all-games', component: AllGamesComponent },
                     { path: 'user-feedbacks', component: UserFeedbacksComponent },
-                    { path: 'user-insights', component: UserInsightsComponent, },
-                    { path: 'comments/:id', component: CommentsComponent },
-                    { path: 'all-games-playtimeForever', component: AllGamesPlaytimeComponent },
+
+                    // { path: 'all-games-playtimeForever', component: AllGamesPlaytimeComponent },
                     { path: '', redirectTo: 'home', pathMatch: 'full' },
                 ]
+
+            },
+            {
+                path: 'sidebar',
+                component: NavBarComponent,
+                children: [
+                    {
+                        path: 'ranking-tier',
+                        component: RankingTierComponent
+                    },
+                    {
+                        path: 'game-status-manager',
+                        component: GameStatusManagerComponent
+                    },
+                    {
+                        path: 'user-insights',
+                        component: UserInsightsComponent,
+                    },
+                ]
+            },
+
+            {
+                path: 'all-games',
+                component: AllGamesComponent,
             },
             { path: 'insights', component: AccountGameAchievementComponent },
             { path: 'usuario', component: AccountGameAchievementComponent },

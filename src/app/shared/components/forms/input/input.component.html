@@ -1,0 +1,5 @@
+<div class="input-wrapper horizontal">
+    <label *ngIf="label">{{ label }}</label>
+    <input name="input" [type]="type" [placeholder]="placeholder" [(ngModel)]="value" (ngModelChange)="onChange($event)"
+        (blur)="onTouched()" [disabled]="disabled" />
+</div>

@@ -1,0 +1,7 @@
+<ng-container *ngIf="pagedFeedbacks$ | async as paged">
+    <app-comment-list [items]="paged.items" [totalItems]="paged.totalItems" itemType="game"></app-comment-list>
+
+    <app-pagination [totalItems]="paged.totalItems" [pageSize]="paged.pageSize" [pageIndex]="paged.pageNumber - 1"
+        (pageChange)="onPageChange($event)">
+    </app-pagination>
+</ng-container>

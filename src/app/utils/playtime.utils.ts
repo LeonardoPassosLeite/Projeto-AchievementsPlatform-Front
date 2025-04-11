@@ -1,5 +1,11 @@
 export function formatPlaytimeForever(minutes: number): string {
-    const hours = Math.floor(minutes / 60);
-    const remainingMinutes = minutes % 60;
-    return `${hours}h ${remainingMinutes}m`;
-}
+    const hours = minutes / 60;
+  
+    if (hours >= 24) {
+      const days = hours / 24;
+      return `${days.toFixed(1)} dias`;
+    }
+  
+    return `${hours.toFixed(1)} horas`;
+  }
+  

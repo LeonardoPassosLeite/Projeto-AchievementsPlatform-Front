@@ -1,0 +1,41 @@
+@import '../../../../../shareds/colors.scss';
+
+.input-wrapper.horizontal {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  
+    label {
+      color: $mint-cyan;
+      font-weight: 600;
+      font-size: 1rem;
+      white-space: nowrap;
+    }
+  
+    input {
+      flex: 1;
+      padding: 10px 14px;
+      border-radius: 6px;
+      border: 1px solid rgba($mint-cyan, 0.3);
+      background-color: transparent;
+      color: white;
+      font-size: 1rem;
+      outline: none;
+      transition: border-color 0.3s ease;
+  
+      &::placeholder {
+        color: rgba(white, 0.5);
+        font-style: italic;
+      }
+  
+      &:focus {
+        border-color: $aqua-blue;
+      }
+  
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+    }
+  }
+  

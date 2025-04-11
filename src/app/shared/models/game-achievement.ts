@@ -1,3 +1,6 @@
+import { AccountGame } from "./account-game.model";
+import { PagedResult } from "./coomons/pagination.model";
+
 export interface GameAchievement {
     id: number;
     name: string;
@@ -8,4 +11,8 @@ export interface GameAchievement {
     rarity: number;
     steamPoints: number;
     accountGameId: number;
+}
+
+export interface Achievements extends AccountGame {
+    pagination: PagedResult<GameAchievement>;
 }

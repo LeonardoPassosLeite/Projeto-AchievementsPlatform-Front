@@ -1,18 +1,66 @@
-.d-grid-double {
-    grid-template-columns: 1fr 3fr;
+@import '../../../../../shareds/colors.scss';
+
+.container-global {
+  padding: 15px;
 }
 
-.game-image {
-    img {
-        height: 40%;
-    }
+.game-header-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border-radius: 12px;
+  padding: 10px 24px;
+  margin-bottom: 24px;
+  cursor: pointer;
+  background: transparent;
+  backdrop-filter: none;
+  border: 1px solid transparent;
+  transition: background 0.3s, backdrop-filter 0.3s, border 0.3s, box-shadow 0.3s;
 
-    padding: 15px;
+  &:hover,
+  &.active {
+    background: $card-hover-bg;
+    backdrop-filter: blur(8px);
+    border-color: $card-hover-border;
+    box-shadow: 0 4px 12px $shadow;
+  }
 }
 
-.title-game {
-    h3 {
-        padding-left: 10px;
-        padding-top: 20px;
-    }
+.game-icon {
+  width: 204px;
+  height: 104px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.game-title-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  .game-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: $pure-white-text;
+    margin: 0;
+  }
+
+  mat-icon {
+    font-size: 20px;
+    color: $pure-white-text;
+    transition: transform 0.25s ease-in-out;
+  }
+}
+
+.game-header-card.active mat-icon {
+  transform: rotate(180deg);
+}
+
+.error-message {
+  padding: 16px;
+  margin-top: 16px;
+  text-align: center;
+  border-radius: 8px;
+  background-color: $error-bg;
+  color: $error-text;
 }

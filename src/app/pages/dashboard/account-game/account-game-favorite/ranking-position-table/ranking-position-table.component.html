@@ -1,0 +1,60 @@
+<div class="container-overflow scroll">
+    <ng-container *ngIf="topRanked$ | async as topRanked">
+        <table mat-table [dataSource]="topRanked" class="mat-elevation-z8">
+
+            <!-- Coluna Posição -->
+            <ng-container matColumnDef="position">
+                <th mat-header-cell *matHeaderCellDef>#</th>
+                <td mat-cell *matCellDef="let game; let i = index">
+                    <ng-container [ngSwitch]="i">
+                        <span *ngSwitchCase="0" class="top-rank">🥇</span>
+                        <span *ngSwitchCase="1" class="top-rank">🥈</span>
+                        <span *ngSwitchCase="2" class="top-rank">🥉</span>
+                        <span *ngSwitchDefault>{{ i + 1 }}</span>
+                    </ng-container>
+                </td>
+            </ng-container>
+
+            <!-- Coluna Ícone -->
+            <ng-container matColumnDef="icon">
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td mat-cell *matCellDef="let game">
+                    <ng-container *ngIf="game; else emptyIcon">
+                        <img [src]="game.iconUrl" alt="{{ game?.gameName }}" width="32" height="32" />
+                    </ng-container>
+                    <ng-template #emptyIcon>
+                        -
+                    </ng-template>
+                </td>
+            </ng-container>
+
+            <!-- Coluna Nome do Jogo -->
+            <ng-container matColumnDef="gameName">
+                <th mat-header-cell *matHeaderCellDef>Jogo</th>
+                <td mat-cell *matCellDef="let game; let i = index">
+
+                    <!-- Se tem jogo e não está editando -->
+                    <ng-container *ngIf="game && !editingPositions.has(i); else autoComplete">
+                        <div class="selected-game" (click)="editPosition(i)">
+                            {{ game.gameName }}
+                            <mat-icon class="edit-icon">edit</mat-icon>
+                        </div>
+                    </ng-container>
+
+                    <!-- Se está editando ou posição vazia -->
+                    <ng-template #autoComplete>
+                        <app-auto-complete [games]="allGames" [placeholder]="'Buscar jogo...'"
+                            (gameSelected)="onGameSelected(i, $event)">
+                        </app-auto-complete>
+                    </ng-template>
+
+                </td>
+            </ng-container>
+
+            <!-- Cabeçalho e Linhas -->
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        </table>
+    </ng-container>
+</div>

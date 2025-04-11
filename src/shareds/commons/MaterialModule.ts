@@ -6,27 +6,32 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSelectModule } from '@angular/material/select';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatButtonModule } from '@angular/material/button';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
     imports: [
         MatIconModule,
+        MatButtonModule,
+        MatTooltipModule,
         MatTableModule,
         MatCheckboxModule,
         MatInputModule,
         MatSelectModule,
         MatPaginatorModule,
         MatAutocompleteModule,
-        MatIconModule,
+        MatIconModule
     ],
     exports: [
         MatIconModule,
+        MatButtonModule,
+        MatTooltipModule,
         MatTableModule,
         MatCheckboxModule,
         MatInputModule,
         MatSelectModule,
         MatPaginatorModule,
-        MatAutocompleteModule,
-        MatIconModule,
+        MatAutocompleteModule
     ],
 })
 export class MaterialModule { }

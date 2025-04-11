@@ -1,0 +1,47 @@
+@import '../../../../../shareds/colors.scss';
+
+.status-board {
+    display: flex;
+    gap: 24px;
+    justify-content: space-around;
+    padding: 16px;
+}
+
+.status-column {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 12px;
+    border-radius: 8px;
+    width: 240px;
+
+    h3 {
+        color: $mint-cyan;
+        text-align: center;
+        margin-bottom: 12px;
+    }
+
+    .game-card {
+        background: rgba($rare-deep-blue, 0.1);
+        padding-top: 5px;
+        margin-bottom: 10px;
+        border-radius: 4px;
+        color: $pure-white-text;
+        text-align: center;
+        border: 1px solid rgba($rare-deep-blue, 0.3);
+    }
+
+    .no-games {
+        color: $silver-gray;
+        text-align: center;
+        font-style: italic;
+    }
+}
+
+.game-thumbnail {
+    width: 224px;
+    height: 104px;
+}
+
+.game-thumbnail-placeholder {
+    height: 100%;
+    width: 100%;
+}

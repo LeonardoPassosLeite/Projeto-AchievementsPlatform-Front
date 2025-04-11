@@ -2,20 +2,26 @@
     <div class="details-game fs-14">
         <h3>Pontuação do jogador</h3>
         <span>
-            S {{ gameDetails?.gameStats?.totalUserSteamPoints || 0 }} /
+            <mat-icon>sports_esports</mat-icon>
+            {{ gameDetails?.gameStats?.totalUserSteamPoints || 0 }} /
             {{ gameDetails?.gameStats?.totalGameSteamPoints || 0 }}
         </span>
-        <ng-template #noStats>Sem estatísticas</ng-template>
     </div>
+
     <div class="details-game fs-14">
         <h3>Conquistas</h3>
         <span>
-            T {{ gameDetails?.gameStats?.totalUserAchievements || 0 }} /
+            <mat-icon>emoji_events</mat-icon>
+            {{ gameDetails?.gameStats?.totalUserAchievements || 0 }} /
             {{ gameDetails?.gameStats?.totalAchievements || 0 }}
         </span>
     </div>
+
     <div class="details-game fs-14">
         <h3>Tempo de jogo</h3>
-        H <span>{{ formatPlaytime(gameDetails?.playtimeForever || 0) }}</span>
+        <span>
+            <mat-icon>schedule</mat-icon>
+            {{ formatPlaytime(gameDetails?.playtimeForever || 0) }}
+        </span>
     </div>
 </div>

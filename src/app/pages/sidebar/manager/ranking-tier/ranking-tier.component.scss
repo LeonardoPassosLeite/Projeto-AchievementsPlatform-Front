@@ -1,0 +1,122 @@
+@import '../../../../../shareds/colors.scss';
+
+::ng-deep .mat-mdc-table .mat-mdc-cell,
+::ng-deep .mat-mdc-table .mat-mdc-header-cell {
+  padding: 0 !important;
+}
+
+::ng-deep .mat-mdc-header-cell {
+  text-align: center !important;
+  justify-content: center !important;
+}
+
+.ranking-tier {
+  .tier-table-container {
+    background-color: transparent;
+
+    .tier-cell {
+      font-weight: bold;
+      text-align: center;
+      vertical-align: middle;
+      border-right: 1px solid $dark-border;
+      border-bottom: 1px solid $dark-border;
+      color: $pure-white;
+
+      &.tier-sss {
+        background-color: $pumpkin-orange;
+      }
+
+      &.tier-ss {
+        background-color: $sun-yellow;
+      }
+      &.tier-s {
+        background-color: $neon-purple;
+      }
+
+      &.tier-a {
+        background-color: $rare-deep-blue
+      }
+
+      &.tier-b {
+        background-color: $azure-blue;
+      }
+
+      &.tier-c {
+        background-color: $neon-green;
+      }
+
+      &.tier-d {
+        background-color: $silver-gray;
+      }
+
+      &.tier-f {
+        background-color: $raspberry;
+      }
+    }
+
+    .dropzone {
+      display: flex;
+      flex-wrap: wrap;
+      min-height: 104px;
+      gap: 5px;
+      background-color: $background-color;
+      padding: 5px;
+    }
+
+    .game-item {
+      position: relative;
+      width: 200px;
+      height: 100px;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+      user-select: none;
+
+      .game-thumbnail {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 8px;
+        border: 2px solid $pure-white;
+        box-shadow: 0 2px 4px $shadow;
+      }
+
+      .remove-game-btn {
+        position: absolute;
+        top: 2px;
+        right: 5px;
+        width: 30px;
+        height: 25px;
+        background-color: rgba(0, 0, 0, 0.5);
+        color: $pure-white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.2s ease, background-color 0.3s ease;
+        z-index: 2;
+        border: 1px solid $ghost-white;
+
+        mat-icon {
+          font-size: 10px;
+          width: 12px;
+          height: 10px;
+          line-height: 1;
+          color: $pure-white;
+        }
+
+        &:hover {
+          background-color: $rusty-red;
+        }
+      }
+
+      &:hover .remove-game-btn {
+        opacity: 1;
+      }
+    }
+  }
+}

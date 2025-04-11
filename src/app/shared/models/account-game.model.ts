@@ -1,41 +1,60 @@
-import { GameStatus } from "../enums/GameStatus";
-import { PagedResult } from "./coomons/pagination.model";
-import { GameAchievement } from "./game-achievement";
-import { GameFeedbackWithSteamUser } from "./game-feedback.model";
-import { GameStats } from "./game-stats.model";
+import { GameStatus } from "../enums/game-status";
+import { RankingTier } from "../enums/ranking-tier";
+import { GameStatsBase } from "./game-stats.model";
 
 export interface AccountGameBase {
     id: number;
     gameName: string;
-    iconUrl: string;
+    iconUrl?: string;
 }
 
-export interface AccountGameSumary extends AccountGameBase {
+export interface AccountGameRankingTier extends AccountGameBase {
+    rankingTier: RankingTier;
+}
+
+export interface AccountGamePlaytimePreview extends AccountGameBase {
     playtimeForever: number;
-    totalFeedbacks: number;
-    averageRating: number;
+}
+
+export interface AccountGameFeedback extends AccountGamePlaytimePreview { }
+
+export interface AccountGameStatus extends AccountGameBase {
+    playtimeForever: number;
     gameStatusManager: {
         gameStatus: GameStatus;
     };
 }
 
-export interface AccountGame extends AccountGameSumary {
-    gameStats: GameStats;
-    feedbacks?: GameFeedbackWithSteamUser[];
+export interface AccountGame extends AccountGameBase {
+    playtimeForever: number;
+    rankingPosition: number;
+    rankingTier?: RankingTier;
+    gameStats: GameStatsBase;
+    gameStatusManager: {
+        gameStatus: GameStatus;
+    };
 }
 
-export interface AccountGamePreview extends AccountGameSumary {
+export interface AccountGameWithAchievements extends AccountGameBase {
+    gameStats: GameStatsBase;
+}
 
+export interface AccountAllGames extends AccountGameStatus {
+    playtimeForever: number;
+    totalFeedbacks: number;
+    averageRating: number;
     gameStats: {
         totalUserAchievements: number;
         totalAchievements: number;
     };
 }
 
-export interface AccountGamePlaytimePreview extends AccountGameBase {
-    playTimeForever: number;
+export interface ViewGameRankingPosition extends AccountGameBase {
+    accountGameId: number;
+    rankingPosition: number;
 }
 
-export interface AccountGameWithAchievements extends AccountGame {
-    pagination: PagedResult<GameAchievement>;
+export interface ViewGameRankingTier extends AccountGameBase {
+    accountGameId: number;
+    rankingTier: RankingTier;
 }

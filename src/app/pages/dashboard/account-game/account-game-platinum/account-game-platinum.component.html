@@ -1,6 +1,5 @@
 <app-game-list 
   [accountGames]="(platinumGames$ | async) ?? []"
   [loading]="false"
-  [errorMessage]="null"
   [enableGameDetails]="true">
 </app-game-list>

@@ -1,14 +1,11 @@
-<div class="container-global">
-    <div class="content-nav d-flex fs-12">
-        <a (click)="goToGameAchievements()">Conquistas</a>
-        <a (click)="goToGamePlatinum()">Platinados</a>
-        <a (click)="goToGameInProgress()">Em progresso</a>
-        <a (click)="goToGameFinished()">Zerados</a>
-        <a (click)="goToGameDropped()">Dropados</a>
-        <a (click)="goToGameFavorite()">Favoritos</a>
-        <a href="">🕒</a>
-        <a href="">🔤</a>
-        <a href="">🏆</a>
+<div class="container-global-side">
+    <div class="nav-container">
+        <div class="nav-box" (click)="goToRankingTier()">
+            <button>Ranking tier</button>
+        </div>
+        <div class="nav-box" (click)="goToStatusGameManager()">
+            <button>Gerenciar status</button>
+        </div>
     </div>
     <div>
         <router-outlet></router-outlet>

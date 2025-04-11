@@ -74,7 +74,6 @@
     overflow-x: auto !important;
     white-space: nowrap;
     width: 100%;
-    padding: 10px;
     gap: 15px;
     scroll-behavior: smooth;
     scrollbar-width: thin;
@@ -113,12 +112,12 @@
     text-align: end;
   
     a {
-      color: #007bff; // Cor do link
+      color: #007bff;  
       cursor: pointer;
       text-decoration: underline;
   
       &:hover {
-        color: #0056b3; // Cor do link ao passar o mouse
+        color: #0056b3;  
       }
     }
   }

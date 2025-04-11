@@ -13,16 +13,12 @@ export class NavBarComponent {
 
   constructor(private router: Router) { }
 
-  goToGameAchievements() {
-    this.router.navigate(['dashboard/conquistas/games-conquistas']);
+  goToRankingTier() {
+    this.router.navigate(['sidebar/ranking-tier']);
   }
 
-  goToGamePlatinum() {
-    this.router.navigate(['dashboard/conquistas/games-platinados']);
-  }
-
-  goToGameInProgress() {
-    this.router.navigate(['dashboard/conquistas/games-em-amdamento']);
+  goToStatusGameManager() {
+    this.router.navigate(['sidebar/game-status-manager']);
   }
 
   goToGameFinished() {

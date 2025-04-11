@@ -1,0 +1,59 @@
+<div class="feedback-list" [ngClass]="{ 'container-overflow scroll': itemType === 'game' }">
+    <h3>Comentários: {{ totalItems }}</h3>
+
+    <ng-container *ngIf="items.length > 0; else noComments">
+        <div *ngFor="let feedback of items" class="feedback-card">
+            <div class="game-card" *ngIf="itemType === 'user'">
+                <ng-container *ngIf="getAccountGameFeedback(feedback) as gameInfo">
+                    <div class="game-header">
+                        <img [src]="gameInfo.iconUrl" alt="Capa do jogo" class="game-icon" />
+                        <div class="game-details">
+                            <h4 class="game-title">{{ gameInfo.gameName }}</h4>
+                            <p class="playtime">
+                                <fa-icon [icon]="faClock" class="clock-icon"></fa-icon>
+                                {{ formatPlaytime(gameInfo.playtimeForever) }}
+                            </p>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+
+            <!-- 🧍 CARD DO USUÁRIO / COMENTÁRIO -->
+            <div class="user-card">
+                <div class="top-row">
+                    <div class="user-info">
+                        <img [src]="feedback.steamUserFeedback.avatarUrl" alt="Avatar" class="avatar" />
+
+                        <div class="user-details">
+                            <span class="username">{{ feedback.steamUserFeedback.displayName }}</span>
+                            <p class="comment-text">“{{ feedback.comment }}”</p>
+
+                            <div class="rating-recommend">
+                                <div class="star-rating">
+                                    <ng-container *ngFor="let star of getStars(feedback.rating)">
+                                        <fa-icon [icon]="star" class="star-icon"></fa-icon>
+                                    </ng-container>
+                                </div>
+
+                                <span class="rating">({{ feedback.rating }})</span>
+                                <span class="divider">|</span>
+
+                                <span [class.recommend]="feedback.recommend"
+                                    [class.not-recommend]="!feedback.recommend">
+                                    <fa-icon [icon]="feedback.recommend ? faThumbsUp : faThumbsDown"></fa-icon>
+                                    {{ feedback.recommend ? 'Recomenda' : 'Não recomenda' }}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="date">{{ feedback.createdAt | date: 'dd/MM/yyyy HH:mm' }}</div>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+
+    <ng-template #noComments>
+        <p class="no-comments-msg fs-18">Não há nenhum comentário ainda.</p>
+    </ng-template>
+</div>

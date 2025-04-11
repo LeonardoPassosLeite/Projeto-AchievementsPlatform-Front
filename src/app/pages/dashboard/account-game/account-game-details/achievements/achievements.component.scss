@@ -1,46 +1,42 @@
-.d-grid-double {
+@import '../../../../../../shareds/colors.scss';
+
+.d-grid-double,
+.achievement-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
-    padding: 20px;
+    padding: 15px;
+    box-sizing: border-box;
+    max-height: 620px;
+    overflow-y: auto;
 }
 
 .achievement-card {
     display: flex;
     flex-direction: column;
     margin-top: 10px;
-    background: linear-gradient(145deg, #2b2b2b, #232323);
-    border: 1px solid #444;
+    background: $achievement-gradient;
+    border: 1px solid $dark-border;
     border-radius: 12px;
     padding: 15px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 4px 10px $shadow;
     transition: transform 0.3s, box-shadow 0.3s;
-}
 
-.achievement-card.locked {
-    opacity: 0.5;
-    pointer-events: none;
-    filter: grayscale(100%);
-}
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px $shadow;
+    }
 
-.achievement-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.7);
-}
+    &.locked {
+        opacity: 0.5;
+        pointer-events: none;
+        filter: grayscale(100%);
 
-.achievement-card.locked:hover {
-    transform: none;
-    box-shadow: none;
-}
-
-.achievement-container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Cria 2 colunas de tamanhos iguais */
-    gap: 20px; /* Espaçamento entre os itens */
-    max-height: 620px; /* Altura máxima com rolagem */
-    overflow-y: auto; /* Rolagem vertical */
-    padding: 20px; /* Espaçamento interno */
-    box-sizing: border-box; /* Inclui padding no tamanho do contêiner */
+        &:hover {
+            transform: none;
+            box-shadow: none;
+        }
+    }
 }
 
 .achievement-header {
@@ -55,7 +51,7 @@
     border-radius: 8px;
     margin-right: 16px;
     object-fit: cover;
-    border: 2px solid #555;
+    border: 2px solid $dark-border;
 }
 
 .achievement-info {
@@ -63,17 +59,24 @@
     flex-direction: column;
 }
 
+.achievement-title,
+.achievement-points,
+.achievement-description,
+.achievement-rarity,
+.achievement-unlock-time {
+    margin: 0;
+}
+
 .achievement-title {
     font-size: 18px;
     font-weight: bold;
-    color: #fff;
-    margin: 0;
+    color: $pure-white-text;
 }
 
 .achievement-points {
     font-size: 14px;
     font-weight: bold;
-    color: #ffa500;
+    color: $achievement-orange;
     margin-top: 4px;
 }
 
@@ -83,9 +86,9 @@
 }
 
 .achievement-body {
-    border-top: 1px solid #444;
+    border-top: 1px solid $dark-border;
     padding-top: 12px;
-    color: #bbb;
+    color: $silver-gray;
 }
 
 .achievement-description {
@@ -96,16 +99,23 @@
 
 .achievement-rarity {
     font-size: 12px;
-    color: #eeeeee;
+    color: $snow-white;
     margin-bottom: 8px;
 }
 
 .achievement-unlock-time {
     font-size: 12px;
     font-weight: bold;
-    color: #ff8f8f;
+    color: $raspberry;
+
+    &.unlocked {
+        color: $neon-green;
+    }
 }
 
-.achievement-unlock-time.unlocked {
-    color: #4caf50;
+.empty-achievements {
+    padding: 20px;
+    text-align: center;
+    color: $silver-gray;
+    font-size: 14px;
 }

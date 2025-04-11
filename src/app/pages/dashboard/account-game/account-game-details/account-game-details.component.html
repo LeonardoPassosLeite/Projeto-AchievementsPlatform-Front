@@ -1,21 +1,25 @@
 <div *ngIf="gameDetails" class="container-global">
-    <div class="d-grid-double game-image">
-        <img [src]="gameDetails.iconUrl || '/assets/default-image.jpg'" alt="{{ gameDetails.gameName }}">
-        <div class="title-game fs-10">
-            <h3>{{ gameDetails.gameName }}</h3>
-        </div>
+    <div class="game-header-card" (click)="showDropdown = !showDropdown">
+        <img class="game-icon" [src]="gameDetails.iconUrl || '/assets/default-image.jpg'"
+            alt="{{ gameDetails.gameName }}" />
 
-        <app-modal-account-game-achievement *ngIf="isModalOpen" [gameDetails]="gameDetails" (closeModal)="closeModal()">
-        </app-modal-account-game-achievement>
+        <div class="game-title-wrapper">
+            <h3 class="game-title">{{ gameDetails.gameName }}</h3>
+            <mat-icon [class.rotated]="showDropdown">expand_more</mat-icon>
+        </div>
     </div>
+
+    <app-game-dropdown-selector [games]="gamesWithAchievements" [show]="showDropdown" (select)="selectGame($event)"
+        (scrolledToBottom)="onScrollMoreGames()"></app-game-dropdown-selector>
 
     <app-game-stats [gameDetails]="gameDetails"></app-game-stats>
 
-    <app-achievements [achievements]="achievements" [loading]="loading" [hasMore]="hasMore"
-        (loadMore)="onLoadMoreAchievements()">
-    </app-achievements>
-</div>
+    <app-dropdown [options]="achievementFilterOptions" [selectedValue]="selectedFilter" placeholder="Filtrar conquistas"
+        (valueSelected)="selectedFilter = $event">
+    </app-dropdown>
 
-<div *ngIf="errorMessage" class="error-message">
-    <p>{{ errorMessage }}</p>
+    <app-achievements [achievements]="filterAchievements()" [loading]="gamePaginator.loading"
+        [hasMore]="gamePaginator.hasMore" (loadMore)="onLoadMoreAchievements()">
+    </app-achievements>
+
 </div>

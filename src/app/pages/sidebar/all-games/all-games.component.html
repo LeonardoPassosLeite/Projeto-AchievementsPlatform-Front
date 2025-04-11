@@ -1,13 +1,13 @@
-<div class="games-container scroll">
+<div class="all-games-container">
     <div *ngIf="allGames$ | async as games">
         <div class="games-grid">
             <div *ngFor="let game of games" class="game-card">
-                <div class="game-card-header d-grid-triple d-flex fs-10">
+                <div class="game-card-header d-grid-double d-flex fs-10">
                     <span> ⏳ {{ formatPlaytime(game.playtimeForever || 0) }}</span>
                     <span> 🏆 {{game.gameStats.totalUserAchievements}}/{{game.gameStats.totalAchievements}}</span>
-                    <span>
+                    <!-- <span>
                         {{ getStatusLabel(game.gameStatusManager.gameStatus) }}
-                    </span>
+                    </span> -->
                 </div>
 
                 <img [src]="game.iconUrl ? game.iconUrl : 'assets/default-game.png'"

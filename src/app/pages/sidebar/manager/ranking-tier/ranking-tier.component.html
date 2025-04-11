@@ -1,0 +1,53 @@
+<div class="ranking-tier">
+  <!-- TODOS OS JOGOS (UNRANKED) -->
+  <div cdkDropList id="games-shelf" [cdkDropListData]="{ tier: RankingTier.Unranked }"
+    [cdkDropListConnectedTo]="combinedDropLists" (cdkDropListDropped)="onSlotDrop($event, RankingTier.Unranked)">
+    <app-all-game-list title="Todos os Jogos" [games$]="unrankedGames$"
+      [connectedDropLists]="getDropListIdsByTier()"></app-all-game-list>
+  </div>
+  <!-- TABELA DE TIERS -->
+  <div class="tier-table-container">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <ng-container *ngFor="let column of columns" [matColumnDef]="column.id">
+        <th mat-header-cell *matHeaderCellDef [style.width]="column.width">
+          {{ column.label }}
+        </th>
+
+        <td mat-cell *matCellDef="let element" [ngClass]="getTierNgClass(element.tier, column.id)">
+          <span *ngIf="column.id === 'tier'">{{ element.tierName }}</span>
+
+          <div *ngIf="column.id === 'games'" class="dropzone" cdkDropList [id]="'dropzone-tier-' + element.tier"
+            [cdkDropListConnectedTo]="combinedDropLists" [cdkDropListData]="{ tier: element.tier }"
+            [cdkDropListSortingDisabled]="true" (cdkDropListDropped)="onSlotDrop($event, element.tier)">
+            <ng-container *ngFor="let slot of element.games">
+              <div class="game-item" cdkDrag [cdkDragData]="slot">
+                <img [src]="slot.iconUrl" class="game-thumbnail" />
+                <button mat-icon-button class="remove-game-btn" (click)="removeRanking(slot)">
+                  <mat-icon>close</mat-icon>
+                </button>
+
+                <!-- PREVIEW PERSONALIZADO -->
+                <ng-template cdkDragPreview>
+                  <div class="drag-preview">
+                    <img [src]="slot.iconUrl" alt="Preview">
+                  </div>
+                </ng-template>
+
+                <!-- PLACEHOLDER -->
+                <ng-template cdkDragPlaceholder>
+                  <div class="game-item">
+                    <img [src]="slot.iconUrl" class="game-thumbnail" />
+                  </div>
+                </ng-template>
+              </div>
+            </ng-container>
+          </div>
+        </td>
+      </ng-container>
+
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </div>
+</div>

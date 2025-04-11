@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Query } from '@datorama/akita';
 import { AccountGameState } from './AccountGame.state';
-import { map, Observable } from 'rxjs';
-import { AccountGame, AccountGamePlaytimePreview, AccountGamePreview } from '../../shared/models/account-game.model';
-import { GameStatus } from '../../shared/enums/GameStatus';
+import { map, Observable, startWith } from 'rxjs';
+import { AccountAllGames, AccountGame, AccountGamePlaytimePreview, AccountGameRankingTier, AccountGameStatus, ViewGameRankingTier } from '../../shared/models/account-game.model';
+import { GameStatus } from '../../shared/enums/game-status';
 import { AccountGameStore } from './AccountGame.store';
-import { GameStats } from '../../shared/models/game-stats.model';
+import { GameStats, GameStatsBase } from '../../shared/models/game-stats.model';
+import { RankingTier } from '../../shared/enums/ranking-tier';
+
 
 @Injectable({ providedIn: 'root' })
 export class AccountGameQuery extends Query<AccountGameState> {
@@ -15,6 +17,11 @@ export class AccountGameQuery extends Query<AccountGameState> {
   playtimeGames$: Observable<AccountGame[]>;
   completedGames$: Observable<AccountGame[]>;
   droppedGames$: Observable<AccountGame[]>;
+  unrankedTierGames$: Observable<AccountGameRankingTier[]>;
+  rankedTierGames$: Observable<AccountGameRankingTier[]>;
+  notStarted$: Observable<AccountGameStatus[]>;
+  assignedStatus$: Observable<AccountGameStatus[]>;
+  allGamesWithRaiting$: Observable<AccountAllGames[]>;
   achievementMatchPercentage$: Observable<number>;
 
   constructor(protected override store: AccountGameStore) {
@@ -26,6 +33,15 @@ export class AccountGameQuery extends Query<AccountGameState> {
     this.playtimeGames$ = this.getPlayedGames();
     this.completedGames$ = this.getCompletedGames();
     this.droppedGames$ = this.getDroppedGames();
+
+    this.unrankedTierGames$ = this.getUnrankedTierGames();
+    this.rankedTierGames$ = this.getRankedTierGames();
+
+    this.notStarted$ = this.getNotStartedGames();
+    this.assignedStatus$ = this.getAssignedStatusGames();
+
+    this.allGamesWithRaiting$ = this.getAllGamesWithRatings();
+
     this.achievementMatchPercentage$ = this.calculateAchievementMatchPercentage();
   }
 
@@ -41,71 +57,144 @@ export class AccountGameQuery extends Query<AccountGameState> {
     );
   }
 
-  private getPlatinumGames(): Observable<AccountGame[]> {
-    return this.select(state => {
-      const platinumGames = (state.accountGames ?? [])
-        .filter(game => game.gameStats?.platinum);
+  private transformToGameProgress(game: AccountGame) {
+    const { id, gameName, iconUrl, playtimeForever, rankingPosition, gameStats, gameStatusManager } = game;
 
-      return platinumGames;
+    return {
+      id,
+      gameName,
+      iconUrl,
+      playtimeForever,
+      rankingPosition,
+      gameStats: {
+        id: gameStats.id,
+        platinum: gameStats.platinum,
+        totalAchievements: gameStats.totalAchievements,
+        totalGameSteamPoints: gameStats.totalGameSteamPoints,
+        totalUserAchievements: gameStats.totalUserAchievements,
+        totalUserSteamPoints: gameStats.totalUserSteamPoints
+      },
+      gameStatusManager: {
+        gameStatus: gameStatusManager.gameStatus
+      }
+    };
+  }
+
+  private getFilteredGames(predicate: (game: AccountGame) => boolean): Observable<AccountGame[]> {
+    return this.select(state => {
+      return (state.accountGames ?? [])
+        .filter(predicate)
+        .map(game => this.transformToGameProgress(game));
     }).pipe(map(games => games ?? []));
   }
 
-  private getPlayedGames(): Observable<AccountGame[]> {
-    return this.select(state => {
-      const playedGames = (state.accountGames ?? [])
-        .filter(game => {
-          const hasPlaytime = game.playtimeForever > 0;
-          const isNotPlatinum = !game.gameStats?.platinum;
-          const isNotCompleted = game.gameStatusManager.gameStatus !== GameStatus.Completed;
+  private getFilteredTierGames(predicate: (game: AccountGame) => boolean, tier: RankingTier | null): Observable<AccountGameRankingTier[]> {
+    return this.accountGames$.pipe(
+      map(games =>
+        (games || [])
+          .filter(predicate)
+          .map(game => ({
+            id: game.id,
+            gameName: game.gameName,
+            iconUrl: game.iconUrl,
+            rankingTier: tier ?? game.rankingTier!
+          }))
+      ),
+      startWith([])
+    );
+  }
 
-          return hasPlaytime && isNotPlatinum && isNotCompleted;
-        })
-        .sort((a, b) => b.playtimeForever - a.playtimeForever);
+  private getFilteredStatusGames(predicate: (game: AccountGame) => boolean, fallbackStatus?: GameStatus): Observable<AccountGameStatus[]> {
+    return this.accountGames$.pipe(
+      map(games =>
+        (games || [])
+          .filter(predicate)
+          .map(game => ({
+            id: game.id,
+            gameName: game.gameName,
+            iconUrl: game.iconUrl,
+            playtimeForever: game.playtimeForever,
+            gameStatusManager: {
+              gameStatus: fallbackStatus ?? game.gameStatusManager!.gameStatus
+            }
+          }))
+      ),
+      startWith([])
+    );
+  }
 
-      return playedGames;
-    }).pipe(map(games => games ?? []));
+  //Stats
+  private getPlatinumGames(): Observable<AccountGame[]> {
+    return this.getFilteredGames(game => !!game.gameStats?.platinum);
   }
 
   private getCompletedGames(): Observable<AccountGame[]> {
-    return this.select(state => {
-      const completedGames = (state.accountGames ?? [])
-        .filter(game => game.gameStatusManager.gameStatus == GameStatus.Completed); 
-
-      return completedGames;
-    }).pipe(map(games => games ?? []));
+    return this.getFilteredGames(game => game.gameStatusManager?.gameStatus === GameStatus.Completed);
   }
 
   private getDroppedGames(): Observable<AccountGame[]> {
-    return this.select(state => {
-      const droppedGames = (state.accountGames ?? [])
-        .filter(game => game.gameStatusManager.gameStatus == GameStatus.Abandoned); 
-
-      return droppedGames;
-    }).pipe(map(games => games ?? []));
+    return this.getFilteredGames(game => game.gameStatusManager?.gameStatus === GameStatus.Abandoned);
   }
 
-  getAllGamesPreview$(): Observable<AccountGamePreview[]> {
+  private getPlayedGames(): Observable<AccountGame[]> {
+    return this.getFilteredGames(game => {
+      const hasPlaytime = game.playtimeForever > 0;
+      const isNotPlatinum = !game.gameStats?.platinum;
+      const isNotCompleted = game.gameStatusManager?.gameStatus !== GameStatus.Completed;
+      return hasPlaytime && isNotPlatinum && isNotCompleted;
+    });
+  }
+
+  //Status Manager
+  private getNotStartedGames(): Observable<AccountGameStatus[]> {
+    return this.getFilteredStatusGames(
+      game =>
+        game.gameStatusManager?.gameStatus == null ||
+        game.gameStatusManager?.gameStatus === GameStatus.NotStarted,
+      GameStatus.NotStarted
+    );
+  }
+
+  private getAssignedStatusGames(): Observable<AccountGameStatus[]> {
+    return this.getFilteredStatusGames(
+      game =>
+        game.gameStatusManager?.gameStatus != null &&
+        game.gameStatusManager?.gameStatus !== GameStatus.NotStarted
+    );
+  }
+
+  //All Games With Comments
+  getAllGamesWithRatings(): Observable<AccountAllGames[]> {
     return this.accountGames$.pipe(
       map(games =>
-        games.map(({ id, gameName, iconUrl, playtimeForever, totalFeedbacks, averageRating, gameStats, gameStatusManager }) => ({
-          id,
-          gameName,
-          iconUrl,
-          playtimeForever,
-          totalFeedbacks,
-          averageRating,
-          gameStats: {
-            totalUserAchievements: gameStats.totalUserAchievements,
-            totalAchievements: gameStats.totalAchievements
-          },
-          gameStatusManager: {
-            gameStatus: gameStatusManager.gameStatus
-          }
-        }))
+        games
+          .filter(game =>
+            typeof (game as any).totalFeedbacks === 'number' &&
+            typeof (game as any).averageRating === 'number' &&
+            typeof game.gameStats?.totalUserAchievements === 'number' &&
+            typeof game.gameStats?.totalAchievements === 'number' &&
+            typeof game.gameStatusManager?.gameStatus === 'number'
+          )
+          .map(game => ({
+            id: game.id,
+            gameName: game.gameName,
+            iconUrl: game.iconUrl,
+            playtimeForever: game.playtimeForever,
+            totalFeedbacks: (game as any).totalFeedbacks,
+            averageRating: (game as any).averageRating,
+            gameStatusManager: {
+              gameStatus: game.gameStatusManager!.gameStatus
+            },
+            gameStats: {
+              totalUserAchievements: game.gameStats!.totalUserAchievements,
+              totalAchievements: game.gameStats!.totalAchievements
+            }
+          }))
       )
     );
   }
 
+  //UserInsights
   getAllGamesPlaytimePreview(): Observable<AccountGamePlaytimePreview[]> {
     return this.accountGames$.pipe(
       map(games =>
@@ -114,46 +203,52 @@ export class AccountGameQuery extends Query<AccountGameState> {
             id,
             gameName,
             iconUrl,
-            playTimeForever: playtimeForever
+            playtimeForever
           }))
-          .sort((a, b) => b.playTimeForever - a.playTimeForever)
+          .sort((a, b) => b.playtimeForever - a.playtimeForever)
       )
     );
   }
 
-  getGamesByStatus$(status: GameStatus): Observable<AccountGame[]> {
-    return this.accountGames$.pipe(
-      map(games => games.filter(game => game.gameStatusManager?.gameStatus === status))
+  getGameStatsList(): GameStatsBase[] {
+    return this.getValue().accountGames
+      .filter(game => !!game.gameStats)
+      .map(game => game.gameStats as GameStatsBase);
+  }
+
+  //Rankings
+  private getUnrankedTierGames(): Observable<AccountGameRankingTier[]> {
+    return this.getFilteredTierGames(
+      game => game.rankingTier == null || game.rankingTier === RankingTier.Unranked,
+      RankingTier.Unranked
     );
   }
 
-  getGameStatsList(): GameStats[] {
-    const accountGames = this.getValue().accountGames;
-
-    const gameStatsList = accountGames
-      .filter(game => game.gameStats)
-      .map(game => game.gameStats);
-
-    return gameStatsList;
+  private getRankedTierGames(): Observable<AccountGameRankingTier[]> {
+    return this.getFilteredTierGames(
+      game => typeof game.rankingTier === 'number' && game.rankingTier > 0,
+      null
+    );
   }
 
-  getTopPlayedGames$(top: number = 3): Observable<AccountGame[]> {
+  getTopPlayedGames$(top: number = 10): Observable<AccountGame[]> {
     return this.accountGames$.pipe(
       map(games => {
-        const validGames = games.filter(game => game.playtimeForever > 0);
+        const validGames = games.filter(g => g.playtimeForever > 0);
         const sortedGames = validGames.sort((a, b) => b.playtimeForever - a.playtimeForever);
-        const topGames = sortedGames.slice(0, top);
-        return topGames;
+        return sortedGames.slice(0, top);
       })
     );
   }
 
-  // private getFeedbacksByGameId(gameId: number): Observable<GameFeedback[]> {
-  //   return this.accountGames$.pipe(
-  //     map(games => {
-  //       const game = games.find(g => g.id === gameId);
-  //       return game?.feedbacks ?? [];
-  //     })
-  //   );
-  // }
+  getRankingPosition$(totalPositions: number = 10): Observable<(AccountGame | null)[]> {
+    return this.accountGames$.pipe(
+      map(games => {
+        const ranked = Array.from({ length: totalPositions }, (_, i) =>
+          games.find(g => g.rankingPosition === i + 1) || null
+        );
+        return ranked;
+      })
+    );
+  }
 }

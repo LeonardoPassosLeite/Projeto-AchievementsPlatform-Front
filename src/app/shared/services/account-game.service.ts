@@ -3,11 +3,10 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, Observable, tap, throwError } from 'rxjs';
 import { ErrorHandlingService } from './commons/error-handlig.service';
 import { AccountGame } from '../models/account-game.model';
-import { PagedResult } from '../models/coomons/pagination.model';
+import { PagedResult, PaginationParams } from '../models/coomons/pagination.model';
 import { environment } from '../../../environments/environment';
 import { ApiResponse } from '../models/coomons/api-response.model';
 import { AccountGameStore } from '../../state/account-game/AccountGame.store';
-import { GameFeedback, GameFeedbackWithSteamUser } from '../models/game-feedback.model';
 
 @Injectable({
     providedIn: 'root',
@@ -56,81 +55,23 @@ export class AccountGameService {
         );
     }
 
-    getPagedAccountGamesWithAchievements(
-        token: string,
-        pageNumber: number = 1,
-        pageSize: number = 10
-    ): Observable<PagedResult<AccountGame>> {
-        const headers = new HttpHeaders({
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json',
-        });
-
-        return this.http
-            .get<{ message: string; status: number; pagination: PagedResult<AccountGame> }>(
-                `${this.baseUrl}/all-games-with-achievements`,
-                {
-                    headers,
-                    params: {
-                        pageNumber: pageNumber.toString(),
-                        pageSize: pageSize.toString(),
-                    },
-                    withCredentials: true,
+    getPagedAccountGamesWithAchievements({ page, pageSize }: PaginationParams): Observable<PagedResult<AccountGame>> {
+        return this.http.get<ApiResponse<PagedResult<AccountGame>>>(
+            `${this.baseUrl}/all-games-with-achievements?pageNumber=${page}&pageSize=${pageSize}`,
+            { withCredentials: true }
+        ).pipe(
+            map(response => {
+                if (!response || !response.value) {
+                    console.warn('Resposta inesperada da API:', response);
+                    throw new Error(response?.message || 'Erro desconhecido ao buscar os jogos.');
                 }
-            )
-            .pipe(
-                map((response) => {
-                    if (!response || response.status !== 200 || !response.pagination) {
-                        console.warn('Resposta inesperada da API:', response);
-                        throw new Error(response?.message || 'Erro desconhecido ao buscar os jogos.');
-                    }
-                    return response.pagination;
-                }),
-                catchError((error) => {
-                    const errorMessage = this.errorHandlingService.handleHttpError(error);
-                    console.error('Erro na requisição para all-games-with-achievements:', errorMessage);
-                    return throwError(() => new Error(errorMessage));
-                })
-            );
-    }
-
-    getPagedGameFeedbacks(
-        token: string,
-        accountGameId: number,
-        pageNumber: number = 1,
-        pageSize: number = 10
-    ): Observable<PagedResult<GameFeedbackWithSteamUser>> {
-        const headers = new HttpHeaders({
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json',
-        });
-
-        return this.http
-            .get<{ message: string; status: number; pagination: PagedResult<GameFeedbackWithSteamUser> }>(
-                `${this.baseUrl}/game-feedbacks`,
-                {
-                    headers,
-                    params: {
-                        accountGameId: accountGameId.toString(),
-                        pageNumber: pageNumber.toString(),
-                        pageSize: pageSize.toString(),
-                    },
-                    withCredentials: true,
-                }
-            )
-            .pipe(
-                map((response) => {
-                    if (!response || response.status !== 200 || !response.pagination) {
-                        console.warn('Resposta inesperada da API:', response);
-                        throw new Error(response?.message || 'Erro desconhecido ao buscar os feedbacks.');
-                    }
-                    return response.pagination; 
-                }),
-                catchError((error) => {
-                    const errorMessage = this.errorHandlingService.handleHttpError(error);
-                    console.error('Erro na requisição para game-feedbacks:', errorMessage);
-                    return throwError(() => new Error(errorMessage));
-                })
-            );
+                return response.value;
+            }),
+            catchError(error => {
+                const errorMessage = this.errorHandlingService.handleHttpError(error);
+                console.error('Erro na requisição para all-games-with-achievements:', errorMessage);
+                return throwError(() => new Error(errorMessage));
+            })
+        );
     }
 }

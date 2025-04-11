@@ -1,11 +1,11 @@
-<div>
-    <app-carousel [items]="carouselItems" [statuses]="statuses" [getStatusName]="getStatusName"
-        [itemTemplate]="carouselItemsItemTemplate">
+<div class="container-overflow scroll">
+    <ng-template #gameItemTemplate let-game>
+        <div class="game-card">
+            <img [src]="game.iconUrl" class="game-thumbnail" />
+        </div>
+    </ng-template>
+
+    <app-carousel [items]="(games$ | async) ?? []" [statuses]="statuses" [getStatusName]="getStatusName"
+        [getStatusFromItem]="getStatusFromItem" [itemTemplate]="gameItemTemplate">
     </app-carousel>
 </div>
-
-<ng-template #carouselItemsItemTemplate let-item>
-    <div class="carousel-item-content">
-        <img *ngIf="item.iconUrl" [src]="item.iconUrl" alt="{{ item.gameName }}" class="game-icon">
-    </div>
-</ng-template>

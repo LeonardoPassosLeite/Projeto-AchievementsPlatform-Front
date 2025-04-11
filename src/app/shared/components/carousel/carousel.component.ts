@@ -1,4 +1,4 @@
-import { Component, EventEmitter, ElementRef, Input, Output, QueryList, SimpleChanges, TemplateRef, ViewChildren, OnChanges } from '@angular/core';
+import { Component, EventEmitter, ElementRef, Input, Output, QueryList, SimpleChanges, TemplateRef, ViewChildren, OnChanges, AfterViewInit } from '@angular/core';
 import { GenericModule } from '../../../../shareds/commons/GenericModule';
 
 @Component({
@@ -8,16 +8,17 @@ import { GenericModule } from '../../../../shareds/commons/GenericModule';
   templateUrl: './carousel.component.html',
   styleUrl: './carousel.component.scss'
 })
-export class CarouselComponent<T extends { id: number; gameName: string, status: S }, S> implements OnChanges {
+export class CarouselComponent<T, S> implements OnChanges, AfterViewInit {
   @ViewChildren('scrollContainer') scrollContainers!: QueryList<ElementRef>;
 
   @Input() items: T[] = [];
   @Input() statuses: S[] = [];
   @Input() getStatusName!: (status: S) => string;
+  @Input() getStatusFromItem!: (item: T) => S;
   @Input() itemTemplate!: TemplateRef<any>;
   @Output() statusUpdated = new EventEmitter<{ id: number; newStatus: S }>();
 
-  organizedItems: { status: S, items: T[] }[] = [];
+  organizedItems: { status: S; items: T[] }[] = [];
 
   canScrollLeftMap: Record<string, boolean> = {};
   canScrollRightMap: Record<string, boolean> = {};
@@ -37,7 +38,7 @@ export class CarouselComponent<T extends { id: number; gameName: string, status:
   private organizeItems(): void {
     this.organizedItems = this.statuses.map(status => ({
       status,
-      items: this.items.filter(item => item.status === status) as T[] || [],
+      items: this.items.filter(item => this.getStatusFromItem(item) === status)
     }));
   }
 
@@ -52,7 +53,6 @@ export class CarouselComponent<T extends { id: number; gameName: string, status:
     if (!a || !b || a.length !== b.length) return false;
     return new Set(a).size === new Set(b).size;
   }
-
 
   private scheduleScrollUpdate(): void {
     if (this.updateScrollTimeout) {
@@ -90,8 +90,8 @@ export class CarouselComponent<T extends { id: number; gameName: string, status:
   }
 
   private getContainerByStatus(status: S): HTMLElement | null {
-    return this.scrollContainers.find(ref => ref.nativeElement.getAttribute('data-status') === this.getStatusName(status))?.nativeElement ?? null;
+    return this.scrollContainers.find(
+      ref => ref.nativeElement.getAttribute('data-status') === this.getStatusName(status)
+    )?.nativeElement ?? null;
   }
-
-
-} 
+}

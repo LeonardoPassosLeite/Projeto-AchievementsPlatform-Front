@@ -8,10 +8,10 @@
 .grid-items {
     text-align: left;
     padding: 20px;
-    border: 1px solid $white;
+    border: 1px solid $pure-white;
     border-radius: 8px;
     margin-left: 20px;
-    background-color: #1a1a1a7c;
+    background-color: rgba($midnight, 0.49);
     height: 68vh;
 
     .item-conquistas {
@@ -26,16 +26,16 @@
         position: relative;
 
         span {
-            color: $aqua;
+            color: $aqua-blue;
             letter-spacing: 1px;
-            text-shadow: 0 0 5px rgba(0, 255, 255, 0.7), 0 0 10px rgba(0, 255, 255, 0.4);
+            text-shadow: $cyan-aura, 0 0 10px rgba($neon-cyan, 0.4);
             transition: all 0.3s ease;
             cursor: pointer;
         }
 
         span:hover {
-            color: #00ff00;
-            text-shadow: 0 0 10px rgba(0, 255, 0, 0.8), 0 0 15px rgba(0, 255, 0, 0.5);
+            color: $neon-green;
+            text-shadow: 0 0 10px rgba($neon-green, 0.8), 0 0 15px rgba($neon-green, 0.5);
             transform: scale(1.05);
         }
 
@@ -43,7 +43,7 @@
             content: "⚡";
             margin-right: 10px;
             font-size: 20px;
-            color: #00d4ff;
+            color: $bright-cyan;
             opacity: 0.7;
             transition: opacity 0.3s ease;
         }

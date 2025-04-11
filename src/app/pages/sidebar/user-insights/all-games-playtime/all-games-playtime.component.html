@@ -1,14 +1,14 @@
-<div *ngIf="(playtimeGames$ | async) as games; else loading" class="container-overvlow scroll">
+<!-- <div *ngIf="(playtimeGames$ | async) as games; else loading" class="container-overvlow scroll">
     <div *ngFor="let game of games; let i = index" class="game-card">
         <div class="rank">{{ i + 1 }}</div>
         <img [src]="game.iconUrl" alt="{{ game.gameName }} icon" class="game-icon">
         <div class="game-info">
             <h3>{{ game.gameName }}</h3>
-            <p>Tempo jogado: {{ game.playTimeForever }} horas</p>
+            <p>Tempo jogado: {{ game.playtimeForever }} horas</p>
         </div>
     </div>
 </div>
 
 <ng-template #loading>
     <p>Carregando jogos...</p>
-</ng-template>
+</ng-template> -->

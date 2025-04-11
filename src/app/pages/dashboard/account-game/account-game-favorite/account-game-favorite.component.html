@@ -1,0 +1,17 @@
+<div class="account-game-container">
+    <nav class="tab-nav">
+        <button type="button" class="tab-button" [class.active]="isActiveTab('ranking-position')"
+            (click)="navigateToTab('ranking-position')">
+            <span class="material-icons-outlined">Top ranking</span>
+        </button>
+
+        <button type="button" class="tab-button" [class.active]="isActiveTab('playtime')"
+            (click)="navigateToTab('playtime')">
+            <span class="material-icons-outlined">Top jogados</span>
+        </button>
+    </nav>
+
+    <div class="content-wrapper">
+        <router-outlet></router-outlet>
+    </div>
+</div>

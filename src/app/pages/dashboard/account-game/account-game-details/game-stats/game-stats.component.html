@@ -1,14 +1,14 @@
 <div class="d-grid-triple" *ngIf="gameDetails?.gameStats">
-    <div class="details-game fs-14">
+    <div class="details-game ">
         <h3>Pontuação do jogador</h3>
         <span>
-            <mat-icon>sports_esports</mat-icon>
+            <span class="g-icon">S</span>
             {{ gameDetails?.gameStats?.totalUserSteamPoints || 0 }} /
             {{ gameDetails?.gameStats?.totalGameSteamPoints || 0 }}
         </span>
     </div>
 
-    <div class="details-game fs-14">
+    <div class="details-game">
         <h3>Conquistas</h3>
         <span>
             <mat-icon>emoji_events</mat-icon>
@@ -17,7 +17,7 @@
         </span>
     </div>
 
-    <div class="details-game fs-14">
+    <div class="details-game">
         <h3>Tempo de jogo</h3>
         <span>
             <mat-icon>schedule</mat-icon>

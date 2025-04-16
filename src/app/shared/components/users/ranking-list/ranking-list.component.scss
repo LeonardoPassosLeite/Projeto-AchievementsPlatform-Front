@@ -1,0 +1,51 @@
+.table-ranking {
+    .value-content {
+        display: inline-flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 6px;
+    }
+
+    .icon-ranking {
+        width: 20px;
+        height: 20px;
+        object-fit: contain;
+        margin-left: 4px;
+        filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.5));
+        transition: width 0.3s ease, height 0.3s ease;
+    }
+
+    td.mat-cell {
+        vertical-align: middle;
+    }
+
+
+    .user-info {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        img {
+            width: 40px;
+            height: 40px;
+            border-radius: 4px;
+            object-fit: cover;
+        }
+
+        span {
+            font-size: 14px;
+            font-weight: 600;
+            color: #fff;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .user-info img {
+            display: none;
+        }
+
+        .user-info span {
+            font-size: 12px;
+        }
+    }
+}

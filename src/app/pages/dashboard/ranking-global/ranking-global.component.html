@@ -1,1 +1,7 @@
-<p>ranking-global works!</p>
+<div class="ranking-types">
+    <button (click)="changeRankingType(rankingEnum.Level)">Level</button>
+    <button (click)="changeRankingType(rankingEnum.Platinum)">Platina</button>
+    <button (click)="changeRankingType(rankingEnum.SteamPoints)">SteamPoints</button>
+</div>
+
+<app-ranking-list [users]="filteredRankings" [rankingType]="rankingType"></app-ranking-list>

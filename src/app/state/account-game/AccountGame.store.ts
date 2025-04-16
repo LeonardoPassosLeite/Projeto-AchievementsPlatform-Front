@@ -3,7 +3,7 @@ import { Store, StoreConfig } from '@datorama/akita';
 import { AccountGameState, createInitialState } from './AccountGame.state';
 import { AccountGame } from '../../shared/models/account-game.model';
 import { GameStatus } from '../../shared/enums/game-status';
-import { RankingTier } from '../../shared/enums/ranking-tier';
+import { RankingTier } from '../../shared/enums/ranking-tier.enum';
 
 @Injectable({ providedIn: 'root' })
 @StoreConfig({ name: 'accountGame' })
@@ -14,6 +14,7 @@ export class AccountGameStore extends Store<AccountGameState> {
   }
 
   setAccountGames(accountGames: AccountGame[]) {
+    console.log('[Store] setAccountGames →', accountGames);
     this.update(state => ({
       ...state,
       accountGames: [...state.accountGames, ...accountGames],

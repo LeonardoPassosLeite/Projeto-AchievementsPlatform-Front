@@ -1,37 +1,32 @@
+@import '../../../../../shareds/colors.scss';
+
 .tab-nav {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 16px;
-    justify-content: start;
+  margin: 20px 0 0 0;
+}
+
+.tab-button {
+  background-color: rgba($azure-blue, 0.12);
+  border: 1px solid rgba($azure-blue, 0.3);
+  color: $silver-gray;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background-color: rgba($neon-cyan, 0.15);
+    color: $pure-white;
+    border-color: rgba($neon-cyan, 0.4);
   }
-  
-  .tab-button {
-    background-color: #1a1a2e;
-    border: 1px solid #292945;
-    color: #aaa;
-    padding: 8px 16px;
-    border-radius: 6px;
-    font-size: 14px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    transition: all 0.2s ease;
-  
-    .material-icons-outlined {
-      font-size: 18px;
-    }
-  
-    &:hover {
-      background-color: #23233b;
-      color: #fff;
-      border-color: #393967;
-    }
-  
-    &.active {
-      background-color: #393967;
-      color: #fff;
-      border-color: #4c4ca0;
-    }
+
+  &.active {
+    background-color: rgba($neon-cyan, 0.25);
+    color: $pure-white;
+    border-color: $neon-cyan;
+    box-shadow: 0 0 8px $cyan-glow;
   }
-  
+}

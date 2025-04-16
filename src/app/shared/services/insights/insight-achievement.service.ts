@@ -18,40 +18,40 @@ export class InsightAchievementService {
     private errorHandlingService: ErrorHandlingService
   ) { }
 
-  getAllAchievements(): Observable<GameAchievement[]> {
-    const pageSize = 100;
-    let pageNumber = 1;
-    let allAchievements: GameAchievement[] = [];
+  // getAllAchievements(): Observable<GameAchievement[]> {
+  //   const pageSize = 100;
+  //   let pageNumber = 1;
+  //   let allAchievements: GameAchievement[] = [];
 
-    const loadPage = (): Observable<GameAchievement[]> => {
-      return this.getPagedAchievements(pageNumber, pageSize).pipe(
-        switchMap((pagedResult) => {
-          allAchievements = [...allAchievements, ...pagedResult.items];
+  //   const loadPage = (): Observable<GameAchievement[]> => {
+  //     return this.getPagedAchievements(pageNumber, pageSize).pipe(
+  //       switchMap((pagedResult) => {
+  //         allAchievements = [...allAchievements, ...pagedResult.items];
 
-          if (pagedResult.items.length === pageSize) {
-            pageNumber++;
-            return loadPage();
-          } else {
-            return of(allAchievements);
-          }
-        })
-      );
-    };
+  //         if (pagedResult.items.length === pageSize) {
+  //           pageNumber++;
+  //           return loadPage();
+  //         } else {
+  //           return of(allAchievements);
+  //         }
+  //       })
+  //     );
+  //   };
 
-    return loadPage();
-  }
+  //   return loadPage();
+  // }
 
-  private getPagedAchievements(pageNumber: number, pageSize: number): Observable<PagedResult<GameAchievement>> {
-    return this.http.get<PagedResult<GameAchievement>>(
-      `${this.baseUrl}/paged-achievements?pageNumber=${pageNumber}&pageSize=${pageSize}`
-    ).pipe(
-      catchError(error => {
-        const errorMessage = this.errorHandlingService.handleHttpError(error);
-        console.error('Erro ao buscar achievements paginados:', errorMessage);
-        return throwError(() => new Error(errorMessage));
-      })
-    );
-  }
+  // private getPagedAchievements(pageNumber: number, pageSize: number): Observable<PagedResult<GameAchievement>> {
+  //   return this.http.get<PagedResult<GameAchievement>>(
+  //     `${this.baseUrl}/paged-achievements?pageNumber=${pageNumber}&pageSize=${pageSize}`
+  //   ).pipe(
+  //     catchError(error => {
+  //       const errorMessage = this.errorHandlingService.handleHttpError(error);
+  //       console.error('Erro ao buscar achievements paginados:', errorMessage);
+  //       return throwError(() => new Error(errorMessage));
+  //     })
+  //   );
+  // }
 
   countAchievementsByMonth(achievements: GameAchievement[]): Record<string, number> {
     const achievementsByMonth: Record<string, number> = {};

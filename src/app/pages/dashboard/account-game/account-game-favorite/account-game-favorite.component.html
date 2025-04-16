@@ -1,13 +1,13 @@
-<div class="account-game-container">
-    <nav class="tab-nav">
+<div class="favorite-game-container">
+    <nav class="tab-nav d-flex">
         <button type="button" class="tab-button" [class.active]="isActiveTab('ranking-position')"
             (click)="navigateToTab('ranking-position')">
-            <span class="material-icons-outlined">Top ranking</span>
+            <span class="fs-18">Top ranking</span>
         </button>
 
         <button type="button" class="tab-button" [class.active]="isActiveTab('playtime')"
             (click)="navigateToTab('playtime')">
-            <span class="material-icons-outlined">Top jogados</span>
+            <span class="fs-18">Top jogados</span>
         </button>
     </nav>
 

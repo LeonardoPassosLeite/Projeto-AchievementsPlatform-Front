@@ -1,26 +1,26 @@
 <div class="container-overflow scroll" (scroll)="onScroll($event)">
-    <div *ngIf="loading && accountGames.length === 0" class="loading">
-        Carregando jogos...
-    </div>
 
-    <div *ngIf="errorMessage" class="error">
-        <fa-icon icon="exclamation-triangle" class="error-icon"></fa-icon>
+    <div *ngIf="errorMessage" class="error-message">
+        <fa-icon icon="exclamation-triangle"></fa-icon>
         {{ errorMessage }}
-      </div>
-      
+    </div>
 
     <div *ngIf="!loading && accountGames.length === 0 && !errorMessage" class="no-games">
         Nenhum jogo encontrado.
     </div>
 
-    <div *ngIf="accountGames.length > 0" class="games-list">
+    <div *ngIf="accountGames.length > 0">
         <div *ngFor="let game of accountGames" class="game-card d-flex"
             [ngClass]="{'platinum-background': game.gameStats.platinum}" (click)="onGameClick(game.id)">
+
             <div class="game-image">
                 <img [src]="game.iconUrl || '/assets/default-image.jpg'" alt="Imagem do jogo {{ game.gameName }}" />
             </div>
+
             <div class="game-details d-flex">
+
                 <h3>{{ game.gameName || 'Nome do jogo não disponível' }}</h3>
+
                 <div class="game-meta d-grid-triple">
                     <p>
                         <fa-icon [icon]="faSteamPoints"></fa-icon>
@@ -40,6 +40,7 @@
                         game.gameStats.totalAchievements) * 100 | number:'1.0-0') : 0 }}%
                     </span>
                 </div>
+
                 <div class="progress-bar-container">
                     <div class="progress-bar"
                         [style.width]="(game.gameStats.totalAchievements > 0 ? (game.gameStats.totalUserAchievements / game.gameStats.totalAchievements) * 100 : 0) + '%'">
@@ -47,9 +48,5 @@
                 </div>
             </div>
         </div>
-    </div>
-
-    <div *ngIf="loading && accountGames.length > 0" class="loading-more">
-        Carregando mais jogos...
     </div>
 </div>

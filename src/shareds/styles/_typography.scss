@@ -1,0 +1,72 @@
+html,
+h1,
+h2,
+h3,
+body {
+    color: $pure-white;
+    text-transform: capitalize;
+}
+
+h1 {
+    font-size: 26px;
+}
+
+h3 {
+    font-size: 16px;
+}
+
+p {
+    font-size: 14px;
+}
+
+.fs-10 {
+    font-size: 10px;
+}
+
+.fs-12 {
+    font-size: 12px;
+}
+
+.fs-14 {
+    font-size: 14px;
+}
+
+.fs-16 {
+    font-size: 16px;
+}
+
+.fs-18 {
+    font-size: 18px;
+}
+
+.fs-24 {
+    font-size: 24px;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+span {
+    font-size: 12px;
+    color: $pure-white;
+}
+
+button span {
+    color: inherit;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.space-between {
+    justify-content: space-between;
+}
+
+.text-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: $pure-white-text;
+    margin: 0;
+}

@@ -46,7 +46,7 @@ export class AuthService {
     if (!steamId) throw new Error('SteamID não encontrado no token');
 
     return forkJoin({
-      accountGames: this.accountGameService.addAccountGames(token).pipe(
+      accountGames: this.accountGameService.addAccountGames().pipe(
         map((response: any) => {
           if (!response || !response.value) {
             throw new Error('Resposta inesperada do backend: "value" não encontrado');
@@ -58,7 +58,7 @@ export class AuthService {
           return throwError(() => new Error('Erro ao salvar jogos. Verifique o backend.'));
         })
       ),
-      steamProfile: this.steamUserService.storeSteamUser(token).pipe(
+      steamProfile: this.steamUserService.steamUser().pipe(
         catchError((error) => {
           console.error('Erro ao sincronizar perfil Steam:', error);
           return throwError(() => new Error('Erro ao sincronizar o perfil Steam. Verifique o backend.'));

@@ -14,19 +14,13 @@
     <div class="right-item" (click)="navigation.goToUserInsights()">
         <span>Minhas Estátisticas</span>
     </div>
-    <div class="right-item">
+    <!-- <div class="right-item">
         <span>Guias de Conquistas</span>
-    </div>
+    </div> -->
     <div class="right-item" (click)="navigation.goToRankingTier()">
         <span>Meu ranking tier</span>
     </div>
-    <!-- <div class="right-item">
-        <span role="button" tabindex="1" (click)="goToTest()" (keydown.enter)="goToGameStatus()">Minhas
-            Estátisticas</span>
-    </div> -->
-    <div class="right-item">
-        <span role="button" tabindex="0" (click)="navigation.goToGameStatusManager()"
-            (keydown.enter)="navigation.goToGameStatusManager">Gerenciar
-            Jogos</span>
+    <div class="right-item" (click)="navigation.goToGameStatusManager()">
+        <span>Gerenciar Jogos</span>
     </div>
 </div>

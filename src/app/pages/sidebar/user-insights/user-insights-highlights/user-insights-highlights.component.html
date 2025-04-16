@@ -1,0 +1,3 @@
+<ng-container *ngIf="topPlayedGames$ | async as topPlayedGames">
+    <app-podium-game-playtime [topPlayedGames]="topPlayedGames"></app-podium-game-playtime>
+</ng-container>

@@ -1,0 +1,17 @@
+@import'../../../../../shareds/colors.scss';
+
+.content-nav a {
+    color: $silver-gray;
+    padding: 10px 10px;
+    border-radius: 4px;
+    transition: background 0.3s, color 0.3s;
+    cursor: pointer;
+
+    &.active {
+        background: rgba($azure-blue, 0.23);
+    }
+
+    &:hover {
+        background: $ghost-white;
+    }
+}

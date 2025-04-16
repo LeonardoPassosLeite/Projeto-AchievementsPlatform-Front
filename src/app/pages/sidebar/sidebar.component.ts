@@ -4,7 +4,6 @@ import { TokenStorageService } from '../../core/auth/tokenStorage.service';
 import { ErrorHandlingService } from '../../shared/services/commons/error-handlig.service';
 import { SteamUser } from '../../shared/models/steam-user.model';
 import { GenericModule } from '../../../shareds/commons/GenericModule';
-import { Router } from '@angular/router';
 import { NavigationService } from '../../shared/services/commons/navigation.service';
 
 @Component({
@@ -23,22 +22,21 @@ export class SidebarComponent {
     private steamUserService: SteamUserService,
     public navigation: NavigationService,
     private errorHandlingService: ErrorHandlingService,
-    private tokenCoockieService: TokenStorageService,
-    private router: Router,
+    private tokenCoockieService: TokenStorageService
   ) { }
 
   ngOnInit(): void {
     const token = this.tokenCoockieService.getTokenFromCookie();
     if (token) {
-      this.loadSteamUser(token);
+      this.loadSteamUser();
     } else {
       this.errorMessage = 'Token de autenticação não encontrado.';
       this.loading = false;
     }
   }
 
-  loadSteamUser(token: string): void {
-    this.steamUserService.getStoredUser(token).subscribe({
+  loadSteamUser(): void {
+    this.steamUserService.getSeamUser().subscribe({
       next: (response) => {
         this.steamUser = response;
       },

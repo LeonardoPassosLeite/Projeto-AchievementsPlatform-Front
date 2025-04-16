@@ -2,54 +2,30 @@
     <div *ngIf="!loading && steamUser">
         <div class="d-grid-double">
 
-            <div class="d-flex container-user-profile">
-                <img [src]="steamUser.avatarUrl || '/assets/default-avatar.jpg'" alt="Avatar" class="profile-avatar" />
-                <div class="profile-info">
-                    <div class="username fs-24 bold">
-                        <span> {{ steamUser.displayName || 'Nome de usuário não disponível' }}</span>
-                    </div>
-                    <div class="profile-level d-flex fs-16 bold">
-                        <div class="stats">Level:
-                            <span>{{ steamUserXpMock.level }}</span>
-                        </div>
-                        <div class="stats">Platinas:
-                            <span> {{ steamUser.userStats.allPlatinum }}</span>
-                        </div>
-                        <div class="stats">Conquistas:
-                            <span> {{ steamUser.userStats.allAchievements }}</span>
-                        </div>
-                        <!-- <div class="stats">Total Jogado:
-                            <span>{{ formatPlaytimeDetailed(steamUser.userStats.allPlaytimeForever) }}</span>
-                        </div> -->
-                    </div>
-                    <div class="xp-bar-container fs-14">
-                        <span> {{ steamUserXpMock.xpCurrent }} XP / {{ steamUserXpMock.xpToNextLevel }} XP </span>
-                        <div class="xp-bar">
-                            <!-- <div class="xp-progress" [style.width]="getXpPercentage() + '%'"></div> -->
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <app-steam-user [steamUser]="steamUser"></app-steam-user>
 
             <div class="grid-item-ranking">
                 <div class="ranking-content">
                     <h2>Ranking</h2>
                     <div class="circle">
-                        <span class="placement">#1</span>
+                        <span class="placement">{{ steamUser.userStats.ranking }}</span>
                     </div>
-                    <p class="statistic fs-18">{{steamUser.userStats.totalSteamPoints}} SP</p>
+                    <p class="statistic fs-18">{{ steamUser.userStats.totalSteamPoints }} SP</p>
                 </div>
             </div>
         </div>
 
         <div class="content-nav d-flex fs-12">
-            <a (click)="goToHome()">Inicio</a>
-            <a (click)="goToGameStatus()">Painel</a>
-            <a (click)="goToConquistas()">Conquistas</a>
-            <a (click)="goToRanking()">Ranking Global</a>
+            <a (click)="navigateTo(DashboardMenu.Home)"
+                [ngClass]="{ 'active': selectedMenu === DashboardMenu.Home }">Início</a>
+            <a (click)="navigateTo(DashboardMenu.GameStatus)"
+                [ngClass]="{ 'active': selectedMenu === DashboardMenu.GameStatus }">Painel</a>
+            <a (click)="navigateTo(DashboardMenu.Conquistas)"
+                [ngClass]="{ 'active': selectedMenu === DashboardMenu.Conquistas }">Conquistas</a>
+            <a (click)="navigateTo(DashboardMenu.Ranking)"
+                [ngClass]="{ 'active': selectedMenu === DashboardMenu.Ranking }">Ranking Global</a>
         </div>
 
-        <!-- Segunda seção: Conteudos -->
         <div class="d-grid-double">
             <div class="content-roating">
                 <router-outlet></router-outlet>
@@ -58,42 +34,4 @@
             <app-sidebar></app-sidebar>
         </div>
     </div>
-
-    <div class="music-search-container" *ngIf="isMusicSearchOpen">
-        <div class="music-search-header">
-            <h3>Buscar Música</h3>
-            <button (click)="toggleMusicSearch()">Fechar</button>
-        </div>
-        <div class="music-search-input">
-            <input [(ngModel)]="searchQuery" placeholder="Digite o nome da música..." (input)="onSearchInput()" />
-            <button (click)="searchMusic()">Buscar</button>
-        </div>
-        <!-- Exibe a lista de resultados apenas se houver texto no campo de busca -->
-        <div class="music-results" *ngIf="searchQuery.trim()">
-            <div *ngFor="let video of searchResults" class="music-item">
-                <img [src]="video.snippet.thumbnails.default.url" alt="Thumbnail" />
-                <div class="music-info">
-                    <p class="music-title">{{ video.snippet.title }}</p>
-                    <p class="music-channel">{{ video.snippet.channelTitle }}</p>
-                </div>
-                <button (click)="playVideo(video.id.videoId)">Play</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Efeito visual de música tocando (fora do painel de busca) -->
-    <div class="music-visualizer" *ngIf="!isMusicSearchOpen && isPlaying">
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-    </div>
-
-    <div class="music-icon" (click)="toggleMusicSearch()">
-        <img src="assets/music-icon.png" alt="Music" />
-    </div>
-
-    <!-- Player do YouTube (invisível até que um vídeo seja reproduzido) -->
-    <div id="youtube-player" style="display: none;"></div>
 </div>

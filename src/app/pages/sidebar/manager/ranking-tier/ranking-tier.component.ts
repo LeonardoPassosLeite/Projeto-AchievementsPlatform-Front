@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { CdkDrag, CdkDropList, CdkDragDrop, DragDropModule } from '@angular/cdk/drag-drop';
-import { RankingTier } from '../../../../shared/enums/ranking-tier';
+import { RankingTier } from '../../../../shared/enums/ranking-tier.enum';
 import { GenericModule } from '../../../../../shareds/commons/GenericModule';
 import { MaterialModule } from '../../../../../shareds/commons/MaterialModule';
 import { ErrorHandlingService } from '../../../../shared/services/commons/error-handlig.service';

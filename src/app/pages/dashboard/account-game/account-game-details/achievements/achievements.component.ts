@@ -2,11 +2,16 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { GenericModule } from '../../../../../../shareds/commons/GenericModule';
 import { GameAchievement } from '../../../../../shared/models/game-achievement';
 import { isScrolledToBottom } from '../../../../../utils/scroll.utils';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'app-achievements',
   standalone: true,
-  imports: [GenericModule],
+  imports: 
+  [
+    GenericModule,
+    MatIcon
+  ],
   templateUrl: './achievements.component.html',
   styleUrl: './achievements.component.scss'
 })

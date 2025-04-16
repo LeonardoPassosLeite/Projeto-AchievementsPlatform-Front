@@ -1,4 +1,4 @@
-import { UserStats } from "./user-stats.model";
+import { UserStats, UserStatsRanking } from "./user-stats.model";
 
 export interface SteamUserFeedback {
     id: number;
@@ -17,6 +17,5 @@ export interface SteamUser extends SteamUserBase {
 }
 
 export interface SteamUserRanking extends SteamUserBase {
-    rankingPosition: number;
-    totalSteamPoints?: number;
+    userStats: UserStatsRanking;
 }

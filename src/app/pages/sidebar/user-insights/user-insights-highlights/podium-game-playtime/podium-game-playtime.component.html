@@ -1,0 +1,14 @@
+<div class="podium-container" #scrollContainer>
+    <div class="podium">
+        <ng-container *ngFor="let game of topPlayedGames.concat(topPlayedGames)">
+            <div class="podium-item">
+                <div class="podium-rank">{{ topPlayedGames.indexOf(game) + 1 }}º</div>
+                <div class="podium-game">
+                    <img [src]="game.iconUrl" alt="{{ game.gameName }}" class="game-icon" />
+                    <span class="game-name">{{ game.gameName }}</span>
+                    <span class="playtime">{{ formatPlaytime(game.playtimeForever) }}</span>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+</div>

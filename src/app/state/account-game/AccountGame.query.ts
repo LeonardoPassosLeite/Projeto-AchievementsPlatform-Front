@@ -6,7 +6,7 @@ import { AccountAllGames, AccountGame, AccountGamePlaytimePreview, AccountGameRa
 import { GameStatus } from '../../shared/enums/game-status';
 import { AccountGameStore } from './AccountGame.store';
 import { GameStats, GameStatsBase } from '../../shared/models/game-stats.model';
-import { RankingTier } from '../../shared/enums/ranking-tier';
+import { RankingTier } from '../../shared/enums/ranking-tier.enum';
 
 
 @Injectable({ providedIn: 'root' })
@@ -210,12 +210,12 @@ export class AccountGameQuery extends Query<AccountGameState> {
     );
   }
 
-  getGameStatsList(): GameStatsBase[] {
+  getGameStatsList(): GameStats[] {
     return this.getValue().accountGames
-      .filter(game => !!game.gameStats)
-      .map(game => game.gameStats as GameStatsBase);
+      .map(x => x.gameStats)
+      .filter((x): x is GameStats => !!x && 'achievements' in x);
   }
-
+  
   //Rankings
   private getUnrankedTierGames(): Observable<AccountGameRankingTier[]> {
     return this.getFilteredTierGames(

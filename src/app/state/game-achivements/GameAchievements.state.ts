@@ -1,17 +1,24 @@
-import { GameAchievement } from "../../shared/models/game-achievement";
-
-export interface GameAchievementsState {
-    gameAchievements: GameAchievement[];
-    page: number;
-    isLoading: boolean;
-    hasMore: boolean;
-}
-
-export function createInitialState(): GameAchievementsState {
+export interface AchievementInsightsState {
+    totalAchievements: number;
+    totalUserAchievements: number;
+    totalGamesWithAchievements: number;
+    platinumGames: number;
+    achievementsByYear: Record<string, number>;
+    achievementsByMonth: Record<string, number>;
+    loading: boolean;
+    error: string | null;
+  }
+  
+  export function createAchievementInsightsInitialState(): AchievementInsightsState {
     return {
-        gameAchievements: [],
-        page: 1,
-        isLoading: false,
-        hasMore: true,
+      totalAchievements: 0,
+      totalUserAchievements: 0,
+      totalGamesWithAchievements: 0,
+      platinumGames: 0,
+      achievementsByYear: {},
+      achievementsByMonth: {},
+      loading: false,
+      error: null
     };
-}
+  }
+  

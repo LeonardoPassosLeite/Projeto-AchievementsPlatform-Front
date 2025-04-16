@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { PagedResult } from '../../../shared/models/coomons/pagination.model';
 import { UserGameFeedbackResponse } from '../../../shared/models/game-feedback.model';
 import { GameFeedbackService } from '../../../shared/services/game-feedback.service';
-import { CommentListComponent } from '../../../shared/components/games/comment-list/comment-list.component';
+import { CommentListComponent } from '../../../shared/components/users/comment-list/comment-list.component';
 import { GenericModule } from '../../../../shareds/commons/GenericModule';
 import { PaginationComponent } from '../../../shared/components/pagination/pagination.component';
 

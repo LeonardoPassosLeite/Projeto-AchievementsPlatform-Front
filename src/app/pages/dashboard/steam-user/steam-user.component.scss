@@ -1,0 +1,66 @@
+@import'../../../../shareds/colors.scss';
+
+.container-user-profile {
+    background: linear-gradient(45deg, $void-black, rgba($charcoal, 0.27));
+    padding: 12px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px $aqua-blue;
+    width: 680px;
+    max-height: 180px;
+    margin-bottom: 20px;
+
+    .profile-avatar {
+        width: 150px;
+        height: 160px;
+        border: 3px solid $aqua-blue;
+        box-shadow: 0 0 10px $aqua-blue;
+        margin-right: 40px;
+        transition: transform 0.3s ease;
+    }
+
+    .profile-info {
+        .username {
+            color: $aqua-blue;
+            margin-top: 10px;
+            text-shadow: 0 0 10px $aqua-blue;
+
+            span {
+                font-size: 20px;
+                font-weight: bold;
+            }
+        }
+
+        .ranking,
+        .stats {
+            color: $vintage-gold;
+            text-shadow: $yellow-spark;
+            margin: 30px 40px 30px 0;
+
+            span {
+                font-size: 14px;
+            }
+        }
+
+        .xp-bar-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+
+            .xp-bar {
+                width: 100%;
+                height: 12px;
+                background-color: rgba(255, 255, 255, 0.1);
+                border-radius: 6px;
+                overflow: hidden;
+                position: relative;
+            }
+
+            .xp-progress {
+                height: 100%;
+                background: linear-gradient(90deg, $neon-green, lighten($neon-green, 20%));
+                border-radius: 6px;
+                transition: width 0.4s ease-in-out;
+            }
+        }
+    }
+}

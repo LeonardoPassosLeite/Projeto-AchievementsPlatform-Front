@@ -15,7 +15,9 @@ export class TokenStorageService {
     }
 
     setToken(token: string): void {
-        this.cookieService.setCookie(this.tokenKey, token);
+        const expires = new Date();
+        expires.setDate(expires.getDate() + 7);
+        this.cookieService.setCookie(this.tokenKey, token, expires);
     }
 
     removeToken(): void {

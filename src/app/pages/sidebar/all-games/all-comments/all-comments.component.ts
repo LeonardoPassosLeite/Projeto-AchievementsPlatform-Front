@@ -8,7 +8,7 @@ import { AccountGameFeedback } from '../../../../shared/models/account-game.mode
 import { PagedResultWithMeta } from '../../../../shared/models/coomons/pagination.model';
 import { GameFeedbackService } from '../../../../shared/services/game-feedback.service';
 import { ErrorHandlingService } from '../../../../shared/services/commons/error-handlig.service';
-import { CommentListComponent } from '../../../../shared/components/games/comment-list/comment-list.component';
+import { CommentListComponent } from '../../../../shared/components/users/comment-list/comment-list.component';
 import { ModalFeedbackWarningComponent } from '../../../../shared/components/modais/modal-feedback-warning/modal-feedback-warning.component';
 import { GenericModule } from '../../../../../shareds/commons/GenericModule';
 import { faThumbsDown, faThumbsUp, faStarHalfAlt, faStar as solidStar } from '@fortawesome/free-solid-svg-icons';

@@ -1,11 +1,23 @@
 <div class="container-global">
     <div class="content-nav d-flex fs-12">
-        <a (click)="goToGameAchievements()">Conquistas</a>
-        <a (click)="goToGamePlatinum()">Platinados</a>
-        <a (click)="goToGameInProgress()">Em progresso</a>
-        <a (click)="goToGameFinished()">Zerados</a>
-        <a (click)="goToGameDropped()">Dropados</a>
-        <a (click)="goToGameFavorite()">Favoritos</a>
+        <a (click)="navigateTo(GameStatusMenu.Achievements)"
+            [ngClass]="{ 'active': selectedMenu === GameStatusMenu.Achievements }">Conquistas</a>
+
+        <a (click)="navigateTo(GameStatusMenu.Platinum)"
+            [ngClass]="{ 'active': selectedMenu === GameStatusMenu.Platinum }">Platinados</a>
+
+        <a (click)="navigateTo(GameStatusMenu.InProgress)"
+            [ngClass]="{ 'active': selectedMenu === GameStatusMenu.InProgress }">Em progresso</a>
+
+        <a (click)="navigateTo(GameStatusMenu.Finished)"
+            [ngClass]="{ 'active': selectedMenu === GameStatusMenu.Finished }">Zerados</a>
+
+        <a (click)="navigateTo(GameStatusMenu.Dropped)"
+            [ngClass]="{ 'active': selectedMenu === GameStatusMenu.Dropped }">Dropados</a>
+
+        <a (click)="navigateTo(GameStatusMenu.Favorite)"
+            [ngClass]="{ 'active': selectedMenu === GameStatusMenu.Favorite }">Favoritos</a>
+
         <a href="">🕒</a>
         <a href="">🔤</a>
         <a href="">🏆</a>

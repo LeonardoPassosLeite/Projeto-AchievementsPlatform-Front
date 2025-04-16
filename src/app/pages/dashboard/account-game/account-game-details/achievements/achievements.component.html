@@ -1,36 +1,34 @@
 <div class="achievement-container scroll" (scroll)="onScroll($event)">
     <div *ngFor="let achievement of achievements" class="achievement-card"
         [ngClass]="{ 'locked': !achievement.achieved }">
-        <div class="achievement-header">
+        <div class="d-flex center">
             <img [src]="achievement.icon || '/assets/default-image.jpg'" alt="{{ achievement.name }}"
                 class="achievement-icon" />
-            <div class="achievement-info">
-                <h3 class="achievement-title">{{ achievement.name }}</h3>
-                <p class="achievement-points">
-                    <span class="points-icon">🏆</span> {{ achievement.steamPoints }} SP
+            <div>
+                <h3 class="m-0">{{ achievement.name }}</h3>
+                <p class="achievement-points fs-14 bold">
+                    <span>🏆</span> {{ achievement.steamPoints }} SP
                 </p>
             </div>
         </div>
         <div class="achievement-body">
-            <p class="achievement-description">"{{ achievement.description }}"</p>
-            <p class="achievement-rarity">
+            <p class="achievement-description fs-12">"{{ achievement.description }}"</p>
+            <p class="achievement-rarity fs-12">
                 {{ achievement.rarity }}% dos jogadores desbloquearam isso
             </p>
-            <p class="achievement-unlock-time" *ngIf="achievement.achieved" [ngClass]="'unlocked'">
-                ✅ Desbloqueado em {{ convertTimestampToDate(achievement.unlockTime) }}
+            <p class="achievement-unlock-time fs-12 bold" *ngIf="achievement.achieved" [ngClass]="'unlocked'">
+                <mat-icon class="icon-unlock">check_circle</mat-icon>
+                Desbloqueado em {{ convertTimestampToDate(achievement.unlockTime) }}
             </p>
 
-            <p class="achievement-unlock-time" *ngIf="!achievement.achieved">
-                🔒 Ainda não desbloqueado
+            <p class="achievement-unlock-time fs-12 bold" *ngIf="!achievement.achieved">
+                <mat-icon class="icon-lock">lock</mat-icon>
+                Ainda não desbloqueado
             </p>
         </div>
     </div>
 
-    <div *ngIf="!loading && achievements.length === 0" class="empty-achievements">
+    <div *ngIf="!loading && achievements.length === 0" class="empty-achievements fs-14 center">
         Nenhuma conquista encontrada
-    </div>
-
-    <div *ngIf="loading" class="loading-more">
-        Carregando mais conquistas...
     </div>
 </div>

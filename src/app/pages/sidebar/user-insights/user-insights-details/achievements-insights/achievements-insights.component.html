@@ -1,0 +1,19 @@
+<div class="chart-pair-container">
+
+  <!-- Gráfico Pizza de Conquistas -->
+  <div class="chart-container" *ngIf="achievementLabels.length">
+    <app-chart [datasets]="[{ data: achievementData, label: 'Conquistas' }]" [labels]="achievementLabels"
+      [options]="pieChartOptions" [chartType]="pieChartType">
+    </app-chart>
+    <h3 class="chart-title">Conquistas feitas</h3>
+  </div>
+
+  <!-- Gráfico Pizza de Platinas -->
+  <div class="chart-container" *ngIf="platinumLabels.length">
+    <app-chart [datasets]="[{ data: platinumData, label: 'Platinas' }]" [labels]="platinumLabels"
+      [options]="pieChartOptions" [chartType]="pieChartType">
+    </app-chart>
+    <h3 class="chart-title">Jogos platinados</h3>
+  </div>
+
+</div>

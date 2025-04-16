@@ -1,0 +1,67 @@
+<div class="container-overflow scroll table-ranking">
+    <table mat-table [dataSource]="[].constructor(15)" class="mat-elevation-z8">
+
+        <!-- Posição -->
+        <ng-container matColumnDef="position">
+            <th mat-header-cell *matHeaderCellDef>#</th>
+            <td mat-cell *matCellDef="let row; let i = index">
+                <ng-container [ngSwitch]="i">
+                    <span *ngSwitchCase="0" class="top-rank">🥇</span>
+                    <span *ngSwitchCase="1" class="top-rank">🥈</span>
+                    <span *ngSwitchCase="2" class="top-rank">🥉</span>
+                    <span *ngSwitchDefault>{{ i + 1 }}</span>
+                </ng-container>
+            </td>
+        </ng-container>
+
+        <!-- Avatar + Nome -->
+        <ng-container matColumnDef="user">
+            <th mat-header-cell *matHeaderCellDef>Usuário</th>
+            <td mat-cell *matCellDef="let row; let i = index">
+                <ng-container *ngIf="users[i]; else emptyUser">
+                    <div class="user-info">
+                        <img [src]="users[i].steamUser.avatarUrl" width="32" height="32">
+                        <span>{{ users[i].steamUser.displayName }}</span>
+                    </div>
+                </ng-container>
+                <ng-template #emptyUser>
+                    <span>-</span>
+                </ng-template>
+            </td>
+        </ng-container>
+
+        <!-- Valor Dinâmico -->
+        <ng-container matColumnDef="value">
+            <th mat-header-cell *matHeaderCellDef>
+                {{ rankingType === rankingEnum.Level ? 'Level' : (rankingType === rankingEnum.Platinum ? 'Platinas' :
+                'SteamPoints') }}
+            </th>
+            <td mat-cell *matCellDef="let row; let i = index">
+                <ng-container *ngIf="users[i]; else emptyValue">
+                    <div class="value-content">
+                        {{ rankingType === rankingEnum.Level ? users[i].steamUser.userStats.level :
+                        rankingType === rankingEnum.Platinum ? users[i].steamUser.userStats.allPlatinum :
+                        users[i].steamUser.userStats.totalSteamPoints }}
+
+                        <span *ngIf="rankingType === rankingEnum.SteamPoints" class="g-icon">S</span>
+
+                        <img *ngIf="rankingType === rankingEnum.Platinum"
+                        src="assets/icons/platinum.svg"
+                        alt="Platinas"
+                        class="icon-ranking">
+                   
+
+                    </div>
+                </ng-container>
+
+                <ng-template #emptyValue>
+                    -
+                </ng-template>
+            </td>
+
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+</div>

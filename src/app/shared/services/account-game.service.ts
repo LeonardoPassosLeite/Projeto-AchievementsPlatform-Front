@@ -20,18 +20,9 @@ export class AccountGameService {
         private errorHandlingService: ErrorHandlingService
     ) { }
 
-    addAccountGames(token: string): Observable<ApiResponse<AccountGame[]>> {
-        if (!token) {
-            console.error('Token ausente ao tentar salvar jogos');
-            return throwError(() => new Error('Token ausente'));
-        }
-
+    addAccountGames(): Observable<ApiResponse<AccountGame[]>> {
         return this.http.post<ApiResponse<AccountGame[]>>(`${this.baseUrl}/create-games`, {}, {
-            headers: new HttpHeaders({
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${token}`,
-            }),
-            withCredentials: true,
+            withCredentials: true
         }).pipe(
             tap((response) => {
                 if (!response || !response.value) {
@@ -41,15 +32,12 @@ export class AccountGameService {
 
                 const newGames = response.value;
 
-                this.accountGameStore.update({
-                    accountGames: newGames,
-                    isLoading: false
-                });
-
+                this.accountGameStore.setAccountGames(newGames);
+                this.accountGameStore.setLoading(false);
             }),
             catchError((error) => {
                 console.error('Erro ao salvar jogos:', error);
-                this.accountGameStore.update({ isLoading: false });
+                this.accountGameStore.setLoading(false);
                 return throwError(() => new Error('Erro ao salvar jogos. Verifique o backend.'));
             })
         );

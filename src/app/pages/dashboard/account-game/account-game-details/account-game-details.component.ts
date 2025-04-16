@@ -14,6 +14,7 @@ import { GameDropdownSelectorComponent } from '../../../../shared/components/gam
 import { InfinitePaginator } from '../../../../utils/infinite-paginator';
 import { AchievementFilterType } from '../../../../shared/enums/achievement-filter-type';
 import { DropdownComponent } from '../../../../shared/components/forms/dropdown/dropdown.component';
+import { AchievementOrderType } from '../../../../shared/enums/achievement-order-type';
 
 @Component({
   selector: 'app-account-game-details',
@@ -42,7 +43,10 @@ export class AccountGameDetailsComponent implements OnInit {
   showDropdown = false;
 
   achievementFilterOptions = Object.values(AchievementFilterType);
+  achievementOrderOptions = Object.values(AchievementOrderType);
+
   selectedFilter: AchievementFilterType = AchievementFilterType.All;
+  selectedOrder: AchievementOrderType = AchievementOrderType.None;
 
   constructor(
     private accountGameDetailsService: AccountGameDetailsService,
@@ -67,18 +71,31 @@ export class AccountGameDetailsComponent implements OnInit {
   }
 
   filterAchievements(): GameAchievement[] {
+    let filtered = this.achievements;
+
     switch (this.selectedFilter) {
       case AchievementFilterType.Unlocked:
-        return this.achievements.filter(a => a.unlockTime);
+        filtered = filtered.filter(a => a.unlockTime);
+        break;
       case AchievementFilterType.Locked:
-        return this.achievements.filter(a => !a.unlockTime);
+        filtered = filtered.filter(a => !a.unlockTime);
+        break;
       case AchievementFilterType.Rare:
-        return this.achievements.filter(a => a.rarity <= 10);
-      default:
-        return this.achievements;
+        filtered = filtered.filter(a => a.rarity <= 10);
+        break;
     }
-  }
 
+    switch (this.selectedOrder) {
+      case AchievementOrderType.MostSteamPoints:
+        filtered = [...filtered].sort((a, b) => b.steamPoints - a.steamPoints);
+        break;
+      case AchievementOrderType.LeastSteamPoints:
+        filtered = [...filtered].sort((a, b) => a.steamPoints - b.steamPoints);
+        break;
+    }
+
+    return filtered;
+  }
 
   private loadGames(): void {
     this.gamePaginator.loading = true;

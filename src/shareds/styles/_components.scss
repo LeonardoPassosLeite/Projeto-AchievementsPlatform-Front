@@ -1,0 +1,120 @@
+.content-nav a {
+    color: $silver-gray;
+    padding: 10px 10px;
+    border-radius: 4px;
+    transition: background 0.3s, color 0.3s;
+    cursor: pointer;
+
+    &.active {
+        background: rgba($azure-blue, 0.23);
+    }
+
+    &:hover {
+        background: $ghost-white;
+    }
+}
+
+.cdk-drag-preview {
+    width: 200px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 20, 30, 0.9);
+    border-radius: 8px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+    opacity: 0.95;
+    z-index: 9999;
+    padding: 5px;
+    pointer-events: none;
+    box-sizing: border-box;
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 6px;
+    }
+
+    .drag-preview {
+        width: 204px;
+        height: 100px;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+.snackbar-success,
+.snackbar-error {
+    border-radius: 14px;
+    font-weight: bold;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: fixed;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    min-width: 280px;
+    max-width: 90vw;
+    font-family: 'Orbitron', sans-serif;
+    letter-spacing: 1px;
+}
+
+.game-thumbnail {
+    width: 200px !important;
+    height: 100px !important;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 2px solid rgba($neon-cyan, 0.4);
+    box-shadow: 0 4px 12px $shadow;
+    transition: all 0.3s ease;
+    filter: brightness(0.9);
+    flex-shrink: 0;
+}
+
+//game
+
+.games-container {
+    max-width: 1000px;
+    height: 70vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    font-family: 'Orbitron', sans-serif;
+    color: white;
+    margin: 0 auto;
+    padding: 10px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 255, 255, 0.3);
+}
+
+.game-image {
+    width: 200px;
+    height: 100px;
+    margin-right: 15px;
+    flex-shrink: 0;
+    overflow: hidden;
+    border-radius: 10px;
+    border: 3px solid $bright-cyan;
+    background: rgba($pure-black, 0.5);
+
+    img {
+        width: auto;
+        height: 100%;
+        object-fit: contain;
+        object-position: center;
+        border-radius: 10px;
+        transition: transform 0.3s ease, filter 0.3s ease;
+        filter: contrast(1.2) brightness(1.1);
+
+        &:hover {
+            transform: scale(1.05);
+            filter: contrast(1.5) brightness(1.3);
+        }
+    }
+}

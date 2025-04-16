@@ -1,0 +1,16 @@
+<div class="container-global-side">
+    <div class="nav-container">
+        <div class="nav-box" (click)="navigation.goToRankingTier()">
+            <button>Ranking tier</button>
+        </div>
+        <div class="nav-box" (click)="navigation.goToGameStatusManager()">
+            <button>Gerenciar status</button>
+        </div>
+        <div class="nav-box" (click)="navigation.goToUserInsights()">
+            <button>Minhas estátisticas</button>
+        </div>
+    </div>
+    <div>
+        <router-outlet></router-outlet>
+    </div>
+</div>

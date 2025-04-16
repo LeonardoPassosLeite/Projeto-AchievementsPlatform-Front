@@ -5,11 +5,27 @@ import { Injectable } from '@angular/core';
 })
 export class CoockieService {
 
+  // setCookie(name: string, value: string, expires?: Date, path: string = '/'): void {
+  //   let cookie = `${name}=${encodeURIComponent(value)}; path=${path}; SameSite=None; Secure;`;
+  
+  //   if (expires) {
+  //     cookie += ` expires=${expires.toUTCString()};`;
+  //   }
+  
+  //   document.cookie = cookie;
+  // }
+  
+
+  //dev
   setCookie(name: string, value: string, expires?: Date, path: string = '/'): void {
-    let cookie = `${name}=${encodeURIComponent(value)}; path=${path}; SameSite=None; Secure;`;
+    let cookie = `${name}=${encodeURIComponent(value)}; path=${path};`;
   
     if (expires) {
       cookie += ` expires=${expires.toUTCString()};`;
+    }
+  
+    if (location.protocol === 'https:') {
+      cookie += ` SameSite=None; Secure;`;
     }
   
     document.cookie = cookie;

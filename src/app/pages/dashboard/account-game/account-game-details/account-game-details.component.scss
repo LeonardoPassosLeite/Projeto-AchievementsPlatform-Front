@@ -1,13 +1,6 @@
 @import '../../../../../shareds/colors.scss';
 
-.container-global {
-  padding: 15px;
-}
-
 .game-header-card {
-  display: flex;
-  align-items: center;
-  gap: 16px;
   border-radius: 12px;
   padding: 10px 24px;
   margin-bottom: 24px;
@@ -24,43 +17,4 @@
     border-color: $card-hover-border;
     box-shadow: 0 4px 12px $shadow;
   }
-}
-
-.game-icon {
-  width: 204px;
-  height: 104px;
-  object-fit: cover;
-  border-radius: 8px;
-}
-
-.game-title-wrapper {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-
-  .game-title {
-    font-size: 20px;
-    font-weight: 600;
-    color: $pure-white-text;
-    margin: 0;
-  }
-
-  mat-icon {
-    font-size: 20px;
-    color: $pure-white-text;
-    transition: transform 0.25s ease-in-out;
-  }
-}
-
-.game-header-card.active mat-icon {
-  transform: rotate(180deg);
-}
-
-.error-message {
-  padding: 16px;
-  margin-top: 16px;
-  text-align: center;
-  border-radius: 8px;
-  background-color: $error-bg;
-  color: $error-text;
 }

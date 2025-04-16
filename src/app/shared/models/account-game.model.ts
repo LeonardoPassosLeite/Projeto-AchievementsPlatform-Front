@@ -1,5 +1,5 @@
 import { GameStatus } from "../enums/game-status";
-import { RankingTier } from "../enums/ranking-tier";
+import { RankingTier } from "../enums/ranking-tier.enum";
 import { GameStatsBase } from "./game-stats.model";
 
 export interface AccountGameBase {

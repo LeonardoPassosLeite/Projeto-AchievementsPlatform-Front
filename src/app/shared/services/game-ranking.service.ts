@@ -5,7 +5,7 @@ import { catchError, map } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { ErrorHandlingService } from './commons/error-handlig.service';
 import { ViewGameRankingPosition, ViewGameRankingTier } from '../models/account-game.model';
-import { RankingTier } from '../enums/ranking-tier';
+import { RankingTier } from '../enums/ranking-tier.enum';
 import { ApiResponse } from '../models/coomons/api-response.model';
 
 @Injectable({ providedIn: 'root' })

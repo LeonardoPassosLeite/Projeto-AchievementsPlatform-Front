@@ -1,37 +1,25 @@
 import { Component } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
+import { GenericModule } from '../../../../../shareds/commons/GenericModule';
+import { NavigationService } from '../../../services/commons/navigation.service';
+import { GameStatusMenu } from '../../../enums/navigation.enum';
+import { getSelectedGameStatusMenu } from '../../../../utils/navigation.utils';
 
 @Component({
   selector: 'app-game-status-nav',
   standalone: true,
-  imports: [RouterModule],
+  imports: [GenericModule, RouterModule],
   templateUrl: './game-status-nav.component.html',
-  styleUrl: './game-status-nav.component.scss'
+  styleUrls: ['./game-status-nav.component.scss']
 })
 export class GameStatusNavComponent {
-  constructor(private router: Router) { }
+  GameStatusMenu = GameStatusMenu;
+  selectedMenu: GameStatusMenu = GameStatusMenu.Achievements;
 
-  goToGameAchievements() {
-    this.router.navigate(['dashboard/conquistas/games-conquistas']);
-  }
+  constructor(public navigation: NavigationService) { }
 
-  goToGamePlatinum() {
-    this.router.navigate(['dashboard/conquistas/games-platinados']);
-  }
-
-  goToGameInProgress() {
-    this.router.navigate(['dashboard/conquistas/games-em-amdamento']);
-  }
-
-  goToGameFinished() {
-    this.router.navigate(['dashboard/conquistas/games-finalizados']);
-  }
-
-  goToGameDropped() {
-    this.router.navigate(['dashboard/conquistas/games-dropados']);
-  }
-
-  goToGameFavorite() {
-    this.router.navigate(['dashboard/conquistas/games-favoritos']);
+  navigateTo(menu: GameStatusMenu): void {
+    this.selectedMenu = menu;
+    this.navigation.navigateGameStatus(menu);
   }
 }

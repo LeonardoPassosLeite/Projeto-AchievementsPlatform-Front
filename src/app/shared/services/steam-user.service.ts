@@ -16,17 +16,11 @@ export class SteamUserService {
         private errorHandlingService: ErrorHandlingService
     ) { }
 
-    storeSteamUser(token: string): Observable<SteamUser> {
+    steamUser(): Observable<SteamUser> {
         return this.http.post<SteamUser>(`${this.baseUrl}/steamuser/store-profile`, {}, {
-            headers: new HttpHeaders({
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`,
-            }),
             withCredentials: true,
         }).pipe(
-            map(response => {
-                return response;
-            }),
+            map(response => response),
             catchError(error => {
                 const errorMessage = this.errorHandlingService.handleHttpError(error);
                 console.error('Erro na requisição para store-profile:', errorMessage);
@@ -35,12 +29,8 @@ export class SteamUserService {
         );
     }
 
-    getStoredUser(token: string): Observable<SteamUser> {
+    getSeamUser(): Observable<SteamUser> {
         return this.http.get<SteamUser>(`${this.baseUrl}/steamUser/stored-profile`, {
-            headers: new HttpHeaders({
-                Authorization: `Bearer ${token}`,
-                'Content-Type': 'application/json',
-            }),
             withCredentials: true,
         }).pipe(
             catchError(error => {
@@ -67,6 +57,7 @@ export class SteamUserService {
         );
     }
 
+
     getUserFeedbacks(token: string): Observable<any[]> {
         return this.http.get<any[]>(`${this.baseUrl}/steamuser/feedbacks`, {
             headers: new HttpHeaders({
@@ -76,12 +67,12 @@ export class SteamUserService {
             withCredentials: true,
         }).pipe(
             catchError(error => {
-                console.error('Erro completo:', error);  
+                console.error('Erro completo:', error);
                 const errorMessage = this.errorHandlingService.handleHttpError(error);
                 console.error('Erro na requisição para feedbacks:', errorMessage);
                 return throwError(() => new Error(errorMessage));
             })
         );
     }
-    
+
 }

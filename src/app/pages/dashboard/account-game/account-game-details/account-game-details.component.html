@@ -1,10 +1,10 @@
 <div *ngIf="gameDetails" class="container-global">
-    <div class="game-header-card" (click)="showDropdown = !showDropdown">
-        <img class="game-icon" [src]="gameDetails.iconUrl || '/assets/default-image.jpg'"
+    <div class="game-header-card d-flex text-center gap-16" (click)="showDropdown = !showDropdown">
+        <img class="game-thumbnail" [src]="gameDetails.iconUrl || '/assets/default-image.jpg'"
             alt="{{ gameDetails.gameName }}" />
 
-        <div class="game-title-wrapper">
-            <h3 class="game-title">{{ gameDetails.gameName }}</h3>
+        <div class="d-flex center gap-10">
+            <h3 class="text-title ">{{ gameDetails.gameName }}</h3>
             <mat-icon [class.rotated]="showDropdown">expand_more</mat-icon>
         </div>
     </div>
@@ -14,9 +14,15 @@
 
     <app-game-stats [gameDetails]="gameDetails"></app-game-stats>
 
-    <app-dropdown [options]="achievementFilterOptions" [selectedValue]="selectedFilter" placeholder="Filtrar conquistas"
-        (valueSelected)="selectedFilter = $event">
-    </app-dropdown>
+    <div class="d-flex">
+        <app-dropdown [options]="achievementFilterOptions" [selectedValue]="selectedFilter"
+            placeholder="Filtrar conquistas" (valueSelected)="selectedFilter = $event">
+        </app-dropdown>
+
+        <app-dropdown [options]="achievementOrderOptions" [selectedValue]="selectedOrder" placeholder="Ordenar por"
+            (valueSelected)="selectedOrder = $event">
+        </app-dropdown>
+    </div>
 
     <app-achievements [achievements]="filterAchievements()" [loading]="gamePaginator.loading"
         [hasMore]="gamePaginator.hasMore" (loadMore)="onLoadMoreAchievements()">

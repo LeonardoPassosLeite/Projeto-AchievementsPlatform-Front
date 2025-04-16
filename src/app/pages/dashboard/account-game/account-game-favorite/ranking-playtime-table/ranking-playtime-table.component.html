@@ -1,8 +1,7 @@
-<div class="container-overflow scroll">
+<div class="container-overflow scroll table-ranking">
     <ng-container *ngIf="topPlayTime$ | async as top10">
         <table mat-table [dataSource]="top10" class="mat-elevation-z8">
 
-            <!-- Posição -->
             <ng-container matColumnDef="position">
                 <th mat-header-cell *matHeaderCellDef>#</th>
                 <td mat-cell *matCellDef="let game; let i = index">
@@ -15,7 +14,6 @@
                 </td>
             </ng-container>
 
-            <!-- Ícone -->
             <ng-container matColumnDef="icon">
                 <th mat-header-cell *matHeaderCellDef></th>
                 <td mat-cell *matCellDef="let game">
@@ -23,19 +21,16 @@
                 </td>
             </ng-container>
 
-            <!-- Nome do Jogo -->
             <ng-container matColumnDef="gameName">
                 <th mat-header-cell *matHeaderCellDef>Jogo</th>
                 <td mat-cell *matCellDef="let game">{{ game.gameName }}</td>
             </ng-container>
 
-            <!-- Tempo de Jogo -->
             <ng-container matColumnDef="playtime">
                 <th mat-header-cell *matHeaderCellDef>Tempo</th>
                 <td mat-cell *matCellDef="let game">{{ formatPlaytime(game.playtimeForever) }}</td>
             </ng-container>
 
-            <!-- Linhas da Tabela -->
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 

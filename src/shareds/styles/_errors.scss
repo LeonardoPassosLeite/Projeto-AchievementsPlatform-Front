@@ -1,0 +1,14 @@
+.error-message {
+    padding: 16px;
+    margin-top: 16px;
+    text-align: center;
+    border-radius: 8px;
+    background-color: $error-bg;
+    color: $error-text;
+}
+
+.no-games {
+    color: $silver-gray;
+    text-align: center;
+    font-style: italic;
+}

@@ -7,6 +7,7 @@ import { ErrorHandlingService } from './commons/error-handlig.service';
 import { GameFeedbackRequest, GameFeedbackResponse, UserGameFeedbackResponse } from '../models/game-feedback.model';
 import { PagedResult, PagedResultWithMeta, PaginationParams } from '../models/coomons/pagination.model';
 import { AccountGameFeedback } from '../models/account-game.model';
+import { ApiResponse } from '../models/coomons/api-response.model';
 
 @Injectable({ providedIn: 'root' })
 export class GameFeedbackService {
@@ -38,9 +39,17 @@ export class GameFeedbackService {
 
   getPagedFeedbacksByGameId(gameId: number, { page, pageSize }: PaginationParams)
     : Observable<PagedResultWithMeta<GameFeedbackResponse, AccountGameFeedback>> {
-    return this.http.get<PagedResultWithMeta<GameFeedbackResponse, AccountGameFeedback>>(
-      `${this.baseUrl}/feedbacks/${gameId}/paged?pageNumber=${page}&pageSize=${pageSize}`
+    return this.http.get<ApiResponse<{ feedbacks: PagedResultWithMeta<GameFeedbackResponse, AccountGameFeedback> }>>(
+      `${this.baseUrl}/feedbacks/${gameId}/paged?pageNumber=${page}&pageSize=${pageSize}`,
+      { withCredentials: true }
     ).pipe(
+      map(response => {
+        if (!response || !response.value?.feedbacks) {
+          console.warn('Resposta inesperada da API:', response);
+          throw new Error(response?.message || 'Erro ao buscar comentários paginados.');
+        }
+        return response.value.feedbacks;
+      }),
       catchError(error => {
         const errorMessage = this.errorHandlingService.handleHttpError(error);
         console.error('Erro ao buscar comentários paginados:', errorMessage);
@@ -51,9 +60,17 @@ export class GameFeedbackService {
 
   getPagedFeedbacksByUser({ page, pageSize }: PaginationParams)
     : Observable<PagedResult<UserGameFeedbackResponse>> {
-    return this.http.get<PagedResult<UserGameFeedbackResponse>>(
-      `${this.baseUrl}/feedbacks-users?pageNumber=${page}&pageSize=${pageSize}`
+    return this.http.get<ApiResponse<{ feedbacks: PagedResult<UserGameFeedbackResponse> }>>(
+      `${this.baseUrl}/feedbacks-users?pageNumber=${page}&pageSize=${pageSize}`,
+      { withCredentials: true }
     ).pipe(
+      map(response => {
+        if (!response || !response.value?.feedbacks) {
+          console.warn('Resposta inesperada da API:', response);
+          throw new Error(response?.message || 'Erro ao buscar comentários do usuário.');
+        }
+        return response.value.feedbacks;
+      }),
       catchError(error => {
         const errorMessage = this.errorHandlingService.handleHttpError(error);
         console.error('Erro ao buscar comentários do usuário:', errorMessage);

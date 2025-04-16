@@ -1,121 +1,104 @@
 @import '../../../../../../shareds/colors.scss';
 
-.d-grid-double,
 .achievement-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
     padding: 15px;
     box-sizing: border-box;
-    max-height: 620px;
+    height: 45vh;
     overflow-y: auto;
-}
 
-.achievement-card {
-    display: flex;
-    flex-direction: column;
-    margin-top: 10px;
-    background: $achievement-gradient;
-    border: 1px solid $dark-border;
-    border-radius: 12px;
-    padding: 15px;
-    box-shadow: 0 4px 10px $shadow;
-    transition: transform 0.3s, box-shadow 0.3s;
-
-    &:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 20px $shadow;
-    }
-
-    &.locked {
-        opacity: 0.5;
-        pointer-events: none;
-        filter: grayscale(100%);
+    .achievement-card {
+        display: flex;
+        flex-direction: column;
+        margin-top: 10px;
+        background: $achievement-gradient;
+        border: 1px solid $dark-border;
+        border-radius: 12px;
+        padding: 15px;
+        box-shadow: 0 4px 10px $shadow;
+        transition: transform 0.3s, box-shadow 0.3s;
 
         &:hover {
-            transform: none;
-            box-shadow: none;
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px $shadow;
+        }
+
+        &.locked {
+            opacity: 0.5;
+            pointer-events: none;
+            filter: grayscale(100%);
+
+            &:hover {
+                transform: none;
+                box-shadow: none;
+            }
+        }
+
+        .achievement-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 8px;
+            margin-right: 16px;
+            object-fit: cover;
+            border: 2px solid $dark-border;
+        }
+
+        .achievement-points {
+            color: $achievement-orange;
+            margin-top: 10px;
+        }
+
+        .points-icon {
+            margin-right: 4px;
+        }
+
+        .achievement-body {
+            border-top: 1px solid $dark-border;
+            padding-top: 12px;
+            color: $silver-gray;
+        }
+
+        .achievement-description {
+            font-style: italic;
+            margin: 8px 0;
+        }
+
+        .achievement-rarity {
+            color: $snow-white;
+            margin-bottom: 8px;
+        }
+
+        .achievement-unlock-time {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 10px;
+            font-weight: bold;
+
+            &.unlocked {
+                color: $neon-green;
+            }
+
+            .icon-unlock {
+                color: $neon-green;
+                font-size: 18px;
+                line-height: 1;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                margin-top: 1px;
+            }
+
+            .icon-lock {
+                color: $slate-gray;
+                font-size: 18px;
+                line-height: 1;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+            }
         }
     }
-}
-
-.achievement-header {
-    display: flex;
-    align-items: center;
-    margin-bottom: 12px;
-}
-
-.achievement-icon {
-    width: 64px;
-    height: 64px;
-    border-radius: 8px;
-    margin-right: 16px;
-    object-fit: cover;
-    border: 2px solid $dark-border;
-}
-
-.achievement-info {
-    display: flex;
-    flex-direction: column;
-}
-
-.achievement-title,
-.achievement-points,
-.achievement-description,
-.achievement-rarity,
-.achievement-unlock-time {
-    margin: 0;
-}
-
-.achievement-title {
-    font-size: 18px;
-    font-weight: bold;
-    color: $pure-white-text;
-}
-
-.achievement-points {
-    font-size: 14px;
-    font-weight: bold;
-    color: $achievement-orange;
-    margin-top: 4px;
-}
-
-.points-icon {
-    margin-right: 4px;
-    font-size: 16px;
-}
-
-.achievement-body {
-    border-top: 1px solid $dark-border;
-    padding-top: 12px;
-    color: $silver-gray;
-}
-
-.achievement-description {
-    font-size: 14px;
-    font-style: italic;
-    margin: 8px 0;
-}
-
-.achievement-rarity {
-    font-size: 12px;
-    color: $snow-white;
-    margin-bottom: 8px;
-}
-
-.achievement-unlock-time {
-    font-size: 12px;
-    font-weight: bold;
-    color: $raspberry;
-
-    &.unlocked {
-        color: $neon-green;
-    }
-}
-
-.empty-achievements {
-    padding: 20px;
-    text-align: center;
-    color: $silver-gray;
-    font-size: 14px;
 }

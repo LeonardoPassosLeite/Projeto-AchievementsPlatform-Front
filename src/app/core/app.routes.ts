@@ -7,7 +7,6 @@ import { RankingGlobalComponent } from '../pages/dashboard/ranking-global/rankin
 import { AccountGameDetailsComponent } from '../pages/dashboard/account-game/account-game-details/account-game-details.component';
 import { AccountGameAchievementComponent } from '../pages/dashboard/account-game/account-game-achievement/account-game-achievement.component';
 import { SideMenuComponent } from '../shared/components/side-navs/side-menu/side-menu.component';
-import { NavBarComponent } from '../shared/components/side-navs/nav-bar/nav-bar.component';
 import { AccountGamePlatinumComponent } from '../pages/dashboard/account-game/account-game-platinum/account-game-platinum.component';
 import { AccountGameInProgressComponent } from '../pages/dashboard/account-game/account-game-in-progress/account-game-in-progress.component';
 import { AccountGameFinishedComponent } from '../pages/dashboard/account-game/account-game-finished/account-game-finished.component';
@@ -29,6 +28,7 @@ import { AllCommentsComponent } from '../pages/sidebar/all-games/all-comments/al
 import { CommentsComponent } from '../pages/sidebar/comments/comments.component';
 import { RankingPlaytimeTableComponent } from '../pages/dashboard/account-game/account-game-favorite/ranking-playtime-table/ranking-playtime-table.component';
 import { UserInsightsComponent } from '../pages/sidebar/user-insights/user-insights.component';
+import { SideNavbarComponent } from '../shared/components/side-navs/side-navbar/side-navbar.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -111,7 +111,7 @@ export const routes: Routes = [
             },
             {
                 path: 'sidebar',
-                component: NavBarComponent,
+                component: SideNavbarComponent,
                 children: [
                     {
                         path: 'ranking-tier',
